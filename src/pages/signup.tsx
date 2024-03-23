@@ -5,7 +5,7 @@ import { client } from "../supabase/client";
 function Signup(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         // const { user, session, error } = await client.auth.signUp({});
         try{
