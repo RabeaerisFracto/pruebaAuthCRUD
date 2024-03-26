@@ -1,15 +1,17 @@
 import './App.css'
-import Signup from './pages/signup.tsx';
+import Login from './pages/login.tsx';
+import Home from './pages/home.tsx';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
 
   return (
-    <>
-      <div>
-        <h1>Hello World</h1>
-        <Signup />
-      </div>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login/>} />
+        <Route path="/home" element={<Home/>} />
+      </Routes>
+    </Router>
   )
 }
 
