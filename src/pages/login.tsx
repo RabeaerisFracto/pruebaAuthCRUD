@@ -10,7 +10,7 @@ function Login (){
         client.auth. onAuthStateChange(async (event)=>{
         if (event === "SIGNED_IN") {
             //Osea usuario logeado, redirigir a SU pagina de inicio
-            navigate("/home")
+            navigate("/exito")
         } else {
             //Redirigir a la pagina de login o signup
             navigate("/login")
