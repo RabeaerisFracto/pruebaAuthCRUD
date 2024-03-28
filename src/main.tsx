@@ -1,14 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
+import Login from './pages/login.tsx'
+import Home from './pages/home.tsx'
+import Exito from './pages/exito.tsx'
 import './index.css'
-// import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import NotFoundPage from './pages/404.tsx'
 
 
-// const router = createBrowserRouter([]);
+const router = createBrowserRouter([
+  { path: '/', element: <App />, errorElement: <NotFoundPage/> },
+  { path: '/login', element: <Login /> },
+  { path: '/home', element: <Home /> },
+  { path: '/exito', element: <Exito /> },
+
+]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )
