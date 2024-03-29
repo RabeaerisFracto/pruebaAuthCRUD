@@ -6,17 +6,23 @@ import { useEffect } from 'react';
 
 function Login (){
     const navigate = useNavigate();
-    useEffect(()=>{
-        client.auth. onAuthStateChange(async (event)=>{
-        if (event === "SIGNED_IN") {
-            //Osea usuario logeado, redirigir a SU pagina de inicio
-            navigate("/exito")
-        } else {
-            //Redirigir a la pagina de login o signup
-            navigate("/login")
+    useEffect(() => {
+        const checkSession = async () => {
+            const { data: { session } } = await client.auth.getSession();
+            if (session) {
+                navigate("/exito");
+            } else {
+                client.auth.onAuthStateChange((event) => {
+                    if (event === "SIGNED_IN") {
+                        navigate("/exito");
+                    } else {
+                        navigate("/login");
+                    }
+                });
+            }
         }
-    })
-}, [navigate])
+        checkSession();
+    }, [navigate]);
     return(
         <div className="Login">
             <header className="Login-header">
