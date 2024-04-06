@@ -29,9 +29,18 @@ function Exito(){
     }
     return(
         <div>
+            {Object.keys(user).length !== 0 ?
+            <>
             <h1>¡Bienvenido!</h1>
             <h2>Has iniciado sesión correctamente</h2>
             <button onClick={()=> signOutUser()}>SignOut</button>
+            </>
+            :
+            <>
+            <h1>¡Ups! Usuario no logueado</h1>
+            <button onClick={()=> navigate("/login")}>Login</button>
+            </>
+            }
         </div>
     )
 }

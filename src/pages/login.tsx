@@ -30,6 +30,24 @@ function Login (){
                 supabaseClient={client}
                 providers={["discord","google"]}
                 theme="dark"
+                localization={{
+                    variables:{
+                    sign_in:{
+                        email_label:'Correo electrónico',
+                        password_label:'Contraseña',
+                        email_input_placeholder:'Ingresa tu correo electrónico',
+                        password_input_placeholder:'Ingresa tu contraseña',
+                        link_text:'¿No tienes cuenta? Inscribete!',
+                        social_provider_text:'Tienes cuenta {{provider}}?',
+                    },
+                    forgotten_password:{
+                        link_text:'¿Olvidaste tu contraseña?',
+                        confirmation_text:'No te preocupes, te enviaremos un correo para que puedas recuperarla',
+                        email_label:'Enviar correo',
+                        email_input_placeholder:'Ingresa tu correo electrónico',
+                    },
+                }
+                }}
                 appearance={{theme: ThemeSupa}}/>
             </header>
         </div> 
