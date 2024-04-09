@@ -7,18 +7,26 @@ import {useEffect, useState} from "react";
 function Exito(){
     const [user, setUser] = useState({});
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+
+//--------------OBTENCION DE DATA DE USUARIO LOGUEADO-------------------
 
     useEffect(()=>{
-        async function getUserData(){
-            await client.auth.getUser().then((value)=>{
-                if(value.data?.user){
-                    setUser(value.data.user)
-                    console.log(value.data.user)
-                    console.log(user)
-                }
-            })}
-        getUserData();
+        async function getUserData(){// Tiene que ser con async
+            const { data:{user:dataUsuario}, error } = await client.auth.getUser();
+            // entre {} para desestructurar el objeto, separado por como para considerar los 2 objetos dentro de "data".
+            if (error) {
+                console.log('Error obteniendo usuario:', error.message);
+            } else if (dataUsuario) { // Usando nombre de variable dataUsuario para no confundir con user
+                setUser(dataUsuario);
+                if(dataUsuario?.email){setEmail(dataUsuario?.email);} // con condicional para evitar error en consola
+                console.log(dataUsuario?.email); // para confirmar mail x consola.
+                console.log(user);
+            }}
+        getUserData();// Se llama a la función para que se ejecute
     },[]);
+
+
 
     async function signOutUser(){
         const { error } = await client.auth.signOut();
@@ -31,7 +39,7 @@ function Exito(){
         <div>
             {Object.keys(user).length !== 0 ?
             <>
-            <h1>¡Bienvenido!</h1>
+            <h1>¡Bienvenido {email.split("@")[0]}!</h1>
             <h2>Has iniciado sesión correctamente</h2>
             <button onClick={()=> signOutUser()}>SignOut</button>
             </>
