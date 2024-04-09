@@ -3,17 +3,19 @@
 import { client } from "../supabase/client";
 import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from "react";
+import { UserContext } from "../context/UserContext";
+
 
 function Exito(){
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(undefined);
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState<string | undefined>('');
 
 //--------------OBTENCION DE DATA DE USUARIO LOGUEADO-------------------
 
     useEffect(()=>{
         async function getUserData(){// Tiene que ser con async
-            const { data:{user:dataUsuario}, error } = await client.auth.getUser();
+            const { data:{user:dataUsuario}, error } = await client.auth.getUser() as any;
             // entre {} para desestructurar el objeto, separado por como para considerar los 2 objetos dentro de "data".
             if (error) {
                 console.log('Error obteniendo usuario:', error.message);
@@ -35,9 +37,12 @@ function Exito(){
             navigate("/login");
             console.log('Desconectado')}
     }
+    //  crear nuevo comonente dentro de return para probar si se pasa info.
+    //  llamar info dentro de este mismo return
     return(
         <div>
-            {Object.keys(user).length !== 0 ?
+            <UserContext.Provider value={user}>
+            {user && Object.keys(user).length !== 0 && typeof email === 'string' ?
             <>
             <h1>¡Bienvenido {email.split("@")[0]}!</h1>
             <h2>Has iniciado sesión correctamente</h2>
@@ -49,6 +54,7 @@ function Exito(){
             <button onClick={()=> navigate("/login")}>Login</button>
             </>
             }
+            </UserContext.Provider>
         </div>
     )
 }
