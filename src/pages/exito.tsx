@@ -4,7 +4,7 @@ import { client } from "../supabase/client";
 import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from "react";
 import { UserContext } from "../context/UserContext";
-import DataOnScreen from "../components/dataonscreen";
+import DataOnScreen from "../components/dataOnScreen";
 
 
 function Exito(){
