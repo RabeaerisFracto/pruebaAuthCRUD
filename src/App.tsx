@@ -1,25 +1,23 @@
 import './App.css'
-import { useEffect, useState } from 'react'
-import { client } from './supabase/client'
+import { useEffect } from 'react';
+
+import UserData from './components/userData';
 
 
 function App() {
-  const [user, setUser] = useState({});
 
+  const userData = UserData();
   useEffect(()=>{
-    async function getUserData(){
-        await client.auth.getUser().then((value)=>{
-            if(value.data?.user){
-                setUser(value.data.user)
-                console.log(value.data.user)
-                console.log(user)
-            }
-        })}
-    getUserData();
-},[]);
+    
+    console.log(userData)
+  },[])
+
+
+
   return (
     <>
       <div>Pagina Inicial</div>
+      <h2>{}</h2>
     </>
   )
 }
