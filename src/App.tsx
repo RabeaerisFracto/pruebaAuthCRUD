@@ -1,17 +1,18 @@
-import './App.css'
 import { useEffect } from 'react';
-
+import './App.css'
 import UserData from './components/userData';
+import useUserStore from './store/userDataStore'
 
 
 function App() {
-
+  const user = useUserStore((state) => state.user);
   const userData = UserData();
   useEffect(()=>{
-    
-    console.log(userData)
-  },[])
-
+    if(user == null|| user == undefined){return}
+    else{
+    console.log("Este es el objeto fnalmente ctm!!: ")
+    console.log(user)}
+  },[useUserStore, userData, user])
 
 
   return (
