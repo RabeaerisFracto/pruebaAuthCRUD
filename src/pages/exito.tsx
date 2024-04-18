@@ -4,7 +4,7 @@ import { client } from "../supabase/client";
 import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from "react";
 import { UserContext } from "../context/UserContext";
-import DataOnScreen from "../components/dataOnScreen";
+// import DataOnScreen from "../components/dataOnScreen.tsx";
 
 
 function Exito(){
@@ -55,7 +55,7 @@ function Exito(){
             <button onClick={()=> navigate("/login")}>Login</button>
             </>
             }
-            <DataOnScreen/>
+            {/* <DataOnScreen/> */}
             </UserContext.Provider>
         </div>
     )
