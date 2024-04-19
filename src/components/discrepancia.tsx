@@ -1,24 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { client } from "../supabase/client";
+import '../components/stylesheets/discrepancia.css';
 
 
 function Discrepancia() {
 
 const [discrepancia, setDiscrepancia] = useState("");
 const [folio, setFolio] = useState("");
-const [user, setUser] = useState({});
+// const [user, setUser] = useState({});
 
-useEffect(()=>{// solo para confirmar que el usuario esta logueado x consola
-  async function getUserData(){
-      await client.auth.getUser().then((value)=>{
-          if(value.data?.user){
-              setUser(value.data.user)
-              console.log(value.data.user)
-              console.log(user)
-          }
-      })}
-  getUserData();
-},[]);
+// useEffect(()=>{// solo para confirmar que el usuario esta logueado x consola
+//   async function getUserData(){
+//       await client.auth.getUser().then((value)=>{
+//           if(value.data?.user){
+//               setUser(value.data.user)
+//               console.log(value.data.user)
+//               console.log(user)
+//           }
+//       })}
+//   getUserData();
+// },[]);
 
 
 
@@ -48,7 +49,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 }
 
   return(
-  <div>
+  <div className="componente-discrepancia">
     <form onSubmit={handleSubmit}>
       <input
         type="text"

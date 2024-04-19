@@ -1,0 +1,27 @@
+.componente-discrepancia {
+    /* border: 2px solid #9b9b9b; */
+    scale: 0.8;
+}
+.componente-discrepancia form button{
+    background-color: #ddd !important;
+    border: none;
+    color: rgb(127, 110, 201);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 0.3s ease 0s;
+}
+
+.componente-discrepancia form button:hover {
+    background-color: #aaa !important;
+    color: rgb(127, 110, 201);
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 0.3s ease 0s;
+}

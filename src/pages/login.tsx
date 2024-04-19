@@ -28,7 +28,7 @@ function Login (){
             <header className="Login-header">
                 <Auth 
                 supabaseClient={client}
-                providers={["discord","google"]}
+                providers={["discord","google","twitch"]}
                 theme="dark"
                 localization={{
                     variables:{

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import UserData from './components/userData';
 import useUserStore from './store/userDataStore';//se importa el store de zustand, para setear el estado user.
+import EsquinaUsuario from './components/esquinaUsuario';
 
 
 function App() {
@@ -15,13 +16,15 @@ function App() {
     if(user == null|| user == undefined){return}//Para que no me renderice el user vacio
     else{
     setId(user.id)//Se setea el estado id con el id del usuario logueado.
-    console.log(user)}//log de user como objeto
-    console.log("user destructurado, presentando el mail: " +user.email);// Mail destructurado
+    // console.log(user)
+  }//log de user como objeto
+    // console.log("user destructurado, presentando el mail: " +user.email);// Mail destructurado
   },[user])//Dependencias del useEffect
 
 
   return (
     <>
+    <EsquinaUsuario/>
       <div>Pagina Inicial</div>
       <h2>No pasar directamente de zustand, sino que mediante useState: {id}</h2>
       <h3>El state demora una fraccion de segundo en actualizarce. Realizar manejo....</h3>

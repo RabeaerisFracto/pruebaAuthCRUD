@@ -1,9 +1,13 @@
 import {create} from 'zustand';
 
-interface IZustand {count: number; count2: number;count3: string;}
+interface IZustand {
+    [key: string]: string;
+}
 export const useZustand = create<IZustand>(()=>({
-    count:456456456,
-    count2: 123123123,
-    count3: "Hola mundo",
+    folio1:"P6031209",
+    folio2: "P6031217",
+    folio3: "P6031225",
+    folio4: "P6031233",
+    folio5: "P6031241",
 }))
 export default useZustand;
