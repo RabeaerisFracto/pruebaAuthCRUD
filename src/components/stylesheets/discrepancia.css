@@ -1,9 +1,27 @@
 .componente-discrepancia {
     /* border: 2px solid #9b9b9b; */
-    scale: 0.8;
+    scale: 1;
 }
-.componente-discrepancia form button{
-    background-color: #ddd !important;
+.componente-discrepancia form input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border-radius: 7px;
+    /* border: 1px solid 3px linear-gradient(90deg, transparent, lightpink); */
+    box-sizing: border-box;
+    outline: none;
+}
+
+.boton-discrepancia{
+    background: transparent;
+    border-radius: 7px;
+    cursor: pointer;
+
+
+}
+/* .componente-discrepancia form button{
+    background-color: #ddd;
     border: none;
     color: rgb(127, 110, 201);
     padding: 15px 32px;
@@ -15,7 +33,7 @@
 }
 
 .componente-discrepancia form button:hover {
-    background-color: #aaa !important;
+    background-color: #aaa;
     color: rgb(127, 110, 201);
     border: none;
     padding: 15px 32px;
@@ -24,4 +42,4 @@
     display: inline-block;
     font-size: 16px;
     transition: all 0.3s ease 0s;
-}
+} */

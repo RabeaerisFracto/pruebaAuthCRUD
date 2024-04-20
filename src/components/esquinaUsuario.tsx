@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import UserData from './userData';
 import useUserStore from '../store/userDataStore';
+import { useNavigate } from "react-router-dom";
+import { client } from "../supabase/client";
+
 import '../components/stylesheets/esquinaUsuario.css'
+
 
 export default function EsquinaUsuario() {
     
@@ -23,15 +27,25 @@ export default function EsquinaUsuario() {
         }
     }, [user, EsquinaUsuario])
 
-console.log(globalname)
+    const navigate = useNavigate();
 
+    async function SignOutUser(){
+        const { error } = await client.auth.signOut();
+        if (error) {console.log('Error al desconectar:', error.message)}
+        else{
+            navigate("/login");
+            console.log('Desconectado')}
+        }
 
     return (
+        <>
         <div className='esquina-usuario'>
             <h4>{email}<br/>
             {globalname}<br/>
             {provider}<br/></h4>
             <img src={avatar} alt='avatar' />
         </div>
+        <button className='botonLogout' onClick={()=> SignOutUser()}>SignOut</button>
+        </>
     )
 }

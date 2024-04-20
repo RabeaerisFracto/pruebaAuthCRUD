@@ -63,7 +63,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         placeholder="Folio"
         required
         onChange={e=>setFolio(e.target.value)}/>
-      <button>Enviar</button>
+      <button className="boton-discrepancia">Enviar</button>
     </form>
   </div>
   )
