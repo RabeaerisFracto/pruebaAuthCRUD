@@ -1,6 +1,7 @@
 import { client } from "../supabase/client";
 import { useState, useEffect } from "react";
 import DataTable, { createTheme } from "react-data-table-component";
+import './stylesheets/muestraDB.css'
 
 
 
@@ -44,6 +45,7 @@ return(
     <div>
         Usuario = {discrepancias && discrepancias[0].Usuario && discrepancias[0].Usuario.nombre}
     </div> */}
+    <div className="tabla">
         <DataTable
             title="Discrepancias"
             theme="prueba"
@@ -58,6 +60,7 @@ return(
             data={discrepancias || []}
         >
         </DataTable>
+    </div>
     </>
 )
     }

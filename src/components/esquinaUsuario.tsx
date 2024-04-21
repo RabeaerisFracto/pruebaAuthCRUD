@@ -45,6 +45,7 @@ export default function EsquinaUsuario() {
             {provider ? provider.charAt(0).toUpperCase() + provider.slice(1) : ''}<br/></h4>
             <img src={avatar} alt='avatar' />
         </div>
+        <button className='botonHome' onClick={()=> navigate("/home")}>Discrepancia</button>
         <button className='botonLista' onClick={()=> navigate("/lista")}>Lista</button>
         <button className='botonLogout' onClick={()=> SignOutUser()}>SignOut</button>
         </>

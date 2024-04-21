@@ -1,0 +1,14 @@
+*{
+    overflow: hidden;
+}
+/* .example::-webkit-scrollbar {
+    display: none;
+} */
+.tabla{
+    margin: 0 40px;
+    position: relative;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    overflow: hidden;
+}

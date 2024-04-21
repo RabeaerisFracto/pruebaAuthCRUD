@@ -8,6 +8,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import NotFoundPage from './pages/404.tsx'
 import ListaDiscrepancias from './pages/lista.tsx'
+import '@picocss/pico'
 
 
 const router = createBrowserRouter([

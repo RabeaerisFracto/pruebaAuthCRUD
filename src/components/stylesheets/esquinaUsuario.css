@@ -1,5 +1,6 @@
 
 .esquina-usuario {
+    z-index: -1;
     /* border: 2px solid #9b9b9b; */
     display: flex;
     width: auto;
@@ -8,7 +9,7 @@
     left: 0;
     /* border-radius: 15px; */
     position: fixed;
-    background: linear-gradient(to right, #333333a9, transparent);
+    background: linear-gradient(to right, #2179acfd, transparent);
 }
 .esquina-usuario h4 {
     font-size: 0.8em;
@@ -27,22 +28,57 @@
     scale: 0.8;
 }
 .botonLogout {
-    display: flex;
-    width: auto;
+    display: block;
+    width: 180px;
     bottom: 20px;
+    height: auto;
     left: 60px;
     /* border-radius: 15px; */
     position: fixed;
-    background: transparent;
-    outline: none;
+    margin: auto;
+    text-align: center;
+    /* background: transparent;
+    outline: none; */
 }
 .botonLista {
-    display: flex;
-    width: auto;
-    bottom: 200px;
-    left: 70px;
+    display: block;
+    width: 180px;
+    height: auto;
+    bottom: 180px;
+    left: 60px;
     /* border-radius: 15px; */
     position: fixed;
-    background: transparent;
-    outline: none;
+    margin: auto;
+    text-align: center;
+    /* background: transparent;
+    outline: none; */
+}
+.botonHome {
+    display: block;
+    width: 180px;
+    height: auto;
+    bottom: 100px;
+    left: 60px;
+    /* border-radius: 15px; */
+    position: fixed;
+    margin: auto;
+    text-align: center;
+    /* background: transparent;
+    outline: none; */
+}
+
+@media screen and (max-width: 600px) {
+    .botonLogout {
+        width: 75vw;
+    }
+    .botonLista {
+        width: 75vw;
+    }
+    .botonHome {
+        width: 75vw;
+    }
+    .esquina-usuario h4 {
+        font-size: 1.2em;
+        margin: 20px 50px;
+    }
 }
