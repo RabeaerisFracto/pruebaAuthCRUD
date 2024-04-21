@@ -5,7 +5,6 @@
 import Discrepancia from "../components/discrepancia";
 import { useZustand } from "../store/loginDataStore";
 import EsquinaUsuario from '../components/esquinaUsuario';
-import MuestraDB from "../components/muestraDB";
 
 
 function Home (){
@@ -26,7 +25,6 @@ function Home (){
                 {folio4}<br/>
                 {folio5}<br/>
             </h2>
-            <MuestraDB/>
         </div>
     )
 }

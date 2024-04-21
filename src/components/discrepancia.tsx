@@ -40,7 +40,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const result = await client.from('Discrepancia').insert([{
       discrepancia: discrepancia,
       folio: folio,
-      user_id: otroNombre?.id // ? necesario para que no de error en la consola
+      user_id: otroNombre?.id, // ? necesario para que no de error en la consola
+      user_name: (otroNombre?.user_metadata.full_name === null ? otroNombre?.email?.split("@")[0] : otroNombre?.user_metadata.full_name),
     }]);
     console.log(result);
   }catch(error){

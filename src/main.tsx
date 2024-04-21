@@ -7,6 +7,7 @@ import Exito from './pages/exito.tsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import NotFoundPage from './pages/404.tsx'
+import ListaDiscrepancias from './pages/lista.tsx'
 
 
 const router = createBrowserRouter([
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
   { path: '/home', element: <Home /> },
   { path: '/exito', element: <Exito /> },
+  { path: '/lista', element: <ListaDiscrepancias /> },
 ]);
 
 

@@ -41,10 +41,11 @@ export default function EsquinaUsuario() {
         <>
         <div className='esquina-usuario'>
             <h4>{email}<br/>
-            {globalname}<br/>
-            {provider}<br/></h4>
+            {globalname ? globalname?.charAt(0).toUpperCase() + globalname?.slice(1) : ''}<br/>
+            {provider ? provider.charAt(0).toUpperCase() + provider.slice(1) : ''}<br/></h4>
             <img src={avatar} alt='avatar' />
         </div>
+        <button className='botonLista' onClick={()=> navigate("/lista")}>Lista</button>
         <button className='botonLogout' onClick={()=> SignOutUser()}>SignOut</button>
         </>
     )
