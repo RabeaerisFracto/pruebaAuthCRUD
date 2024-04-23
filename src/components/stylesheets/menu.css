@@ -1,0 +1,54 @@
+/* .barra-menu {
+    display: none;
+} */
+.botonLogout {
+    display: block;
+    width: 180px;
+    top: 270px;
+    height: auto;
+    left: 60px;
+    /* border-radius: 15px; */
+    position: fixed;
+    margin: auto;
+    text-align: center;
+    /* background: transparent;
+    outline: none; */
+    z-index: 1;
+
+}
+.botonLista {
+    display: block;
+    width: 180px;
+    height: auto;
+    top: 200px;
+    left: 60px;
+    /* border-radius: 15px; */
+    position: fixed;
+    margin: auto;
+    text-align: center;
+    /* background: transparent;
+    outline: none; */
+    z-index: 1;
+
+}
+.botonHome {
+    display: block;
+    width: 180px;
+    height: auto;
+    top: 130px;
+    left: 60px;
+    /* border-radius: 15px; */
+    position: fixed;
+    margin: auto;
+    text-align: center;
+    /* background: transparent;
+    outline: none; */
+    z-index: 1;
+
+}
+.div-menu-shifted {
+    display: none;
+    z-index: 1;
+
+}
+/* clases de css en componente padre afectan a componente hijo */

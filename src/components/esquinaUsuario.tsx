@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import UserData from './userData';
 import useUserStore from '../store/userDataStore';
-import { useNavigate } from "react-router-dom";
-import { client } from "../supabase/client";
+import Menu from './menu';
 
 import '../components/stylesheets/esquinaUsuario.css'
 
@@ -27,27 +26,36 @@ export default function EsquinaUsuario() {
         }
     }, [user, EsquinaUsuario])
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    async function SignOutUser(){
-        const { error } = await client.auth.signOut();
-        if (error) {console.log('Error al desconectar:', error.message)}
-        else{
-            navigate("/login");
-            console.log('Desconectado')}
-        }
+    // async function SignOutUser(){
+    //     const { error } = await client.auth.signOut();
+    //     if (error) {console.log('Error al desconectar:', error.message)}
+    //     else{
+    //         navigate("/login");
+    //         console.log('Desconectado')}
+    //     }
+
+    const [isChecked, setIsChecked] = useState(true);
+
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked);
+    };
 
     return (
         <>
         <div className='esquina-usuario'>
-            <h4>{email}<br/>
-            {globalname ? globalname?.charAt(0).toUpperCase() + globalname?.slice(1) : ''}<br/>
-            {provider ? provider.charAt(0).toUpperCase() + provider.slice(1) : ''}<br/></h4>
-            <img src={avatar} alt='avatar' />
+            <label className='label-menu' htmlFor='checkbox-menu'>
+                <h4>{email}<br/>
+                {globalname ? globalname?.charAt(0).toUpperCase() + globalname?.slice(1) : ''}<br/>
+                {provider ? provider.charAt(0).toUpperCase() + provider.slice(1) : ''}<br/></h4>
+                <img src={avatar} alt='avatar' />
+                <input id='checkbox-menu' type='checkbox' className='checkbox-menu' checked={isChecked} onChange={handleCheckboxChange} />
+            </label>
         </div>
-        <button className='botonHome' onClick={()=> navigate("/home")}>Discrepancia</button>
-        <button className='botonLista' onClick={()=> navigate("/lista")}>Lista</button>
-        <button className='botonLogout' onClick={()=> SignOutUser()}>SignOut</button>
+        <div className={`div-menu ${isChecked ? 'div-menu-shifted' : ''}`} >
+            <Menu />
+        </div>
         </>
     )
 }

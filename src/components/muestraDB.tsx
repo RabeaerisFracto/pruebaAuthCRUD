@@ -39,12 +39,6 @@ createTheme('prueba', {
     console.log(discrepancias);
 return(
     <>
-    {/* <div>
-        Bins = {discrepancias && discrepancias[0].RecepciónCarozo && discrepancias[0].RecepciónCarozo.Bins}
-    </div>
-    <div>
-        Usuario = {discrepancias && discrepancias[0].Usuario && discrepancias[0].Usuario.nombre}
-    </div> */}
     <div className="tabla">
         <DataTable
             title="Discrepancias"

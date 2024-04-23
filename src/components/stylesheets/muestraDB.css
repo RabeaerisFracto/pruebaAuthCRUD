@@ -11,4 +11,5 @@
     border-collapse: collapse;
     border-spacing: 0;
     overflow: hidden;
+    z-index: 1;
 }
