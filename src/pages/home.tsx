@@ -5,6 +5,7 @@
 import Discrepancia from "../components/discrepancia";
 import { useZustand } from "../store/loginDataStore";
 import EsquinaUsuario from '../components/esquinaUsuario';
+import '../pages/stylesheets/pags.css'
 
 
 function Home (){
@@ -16,7 +17,7 @@ function Home (){
     return(
         <div className="Login">
             <EsquinaUsuario/>
-            <h1>Discrepancias</h1>
+            <h1 className='titulo'>Discrepancias</h1>
             <Discrepancia/>
             <h2>
                 {folio1}<br/>

@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import { UserContext } from "../context/UserContext";
 import EsquinaUsuario from '../components/esquinaUsuario';
 // import DataOnScreen from "../components/dataOnScreen.tsx";
+import '../pages/stylesheets/pags.css'
 
 
 function Exito(){

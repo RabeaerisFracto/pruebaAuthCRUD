@@ -1,6 +1,13 @@
-/* .barra-menu {
-    display: none;
-} */
+.barra-menu {
+    border: 5px solid #34a8eb;
+    background-color: #34a8eb;
+    position: absolute;
+    top: 120px;
+    height: 225px;
+    width: 200px;
+    z-index: 5;
+    left: 50px;
+}
 .botonLogout {
     display: block;
     width: 180px;
@@ -13,7 +20,7 @@
     text-align: center;
     /* background: transparent;
     outline: none; */
-    z-index: 1;
+    z-index: 5;
 
 }
 .botonLista {
@@ -28,7 +35,7 @@
     text-align: center;
     /* background: transparent;
     outline: none; */
-    z-index: 1;
+    z-index: 5;
 
 }
 .botonHome {
@@ -43,12 +50,13 @@
     text-align: center;
     /* background: transparent;
     outline: none; */
-    z-index: 1;
-
+    z-index: 5;
 }
-.div-menu-shifted {
-    display: none;
-    z-index: 1;
 
-}
 /* clases de css en componente padre afectan a componente hijo */
+@media screen and (max-width: 500px) {
+    .barra-menu {
+        width: 100%;
+        left: 0px;
+    }
+}
