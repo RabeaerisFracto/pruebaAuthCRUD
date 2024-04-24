@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from "react";
 import { UserContext } from "../context/UserContext";
 import EsquinaUsuario from '../components/esquinaUsuario';
+import useUserStore from "../store/userDataStore";
 // import DataOnScreen from "../components/dataOnScreen.tsx";
 import '../pages/stylesheets/pags.css'
 
@@ -13,7 +14,15 @@ function Exito(){
     const [user, setUser] = useState(undefined);
     const navigate = useNavigate();
     const [email, setEmail] = useState<string | undefined>('');
+    const userStore = useUserStore((state) => state.user);
+    const [globalname, setGlobalname] = useState('Buscando nombre...' as string | undefined);
 
+    useEffect(() => {
+        if (userStore == null || userStore == undefined) { return }
+        else {
+            setGlobalname(userStore.user_metadata.full_name)
+        }
+    }, [userStore])
 //--------------OBTENCION DE DATA DE USUARIO LOGUEADO-------------------
 
     useEffect(()=>{
@@ -26,10 +35,13 @@ function Exito(){
                 setUser(dataUsuario);
                 if(dataUsuario?.email){setEmail(dataUsuario?.email);} // con condicional para evitar error en consola
                 console.log(dataUsuario?.email); // para confirmar mail x consola.
-                console.log(user);
             }}
         getUserData();// Se llama a la función para que se ejecute
+        console.log(user); //se tiene ue ejecutar la funcion primero
+
     },[]);
+
+
 
 
 
@@ -48,7 +60,7 @@ function Exito(){
             <UserContext.Provider value={user}>
             {user && Object.keys(user).length !== 0 && typeof email === 'string' ?
             <>
-            <h1>¡Bienvenido {email.split("@")[0]}!</h1>
+            <h1>¡Bienvenido {globalname ? globalname?.charAt(0).toUpperCase() + globalname?.slice(1) : email.split("@")[0]}!</h1>
             <h2>Has iniciado sesión correctamente</h2>
             <button onClick={()=> signOutUser()}>SignOut</button>
             </>

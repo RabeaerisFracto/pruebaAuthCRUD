@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 import UserData from './components/userData';
+import { client } from './supabase/client';
 import useUserStore from './store/userDataStore';//se importa el store de zustand, para setear el estado user.
-import EsquinaUsuario from './components/esquinaUsuario';
+// import EsquinaUsuario from './components/esquinaUsuario';
+import { useNavigate } from 'react-router-dom';
 
 
 function App() {
@@ -21,13 +23,27 @@ function App() {
     // console.log("user destructurado, presentando el mail: " +user.email);// Mail destructurado
   },[user])//Dependencias del useEffect
 
+  const navigate = useNavigate();
+  useEffect(() => {
+      const checkSession = async () => {
+          const { data: { session } } = await client.auth.getSession();
+          if (session) {
+              navigate("/exito");
+          } else {
+              navigate("/login");
+          }
+      }
+      checkSession();
+  }, [navigate]);
+  console.log(id)
 
   return (
     <>
-    <EsquinaUsuario/>
+
+    {/* <EsquinaUsuario/>
       <div>Pagina Inicial</div>
       <h2>No pasar directamente de zustand, sino que mediante useState: {id}</h2>
-      <h3>El state demora una fraccion de segundo en actualizarce. Realizar manejo....</h3>
+      <h3>El state demora una fraccion de segundo en actualizarce. Realizar manejo....</h3> */}
     </>
   )
 }

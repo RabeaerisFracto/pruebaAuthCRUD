@@ -1,17 +1,17 @@
 .barra-menu {
-    border: 5px solid #34a8eb;
-    background-color: #34a8eb;
+    border: 5px solid linear-gradient(to right, #2179acfd, transparent);
+    background: linear-gradient(to right, #2179acfd, transparent);
     position: absolute;
-    top: 120px;
-    height: 225px;
-    width: 200px;
+    top: 107px;
+    height: 100%;
+    width: 280px;
     z-index: 5;
-    left: 50px;
+    left: 0px;
 }
 .botonLogout {
     display: block;
     width: 180px;
-    top: 270px;
+    bottom: 20px;
     height: auto;
     left: 60px;
     /* border-radius: 15px; */

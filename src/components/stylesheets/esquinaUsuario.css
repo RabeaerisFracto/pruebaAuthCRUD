@@ -9,7 +9,7 @@
     left: 0;
     /* border-radius: 15px; */
     position: fixed;
-    /* background: linear-gradient(to right, #2179acfd, transparent); */
+    background: linear-gradient(to right, #2179acfd, transparent);
 }
 .esquina-usuario h4 {
     font-size: 0.7em;
@@ -51,7 +51,7 @@
 }
 .div-menu-shifted {
     display: none;
-    z-index: 1;
+    z-index: 100;
 
 }
 
