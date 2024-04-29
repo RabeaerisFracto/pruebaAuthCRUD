@@ -44,7 +44,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       user_name: (otroNombre?.user_metadata.full_name === null ? otroNombre?.email?.split("@")[0] : otroNombre?.user_metadata.full_name),
     }]);
     console.log(data, error);
-    if(folio !== ""){
+    if(error?.code === '23505'){
       if(confirm('Discrepancia en folio ya ingresada, desea actualizar??')){
 
         const update = await client
@@ -59,9 +59,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         .eq('folio', folio);
         console.log(update);
         alert('Discrepancia actualizada');
-      }
-
-  }}catch(error){
+      }}
+}catch(error){
     console.log("error en CRUD "+error);
   }
 }
