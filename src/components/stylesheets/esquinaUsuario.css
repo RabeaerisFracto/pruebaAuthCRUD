@@ -39,6 +39,7 @@
     height: fit-content;
     cursor: pointer;
     background: transparent;
+    user-select: none;
     /* outline: 3px solid black; */
 
 }
@@ -47,12 +48,25 @@
 }
 .div-menu {
     display: block;
-    z-index: 100;
+    z-index: 10000;
+    opacity: 0;
+    animation: entrada 0.5s ease forwards;
+}
+@keyframes entrada {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 .div-menu-shifted {
     display: none;
     z-index: 100;
+}
 
+.esquina-usuario {
+    z-index: 2;
 }
 
 @media screen and (max-width: 500px) {
