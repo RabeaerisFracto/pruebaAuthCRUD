@@ -10,6 +10,9 @@
     /* border-radius: 15px; */
     position: fixed;
     background: linear-gradient(to right, #2179acfd, transparent);
+    /* background: radial-gradient(circle  at top left, #2179acfd, white, transparent);
+    background-position: 0 0;
+    background-size: 290px 110px; */
 }
 .esquina-usuario h4 {
     font-size: 0.7em;

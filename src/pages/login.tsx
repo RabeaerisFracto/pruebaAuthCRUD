@@ -9,19 +9,10 @@ function Login (){
     useEffect(() => {
         const checkSession = async () => {
             const { data: { session } } = await client.auth.getSession();
-            if (session) {
-                navigate("/exito");
-            } else {
-                client.auth.onAuthStateChange((event) => {
-                    if (event === "SIGNED_IN") {
-                        navigate("/exito");
-                    } else {
-                        navigate("/login");
-                    }
-                });
-            }
-        }
-        checkSession();
+            console.log(session);
+            if (session) {navigate('/exito')};
+        };
+        checkSession();   
     }, [navigate]);
     return(
         <div className="Login">
