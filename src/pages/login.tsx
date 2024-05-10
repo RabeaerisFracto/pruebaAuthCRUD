@@ -8,9 +8,9 @@ function Login (){
     const navigate = useNavigate();
     useEffect(() => {
         const checkSession = async () => {
-            const { data: { session } } = await client.auth.getSession();
-            console.log(session);
-            if (session) {navigate('/exito')};
+            client.auth.onAuthStateChange(async (event) => {
+                if(event === "SIGNED_IN") navigate("/");
+            });
         };
         checkSession();   
     }, [navigate]);
@@ -21,6 +21,7 @@ function Login (){
                 supabaseClient={client}
                 providers={["discord","google","twitch"]}
                 theme="dark"
+                redirectTo="http://localhost:5173/exito"
                 localization={{
                     variables:{
                     sign_in:{

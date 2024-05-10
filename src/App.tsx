@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 import UserData from './components/userData';
-import { client } from './supabase/client';
+// import { client } from './supabase/client';
 import useUserStore from './store/userDataStore';//se importa el store de zustand, para setear el estado user.
 // import EsquinaUsuario from './components/esquinaUsuario';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 
 function App() {
@@ -23,18 +23,18 @@ function App() {
     // console.log("user destructurado, presentando el mail: " +user.email);// Mail destructurado
   },[user])//Dependencias del useEffect
 
-  const navigate = useNavigate();
-  useEffect(() => {
-      const checkSession = async () => {
-          const { data: { session } } = await client.auth.getSession();
-          if (session) {
-              navigate("/exito");
-          } else {
-              navigate("/login");
-          }
-      }
-      checkSession();
-  }, [navigate]);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //     const checkSession = async () => {
+  //         const { data: { session } } = await client.auth.getSession();
+  //         if (session) {
+  //             // navigate("/exito");
+  //         } else {
+  //             // navigate("/login");
+  //         }
+  //     }
+  //     checkSession();
+  // }, [navigate]);
   console.log(id)
 
   return (
