@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 import UserData from './components/userData';
+import EsquinaUsuario from './components/esquinaUsuario';
 // import { client } from './supabase/client';
 import useUserStore from './store/userDataStore';//se importa el store de zustand, para setear el estado user.
 // import EsquinaUsuario from './components/esquinaUsuario';
@@ -39,7 +40,7 @@ function App() {
 
   return (
     <>
-
+  <EsquinaUsuario/>
     {/* <EsquinaUsuario/>
       <div>Pagina Inicial</div>
       <h2>No pasar directamente de zustand, sino que mediante useState: {id}</h2>

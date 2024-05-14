@@ -5,15 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 
 function Login (){
-    const navigate = useNavigate();
-    useEffect(() => {
-        const checkSession = async () => {
-            client.auth.onAuthStateChange(async (event) => {
-                if(event === "SIGNED_IN") navigate("/");
-            });
-        };
-        checkSession();   
-    }, [navigate]);
+
+    async function verificarToken() {
+        const token = localStorage.getItem('sb-zujszcuwbctlhowucxyz-auth-token');
+        if (token) {
+            client.auth.refreshSession();
+            console.log('token', token);
+        }else{
+            console.log('No hay token');
+        }
+    }
+    verificarToken();
     return(
         <div className="Login">
             <header className="Login-header">
@@ -22,6 +24,10 @@ function Login (){
                 providers={["discord","google","twitch"]}
                 theme="dark"
                 redirectTo="http://localhost:5173/exito"
+                queryParams={{
+                    access_type: 'offline',
+                    next: '/exito',
+                    redirectTo: '/exito'}}
                 localization={{
                     variables:{
                     sign_in:{
