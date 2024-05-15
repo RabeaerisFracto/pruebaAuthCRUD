@@ -1,21 +1,22 @@
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { client } from "../supabase/client";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
+
 
 function Login (){
 
     async function verificarToken() {
-        const token = localStorage.getItem('sb-zujszcuwbctlhowucxyz-auth-token');
-        if (token) {
-            client.auth.refreshSession();
-            console.log('token', token);
-        }else{
+            client.auth.onAuthStateChange((event) => {
+                console.log('Cambio de estado de autenticación', event);
+                if ( event === 'SIGNED_IN' ) {
+                    console.log('Usuario autenticado');
+                    window.location.assign("http://localhost:5173/exito")
+            }else{
             console.log('No hay token');
         }
-    }
-    verificarToken();
+    })};
+verificarToken();
+
     return(
         <div className="Login">
             <header className="Login-header">
