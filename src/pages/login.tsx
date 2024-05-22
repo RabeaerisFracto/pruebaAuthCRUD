@@ -11,6 +11,8 @@ function Login (){
                 if ( event === 'SIGNED_IN' ) {
                     console.log('Usuario autenticado');
                     window.location.assign("http://localhost:5173/exito")
+                    //Se hace mediante JS nativo, para que no se renderice el componente Auth de nuevo.
+                    //Comentar assign para confirmar x consola seguridad de clave de usuario.
             }else{
             console.log('No hay token');
         }

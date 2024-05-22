@@ -2,19 +2,7 @@ import { client } from "../supabase/client";
 import { useState, useEffect } from "react";
 import DataTable, { createTheme } from "react-data-table-component";
 import './stylesheets/muestraDB.css'
-
-
-
-export default function MuestraDB() {
-    const [discrepancias, setDiscrepancias] = useState<any>(null);
-
-interface Discrepancia {
-    RecepciónCarozo: any;
-    folio: string;
-    discrepancia: string;
-    user_name: string;
-    Bins: number;
-}
+// import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue} from "@nextui-org/table";
 
 createTheme('prueba', {
     text: {
@@ -26,7 +14,17 @@ createTheme('prueba', {
     },
     }
 )
+interface Discrepancia {
+    RecepciónCarozo: any;
+    folio: string;
+    discrepancia: string;
+    user_name: string;
+    Bins: number;
+}
 
+
+export default function MuestraDB() {
+    const [discrepancias, setDiscrepancias] = useState<any>(null);
     useEffect(() => {
         async function fetchDiscrepancias() {;
         const { data, error } = await client.from('Discrepancia')
@@ -36,7 +34,6 @@ createTheme('prueba', {
         }
         fetchDiscrepancias();
     },[]);
-    console.log(discrepancias);
 return(
     <>
     <div className="tabla">
@@ -52,8 +49,7 @@ return(
                 {name: 'Productor',grow:4, sortable:true,selector:(row: Discrepancia) => row.RecepciónCarozo && row.RecepciónCarozo.Nom_prod},
             ]}
             data={discrepancias || []}
-        >
-        </DataTable>
+        />
     </div>
     </>
 )

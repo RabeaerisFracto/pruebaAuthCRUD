@@ -14,7 +14,9 @@ export default function EsquinaUsuario() {
     const [avatar, setAvatar] = useState('Buscando avatar...' as string | undefined);
 
     const user = useUserStore((state) => state.user);
+    //En una constante, se selecciona el estado que queremos almacenar en la constante.
     UserData();
+    //Esta funcion se llama para obtener la data del usuario logueado.
 
     useEffect(() => {
         if (user == null || user == undefined) { return }

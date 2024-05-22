@@ -10,10 +10,12 @@ const [user, setUser] = useState<any>();//Se setea el estado user con la data de
 const setZusUser = useUserStore((state) => state.setUser);//Se setea el estado user del store de zustand.
 //OJO: EL STORE DE ZUSTAND NO SE PUEDE USAR DENTRO DE UN HOOK, POR ESO SE USA UNA VARIABLE INTERMEDIA.
 //OJO: EL STATE, VA CON EL SET DEL USESTATE, ES DECIR, EL 2DO PARAMETRO DEL USESTATE.
+//OJO: AQUI SE PASA COMO CONSTANTE EL setUser, POR LO QUE ESTA CONSTANTE ES UNA FUNCION QUE REQUIERE UN ARGUMENTO PARA SETEAR AL user.
 
 useEffect(()=>{setZusUser(user)},[user, setZusUser])
 //Se setea el estado user del store de zustand con el estado user del hook UserData.
 //En el 2do parametro del useEffect, se pasan las dependencias del hook UserData y del store de zustand.
+//OJO: Aqui se stetea el estado "user" del store, con el estado "user" del hook UserData.
 useEffect(()=>{
     async function getUserData(){//Mediante Async Await, se obtiene la data del usuario logueado.
                 await client.auth.getUser().then(({data}) => {;

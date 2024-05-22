@@ -44,6 +44,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       user_name: (otroNombre?.user_metadata.full_name === null ? otroNombre?.email?.split("@")[0] : otroNombre?.user_metadata.full_name),
     }]);
     console.log(data, error);
+    //Gestion de errores para administrar alertas
     if(error?.code === '23505'){
       if(confirm('Discrepancia en folio ya ingresada, desea actualizar??')){
 
