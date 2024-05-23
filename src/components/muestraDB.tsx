@@ -26,29 +26,29 @@ interface Discrepancia {
 export default function MuestraDB() {
 
 
-    const { data: dataDiscrepancias, isLoading, error } = useQuery({
-        queryFn: () => client.from('Discrepancia').select('*,RecepciónCarozo(*)'),
+    const { data: dataDiscrepancias, isLoading, error } = useQuery<any>({
+        queryFn: async () => await client.from('Discrepancia').select('*,RecepciónCarozo(*)'),
         queryKey: ['dataDiscrepancias'],
     });
-    console.log(dataDiscrepancias);
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error de carga de data</div>;
 
-
-
-    // useEffect(() => {
-    //     async function fetchDiscrepancias() {;
-    //     const { data, error } = await client.from('Discrepancia')
-    //     .select('*,RecepciónCarozo(*)');
-    //     if (error) console.log('error', error);
-    //     else setDiscrepancias(data);
-    //     }
-    //     fetchDiscrepancias();
-    // },[]);
 return(
-    <>
-
-    </>
+    <div className="tabla">
+        <DataTable
+            title="Discrepancias"
+            theme="prueba"
+            columns={[
+                {name: 'Folio', sortable:true,selector:(row: Discrepancia) => row.folio},
+                {name: 'Usuario',grow:2, sortable:true,selector:(row: Discrepancia) => row.user_name},
+                {name: 'Discrepancia',grow:5,sortable:true, selector:(row: Discrepancia) => row.discrepancia},
+                {name: 'Bins', sortable:true,selector:(row: Discrepancia) => row.RecepciónCarozo && row.RecepciónCarozo.Bins},
+                {name: 'SDP', sortable:true,selector:(row: Discrepancia) => row.RecepciónCarozo && row.RecepciónCarozo.SDP},
+                {name: 'Productor',grow:4, sortable:true,selector:(row: Discrepancia) => row.RecepciónCarozo && row.RecepciónCarozo.Nom_prod},
+            ]}
+            data={dataDiscrepancias?.data || []}
+        />
+    </div>
 )
     }
