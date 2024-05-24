@@ -10,9 +10,9 @@ function ListaDiscrepancias (){
     return(
         <QueryClientProvider client={queryClient}>
         <div>
-            <EsquinaUsuario/>
             <h1 className='titulo'>Lista Discrepancias</h1>
             <MuestraDB/>
+            <EsquinaUsuario/>
         </div>
         </QueryClientProvider>
     )

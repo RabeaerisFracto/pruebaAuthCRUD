@@ -52,6 +52,20 @@
     outline: none; */
     z-index: 5;
 }
+.botonUpdate {
+    display: block;
+    width: 180px;
+    height: auto;
+    top: 270px;
+    left: 60px;
+    /* border-radius: 15px; */
+    position: fixed;
+    margin: auto;
+    text-align: center;
+    /* background: transparent;
+    outline: none; */
+    z-index: 5;
+}
 
 /* clases de css en componente padre afectan a componente hijo */
 @media screen and (max-width: 500px) {

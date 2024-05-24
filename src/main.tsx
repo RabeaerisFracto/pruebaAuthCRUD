@@ -9,6 +9,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import NotFoundPage from './pages/404.tsx'
 import ListaDiscrepancias from './pages/lista.tsx'
 import '@picocss/pico'
+import UpdateDB from './pages/upload.tsx'
 
 
 const router = createBrowserRouter([
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
   { path: '/home', element: <Home /> },
   { path: '/exito', element: <Exito /> },
+  { path: '/upload', element: <UpdateDB /> },
   { path: '/lista', element: <ListaDiscrepancias /> },
 ]);
 

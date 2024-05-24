@@ -16,7 +16,6 @@ function Home (){
     const folio5 = useZustand(state => state.folio5);
     return(
         <div className="Login">
-            <EsquinaUsuario/>
             <h1 className='titulo'>Discrepancias</h1>
             <Discrepancia/>
             <h2>
@@ -26,6 +25,7 @@ function Home (){
                 {folio4}<br/>
                 {folio5}<br/>
             </h2>
+            <EsquinaUsuario/>
         </div>
     )
 }
