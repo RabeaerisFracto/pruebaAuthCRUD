@@ -54,10 +54,8 @@ CSG: string
 
 function MyDropzone() {
   const onDrop = useCallback((acceptedFiles: any) => {
-    console.log(acceptedFiles[0].text())
-
+    console.log(acceptedFiles[0].text());
     const uploadFile = async (file: File) => {
-      // await client.from('duplicate').delete();
       const fileData = await file.text();
       const duplicate: IData[] = Papa.parse(fileData, { header: true, dynamicTyping: true }).data as IData[];
 
@@ -68,9 +66,9 @@ function MyDropzone() {
       const { data, error } = await client.from('duplicate').insert(cleanedData);
     
       if (error) {
-        console.error('Error uploading file:', error);
+        console.error('Error en carga de archivo', error);
       } else {
-        console.log('File uploaded successfully:', data);
+        console.log('Carga de archivo exitosa', data);
       }
 
   }
@@ -91,8 +89,8 @@ function MyDropzone() {
         <input {...getInputProps()} />
         {
           isDragActive ?
-            <p>Suelta aquí tu archivo ...</p> :
-            <p>Arrastra un archivo aca, o clickea para seleccionarlo</p>
+            <div className='dragZoneActive'>Suelta aquí tu archivo ...</div> :
+            <div className='dragZone'>Arrastra un archivo aca, o click para seleccionarlo</div>
         }
       </div>
       <button type="submit">Subir</button>

@@ -7,3 +7,19 @@
 .CSVImporter_ColumnDragSourceArea {
     display: none;
 }
+.dragZone {
+    display: block;
+    border: 2px dashed #ccc;
+    padding:10px;
+    width: 430.75px;
+    transition: border 0.5s ease-in-out;
+    margin-bottom: 10px;
+}
+.dragZoneActive {
+    display: block;
+    width: 430.75px;
+    border: 2px dashed #777;
+    padding:10px;
+    transition: border 0.5s ease-in-out;
+    margin-bottom: 10px;
+}
