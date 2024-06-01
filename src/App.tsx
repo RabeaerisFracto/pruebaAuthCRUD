@@ -36,7 +36,7 @@ function App() {
   //     }
   //     checkSession();
   // }, [navigate]);
-  console.log(id)
+  // console.log(id)
 
   return (
     <>

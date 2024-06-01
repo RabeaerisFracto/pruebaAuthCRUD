@@ -1,4 +1,4 @@
-import {useCallback} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import Papa from 'papaparse';
 import { client } from '../supabase/client';
@@ -53,9 +53,25 @@ CSG: string
 
 
 function MyDropzone() {
-  const onDrop = useCallback((acceptedFiles: any) => {
-    console.log(acceptedFiles[0].text());
-    const uploadFile = async (file: File) => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [fileName, setFileName] = useState<string>('');
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    setFiles(acceptedFiles);
+    setFileName(acceptedFiles[0].name);
+    console.log(acceptedFiles[0].name);
+  }, []);
+
+  const {getRootProps, getInputProps, isDragActive, fileRejections} = useDropzone({
+    onDrop,
+    accept: {'text/csv': ['.csv'], 'text/plain': ['.txt']},
+    maxFiles: 1
+  })
+
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    for (const file of files) {
       const fileData = await file.text();
       const duplicate: IData[] = Papa.parse(fileData, { header: true, dynamicTyping: true }).data as IData[];
 
@@ -64,33 +80,29 @@ function MyDropzone() {
         Folio: row.Folio || "",
       }));
       const { data, error } = await client.from('duplicate').insert(cleanedData);
-    
+
       if (error) {
         console.error('Error en carga de archivo', error);
       } else {
         console.log('Carga de archivo exitosa', data);
       }
-
+    }
   }
-    acceptedFiles.forEach((file: File) => {
-      uploadFile(file);
-    });
-    
-  }, []);
+    useEffect(() => {
+    if (fileRejections.length === 1) {
+      alert(`Archivo no permitido, solo se permiten archivos .csv`);
+    }
+  }//useEffect para que solo aparezca una vez el alert
+  , [fileRejections]);
 
-  const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({onDrop})
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    console.log(acceptedFiles);
-  }
   return (
     <form onSubmit={handleSubmit}>
       <div {...getRootProps()}>
         <input {...getInputProps()} />
         {
           isDragActive ?
-            <div className='dragZoneActive'>Suelta aquí tu archivo ...</div> :
-            <div className='dragZone'>Arrastra un archivo aca, o click para seleccionarlo</div>
+          <div className='dragZoneActive'>Suelta aquí tu archivo ...</div> :
+          <div className='dragZone'>{fileName !== '' ? fileName : 'Arrastra un archivo aca, o click para seleccionarlo'}</div>
         }
       </div>
       <button type="submit">Subir</button>
