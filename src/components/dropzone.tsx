@@ -75,16 +75,41 @@ function MyDropzone() {
       const fileData = await file.text();
       const duplicate: IData[] = Papa.parse(fileData, { header: true, dynamicTyping: true }).data as IData[];
 
-      const cleanedData = duplicate.map(row => ({
-        ...row,
-        Folio: row.Folio || "",
-      }));
-      const { data, error } = await client.from('duplicate').insert(cleanedData);
+      // const cleanedData = duplicate.map(row => ({
+      //   ...row,
+      //   Folio: row.Folio || "",
+      // }));
+      // const foliosNuevos = cleanedData.map((row) => row.Folio);
+      // const { data, error } = await client.from('duplicate').insert(cleanedData);
 
-      if (error) {
-        console.error('Error en carga de archivo', error);
-      } else {
-        console.log('Carga de archivo exitosa', data);
+      // cleanedData.forEach((data) => {
+      //   console.log(data.Folio);
+      // });
+      // console.log(foliosNuevos);
+
+      const cleanedData = [];
+      for (const row of duplicate) {
+        const {data: existingFolios, error} = await client
+        .from('duplicate')
+        .select('Folio')
+        .eq('Folio', row.Folio)
+        .single();
+
+        if (!existingFolios) {
+          cleanedData.push({
+            ...row,
+            Folio: row.Folio || "",
+          });
+        }
+      }
+      if (cleanedData.length > 0) {
+        const { data, error } = await client.from('duplicate').insert(cleanedData);
+        if (error) {
+          console.error('Error en carga de archivo', error);
+        } else {
+          console.log('Carga de archivo exitosa');
+          console.log('data ingresada',cleanedData);
+        }
       }
     }
   }
@@ -111,3 +136,5 @@ function MyDropzone() {
 }
 
 export default MyDropzone
+
+
