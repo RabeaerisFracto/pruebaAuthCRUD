@@ -89,7 +89,7 @@ function MyDropzone() {
 
       const cleanedData = [];
       for (const row of duplicate) {
-        const {data: existingFolios, error} = await client
+        const {data: existingFolios} = await client
         .from('duplicate')
         .select('Folio')
         .eq('Folio', row.Folio)
@@ -103,15 +103,21 @@ function MyDropzone() {
         }
       }
       if (cleanedData.length > 0) {
-        const { data, error } = await client.from('duplicate').insert(cleanedData);
+        const { error } = await client.from('duplicate').insert(cleanedData);
         if (error) {
           console.error('Error en carga de archivo', error);
         } else {
           console.log('Carga de archivo exitosa');
+          alert('Carga de '+ cleanedData.length +' registros nuevos exitosa');
           console.log('data ingresada',cleanedData);
         }
+      } else {
+        console.log('No hay datos nuevos para ingresar');
+        alert('No hay datos nuevos para ingresar');
       }
     }
+    setFiles([]);
+    setFileName('');
   }
     useEffect(() => {
     if (fileRejections.length === 1) {
