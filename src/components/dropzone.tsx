@@ -75,18 +75,6 @@ function MyDropzone() {
       const fileData = await file.text();
       const duplicate: IData[] = Papa.parse(fileData, { header: true, dynamicTyping: true }).data as IData[];
 
-      // const cleanedData = duplicate.map(row => ({
-      //   ...row,
-      //   Folio: row.Folio || "",
-      // }));
-      // const foliosNuevos = cleanedData.map((row) => row.Folio);
-      // const { data, error } = await client.from('duplicate').insert(cleanedData);
-
-      // cleanedData.forEach((data) => {
-      //   console.log(data.Folio);
-      // });
-      // console.log(foliosNuevos);
-
       const cleanedData = [];
       for (const row of duplicate) {
         const {data: existingFolios} = await client
