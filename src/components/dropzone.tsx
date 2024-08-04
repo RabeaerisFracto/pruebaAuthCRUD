@@ -50,6 +50,7 @@ Nota: string
 Temporada: string
 CSG: string
 }
+// RECORDAR, que si se usa en SQL la fecha, esta tiene un formato especifico. De no ser necesario, se puede cambiar a texto para evitar incompatibilidades.
 
 
 function MyDropzone() {
@@ -78,7 +79,7 @@ function MyDropzone() {
       const cleanedData = [];
       for (const row of duplicate) {
         const {data: existingFolios} = await client
-        .from('duplicate')
+        .from('RecepciónCarozo')
         .select('Folio')
         .eq('Folio', row.Folio)
         .single();
@@ -91,7 +92,7 @@ function MyDropzone() {
         }
       }
       if (cleanedData.length > 0) {
-        const { error } = await client.from('duplicate').insert(cleanedData);
+        const { error } = await client.from('RecepciónCarozo').insert(cleanedData);
         if (error) {
           console.error('Error en carga de archivo', error);
         } else {
