@@ -2,8 +2,12 @@ import {useCallback, useEffect, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import Papa from 'papaparse';
 import { client } from '../supabase/client';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
-interface IData {
+dayjs.extend(customParseFormat);
+
+export interface IData {
 Numero: string
 Estado: string
 KilosFolio: string
@@ -74,10 +78,25 @@ function MyDropzone() {
 
     for (const file of files) {
       const fileData = await file.text();
-      const duplicate: IData[] = Papa.parse(fileData, { header: true, dynamicTyping: true }).data as IData[];
+      const parsedData: IData[] = Papa.parse(fileData, { header: true, dynamicTyping: true }).data as IData[];
 
       const cleanedData = [];
-      for (const row of duplicate) {
+      for (const row of parsedData) {
+        if (row.FecRecepcion) {
+          row.FecRecepcion = dayjs(row.FecRecepcion, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        }
+        if (row.FecCosecha) {
+          row.FecCosecha = dayjs(row.FecCosecha, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        }
+        if (row.FecDestara) {
+          row.FecDestara = dayjs(row.FecDestara, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        }
+        if (row.FecSalida) {
+          row.FecSalida = dayjs(row.FecSalida, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        }
+        if (row.FecPeso) {
+          row.FecPeso = dayjs(row.FecPeso, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        }
         const {data: existingFolios} = await client
         .from('RecepciónCarozo')
         .select('Folio')
