@@ -10,6 +10,7 @@ import useUserStore from './store/userDataStore';//se importa el store de zustan
 
 function App() {
   const [id, setId] = useState('Buscando id...' as string | undefined);//Se inicializa el estado id como string o undefined.
+  console.log(id)//Se logea el estado id.
   const user = useUserStore((state) => state.user);//Se destructura el estado user del store de zustand.
   UserData();//El componente UserData se llama dentro de la funcion App, para obtener la data del usuario logueado.
   //Se necesita llamar al componente UserData, para que se ejecute el useEffect y se obtenga la data del usuario logueado.
