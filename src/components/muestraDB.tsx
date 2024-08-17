@@ -3,7 +3,8 @@ import DataTable, { createTheme } from "react-data-table-component";
 import './stylesheets/muestraDB.css'
 // import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue} from "@nextui-org/table";
 import { useQuery } from "@tanstack/react-query";
-import { IData } from "./dropzone";
+import Discrepancia from "../interfaces/Discrepancia";
+import { useState, useEffect } from "react";
 
 createTheme('prueba', {
     text: {
@@ -14,25 +15,26 @@ createTheme('prueba', {
         default: 'transparent',
     },
     }
-)
-interface Discrepancia {
-    RecepciónCarozo: IData;
-    folio: string;
-    discrepancia: string;
-    user_name: string;
-    Bins: number;
-}
-
-
+);
 
 export default function MuestraDB() {
-
-
     const { data: dataDiscrepancias, isLoading, error } = useQuery<any>({
         queryFn: async () => await client.from('Discrepancia').select('*,RecepciónCarozo(*)'),
         queryKey: ['dataDiscrepancias'],
     });
-console.log(dataDiscrepancias?.data?.map((item: Discrepancia) => item.RecepciónCarozo));
+    console.log(dataDiscrepancias?.data?.map((item: Discrepancia) => item.RecepciónCarozo));
+    
+    const [filteredRecords, setFilteredRecords] = useState<Discrepancia[]>(dataDiscrepancias?.data);
+    useEffect(() => {
+        setFilteredRecords(dataDiscrepancias?.data);
+    }, [dataDiscrepancias?.data]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.toLowerCase();
+        const filtered = (dataDiscrepancias?.data || []).filter((record: Discrepancia) => record.folio.toLowerCase().includes(value));
+        setFilteredRecords(filtered);
+    };
+    
     const ExpandableComponent: React.FC<{ data: Discrepancia }> = ({ data }) => (
         <div className="expandable-component">
             <p><strong>Productor:</strong> {data.RecepciónCarozo.Cprod}  {data.RecepciónCarozo.Nom_prod} </p>
@@ -51,6 +53,7 @@ console.log(dataDiscrepancias?.data?.map((item: Discrepancia) => item.Recepción
 
 return(
     <div className="tabla">
+        <input type="text" onChange={handleChange}></input>
         <DataTable
             title="Discrepancias"
             theme="prueba"
@@ -61,7 +64,7 @@ return(
 
                 {name: 'Productor',grow:4, sortable:true,selector:(row: Discrepancia) => row.RecepciónCarozo.Nom_prod},
             ]}
-            data={dataDiscrepancias?.data || []}
+            data={filteredRecords || []}
             pagination
             // paginationPerPage={4}
             fixedHeader

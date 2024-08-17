@@ -4,57 +4,10 @@ import Papa from 'papaparse';
 import { client } from '../supabase/client';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import IData from '../interfaces/IData';
 
 dayjs.extend(customParseFormat);
 
-export interface IData {
-Numero: string
-Estado: string
-KilosFolio: string
-Cprod: string
-Grp_prod: string
-Chofer: string
-PesoCamion: string
-TaraCamion: string
-PatenteCarro: string
-TotEnvSal: string
-PatenteCamion: string
-FecRecepcion: string
-Transportista: string
-GuiaProductor: string
-FecCosecha: string
-TipoFruta: string
-Folio: string
-CHto: string
-SDP: string
-TranspRut: string
-Car1: string
-CEnv: string
-CTfr: string
-CCnd: string
-PesoCarro: string
-TaraCarro: string
-ConEnvases: string
-Bins: string
-Kilos_prom: string
-FecDestara: string
-Cesp: string
-Cvar: string
-Grp_Var: string
-CPlt: string
-Marca: string
-Nomb: string
-FecSalida: string
-FecPeso: string
-Tipo_cos: string
-UM: string
-Nom_prod: string
-Color: string
-Nota: string
-Temporada: string
-CSG: string
-}
-// RECORDAR, que si se usa en SQL la fecha, esta tiene un formato especifico. De no ser necesario, se puede cambiar a texto para evitar incompatibilidades.
 
 
 function MyDropzone() {
