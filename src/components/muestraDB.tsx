@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import Discrepancia from "../interfaces/Discrepancia";
 import { useState, useEffect } from "react";
 
+
+//-------Tema Tabla-------
 createTheme('prueba', {
     text: {
         primary: 'black',
@@ -16,25 +18,42 @@ createTheme('prueba', {
     },
     }
 );
-
+//-------Funcion principal-------
 export default function MuestraDB() {
+//-------Solicitud a DB mediante useQuery(tanstack)-------
     const { data: dataDiscrepancias, isLoading, error } = useQuery<any>({
-        queryFn: async () => await client.from('Discrepancia').select('*,RecepciónCarozo(*)'),
+        queryFn: async () => await client.from('Discrepancia').select('*,RecepciónCarozo(*)'),//Union de 2 tablas
         queryKey: ['dataDiscrepancias'],
     });
-    console.log(dataDiscrepancias?.data?.map((item: Discrepancia) => item.RecepciónCarozo));
-    
+    console.log(dataDiscrepancias?.data?.map((item: Discrepancia) => item.RecepciónCarozo));//mapeo data en cosola
+//-------Filtro de busqueda-------
     const [filteredRecords, setFilteredRecords] = useState<Discrepancia[]>(dataDiscrepancias?.data);
     useEffect(() => {
         setFilteredRecords(dataDiscrepancias?.data);
-    }, [dataDiscrepancias?.data]);
+    }, [dataDiscrepancias?.data]);//Cada vez que el [] se modifique, se actualizara en el VP.
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {//Reacciona al input text.
         const value = e.target.value.toLowerCase();
-        const filtered = (dataDiscrepancias?.data || []).filter((record: Discrepancia) => record.folio.toLowerCase().includes(value));
+        const filtered = (dataDiscrepancias?.data || []).filter((record: any) =>{
+            if (filterField === 'folio'){
+                return record.folio.toLowerCase().includes(value);
+            }else if (filterField === 'RecepciónCarozo.SDP'){
+                return record.RecepciónCarozo.SDP?.toLowerCase().includes(value);
+            }else if (filterField === 'RecepciónCarozo.CSG'){
+                return record.RecepciónCarozo.CSG?.toLowerCase().includes(value);
+            }
+            return false
+});
         setFilteredRecords(filtered);
-    };
-    
+    }
+//-------Manejo de Select-------
+    const [filterField, setFilterField] = useState<string>('folio');
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setFilterField(e.target.value)
+    }
+    console.log(filterField)
+
+//-------Componente expandible-------
     const ExpandableComponent: React.FC<{ data: Discrepancia }> = ({ data }) => (
         <div className="expandable-component">
             <p><strong>Productor:</strong> {data.RecepciónCarozo.Cprod}  {data.RecepciónCarozo.Nom_prod} </p>
@@ -54,6 +73,11 @@ export default function MuestraDB() {
 return(
     <div className="tabla">
         <input type="text" onChange={handleChange}></input>
+        <select onChange={handleSelectChange}>
+            <option value="folio">Folio</option>
+            <option value="RecepciónCarozo.CSG">CSG</option>
+            <option value="RecepciónCarozo.SDP">SDP</option>
+        </select>
         <DataTable
             title="Discrepancias"
             theme="prueba"
