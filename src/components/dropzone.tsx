@@ -6,33 +6,33 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import IData from '../interfaces/IData';
 
-dayjs.extend(customParseFormat);
+dayjs.extend(customParseFormat);//Para reconfigurar orden de la fecha
 
 
 
 function MyDropzone() {
   const [files, setFiles] = useState<File[]>([]);
-  const [fileName, setFileName] = useState<string>('');
+  const [fileName, setFileName] = useState<string>('');//estados para guardar archivo en dropzone y su nombre
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFiles(acceptedFiles);
     setFileName(acceptedFiles[0].name);
     console.log(acceptedFiles[0].name);
-  }, []);
+  }, []);//acceptedfiles lo otorga react-dropzone
 
   const {getRootProps, getInputProps, isDragActive, fileRejections} = useDropzone({
-    onDrop,
+    onDrop,//1er parametro es el callback
     accept: {'text/csv': ['.csv'], 'text/plain': ['.txt']},
     maxFiles: 1
   })
 
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {//handlesubmit asíncrono
+    e.preventDefault();//Para que submit no reinicie página
 
     for (const file of files) {
-      const fileData = await file.text();
+      const fileData = await file.text();//await en lectura, promesa devuelve cadena de texto y almacena en const
       const parsedData: IData[] = Papa.parse(fileData, { header: true, dynamicTyping: true }).data as IData[];
-
+      //1er arg selecciona objeto/cadena, data con cabecera, dynamic varia a type apropiados los valores.
       const cleanedData = [];
       for (const row of parsedData) {
         if (row.FecRecepcion) {
