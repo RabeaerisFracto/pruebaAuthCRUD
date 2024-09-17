@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import UserData from './userData';
 import useUserStore from '../store/userDataStore';
-import Menu from './menu';
+import { useNavigate } from 'react-router-dom';
+import { client } from "../supabase/client";
 
 import '../components/stylesheets/esquinaUsuario.css'
 
@@ -17,6 +18,9 @@ export default function EsquinaUsuario() {
     //En una constante, se selecciona el estado que queremos almacenar en la constante.
     UserData();
     //Esta funcion se llama para obtener la data del usuario logueado.
+
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         if (user == null || user == undefined) { return }
@@ -44,6 +48,14 @@ export default function EsquinaUsuario() {
         setIsChecked(!isChecked);
     };
 
+    async function SignOutUser(){
+        const { error } = await client.auth.signOut();
+        if (error) {console.log('Error al desconectar:', error.message)}
+        else{
+            navigate("/login");
+            console.log('Desconectado')}
+        }
+
     return (
         <>
         <div className='esquina-usuario'>
@@ -56,7 +68,12 @@ export default function EsquinaUsuario() {
             </label>
         </div>
         <div className={`div-menu ${isChecked ? 'div-menu-shifted' : ''}`} >
-            <Menu />
+        <div className='barra-menu' >
+            <button className='botonHome' onClick={()=> navigate("/home")}>Discrepancia</button>
+            <button className='botonLista' onClick={()=> navigate("/lista")}>Lista</button>
+            <button className='botonUpdate' onClick={()=> navigate("/upload")}>Subir DB</button>
+            <button className='botonLogout' onClick={()=> SignOutUser()}>SignOut</button>
+        </div>
         </div>
         </>
     )

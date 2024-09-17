@@ -5,7 +5,7 @@
     top: 107px;
     height: 100%;
     width: 280px;
-    z-index: 5;
+    z-index: 5000;
     left: 0px;
 }
 .botonLogout {
@@ -20,7 +20,7 @@
     text-align: center;
     /* background: transparent;
     outline: none; */
-    z-index: 5;
+    z-index: 500000;
 
 }
 .botonLista {
@@ -35,7 +35,7 @@
     text-align: center;
     /* background: transparent;
     outline: none; */
-    z-index: 5;
+    z-index: 500000;
 
 }
 .botonHome {
@@ -50,7 +50,7 @@
     text-align: center;
     /* background: transparent;
     outline: none; */
-    z-index: 5;
+    z-index: 500000;
 }
 .botonUpdate {
     display: block;
@@ -64,7 +64,7 @@
     text-align: center;
     /* background: transparent;
     outline: none; */
-    z-index: 5;
+    z-index: 5000000;
 }
 
 /* clases de css en componente padre afectan a componente hijo */

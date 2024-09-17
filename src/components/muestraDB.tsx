@@ -20,6 +20,14 @@ createTheme('prueba', {
 );
 //-------Funcion principal-------
 export default function MuestraDB() {
+//-------Renderizado de comumnas-------
+//Como cambia lo renderizado (presencia o ausencia de columnas), hay que hacerlo de lo primero en la funcion.
+const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
+useEffect(()=>{
+    const handleResize = () =>{setIsMobile(window.innerWidth < 500)};
+    window.addEventListener('resize', handleResize);
+    return () => {window.removeEventListener('resize', handleResize)};
+},[]);
 //-------Solicitud a DB mediante useQuery(tanstack)-------
     const { data: dataDiscrepancias, isLoading, error } = useQuery<any>({
         queryFn: async () => await client.from('Discrepancia').select('*,RecepciónCarozo(*)'),//Union de 2 tablas
@@ -70,9 +78,12 @@ export default function MuestraDB() {
     if (isLoading) return <div>Cargando data...</div>;
     if (error) return <div>Error de carga de data</div>;
 
+
+
+
 return(
     <div className="tabla">
-        <input type="text" onChange={handleChange}></input>
+        <input type="text" placeholder={`Busca por ${filterField === 'folio' ? 'Folio' : filterField === 'RecepciónCarozo.CSG' ? 'CSG' : 'SDP'}`} onChange={handleChange}></input>
         <select onChange={handleSelectChange}>
             <option value="folio">Folio</option>
             <option value="RecepciónCarozo.CSG">CSG</option>
@@ -85,8 +96,13 @@ return(
                 {name: 'Folio', sortable:true,selector:(row: Discrepancia) => row.folio},
                 {name: 'Usuario',grow:2, sortable:true,selector:(row: Discrepancia) => row.user_name},
                 {name: 'Discrepancia',grow:5,sortable:true, selector:(row: Discrepancia) => row.discrepancia},
-
-                {name: 'Productor',grow:4, sortable:true,selector:(row: Discrepancia) => row.RecepciónCarozo.Nom_prod},
+                {name: 'Productor',
+                    grow:4,
+                    sortable:true,
+                    selector:(row: Discrepancia) => row.RecepciónCarozo.Nom_prod,
+                    cell: (row: Discrepancia) => <div className={isMobile ? 'ocultar-columna' : ''}>{row.RecepciónCarozo.Nom_prod}</div>,
+                    omit: isMobile},
+                    //Con "cell" le damos clase a columna. Con "omit" la ocultamos en mobile.
             ]}
             data={filteredRecords || []}
             pagination
