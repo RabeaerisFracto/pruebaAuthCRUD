@@ -62,10 +62,15 @@ export default function EsquinaUsuario() {
         <>
         <div className='esquina-usuario'>
             <label className='label-menu' htmlFor='checkbox-menu'>
+                {user ?
+                <>
                 <h4>{email}<br/>
-                {globalname ? globalname?.charAt(0).toUpperCase() + globalname?.slice(1) : ''}<br/>
-                {provider ? provider.charAt(0).toUpperCase() + provider.slice(1) : ''}<br/></h4>
-                <img src={avatar} alt='avatar' />
+                    {globalname ? globalname?.charAt(0).toUpperCase() + globalname?.slice(1) : ''}<br/>
+                    {provider ? provider.charAt(0).toUpperCase() + provider.slice(1) : ''}<br/></h4>
+                    <img src={avatar} alt='' />
+                </>
+                : <button className='login' onClick={() => navigate("/login")}>LogIn</button>}
+                
                 <input id='checkbox-menu' type='checkbox' className='checkbox-menu' checked={isChecked} onChange={handleCheckboxChange} />
             </label>
         </div>

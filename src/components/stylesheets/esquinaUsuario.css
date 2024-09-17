@@ -3,8 +3,8 @@
     z-index: -1;
     /* border: 2px solid #9b9b9b; */
     display: flex;
-    width: auto;
-    height: auto;
+    width: 265px;
+    height: 106px;
     top: 0;
     left: 0;
     /* border-radius: 15px; */
@@ -44,7 +44,6 @@
     background: transparent;
     user-select: none;
     /* outline: 3px solid black; */
-
 }
 .checkbox-menu {
     display: none;
@@ -54,6 +53,17 @@
     z-index: 10000;
     opacity: 0;
     animation: entrada 0.5s ease forwards;
+}
+.login {
+    display: block;
+    width: 180px;
+    top: 20px;
+    height: auto;
+    left: 60px;
+    /* border-radius: 15px; */
+    position: fixed;
+    margin: auto;
+    text-align: center;
 }
 @keyframes entrada {
     0% {
@@ -85,6 +95,10 @@
     .esquina-usuario h4 {
         font-size: 1em;
         margin: 20px 50px;
+    }
+    .login {
+        width: 80%;
+        left: 10%;
     }
 }
 
