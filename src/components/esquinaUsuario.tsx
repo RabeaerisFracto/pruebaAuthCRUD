@@ -9,10 +9,10 @@ import '../components/stylesheets/esquinaUsuario.css'
 
 export default function EsquinaUsuario() {
     
-    const [email, setEmail] = useState('Buscando email...' as string | undefined);
-    const [globalname, setGlobalname] = useState('Buscando nombre...' as string | undefined);
-    const [provider, setProvider] = useState('Buscando proveedor...' as string | undefined);
-    const [avatar, setAvatar] = useState('Buscando avatar...' as string | undefined);
+    const [email, setEmail] = useState('' as string | undefined);
+    const [globalname, setGlobalname] = useState('' as string | undefined);
+    const [provider, setProvider] = useState('' as string | undefined);
+    const [avatar, setAvatar] = useState('' as string | undefined);
 
     const user = useUserStore((state) => state.user);
     //En una constante, se selecciona el estado que queremos almacenar en la constante.
@@ -23,7 +23,9 @@ export default function EsquinaUsuario() {
 
 
     useEffect(() => {
-        if (user == null || user == undefined) { return }
+        if (user == null || user == undefined) {
+            <button onClick={() => navigate("/login")}>LogIn</button>
+        }
         else {
             setGlobalname(user.user_metadata.full_name)
             setEmail(user.email)
@@ -72,7 +74,9 @@ export default function EsquinaUsuario() {
             <button className='botonHome' onClick={()=> navigate("/home")}>Discrepancia</button>
             <button className='botonLista' onClick={()=> navigate("/lista")}>Lista</button>
             <button className='botonUpdate' onClick={()=> navigate("/upload")}>Subir DB</button>
-            <button className='botonLogout' onClick={()=> SignOutUser()}>SignOut</button>
+            <button className='botonLogout' onClick={()=> SignOutUser()}>
+                {user ? 'SignOut' : 'Log In'}
+            </button>
         </div>
         </div>
         </>

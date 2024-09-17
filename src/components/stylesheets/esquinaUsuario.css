@@ -165,5 +165,6 @@
     }
     .barra-menu button {
         width: 80%;
+        left: 10%;
     }
 }

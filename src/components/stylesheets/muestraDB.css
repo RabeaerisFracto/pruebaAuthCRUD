@@ -36,11 +36,14 @@
 
 @media screen and (max-width: 500px) {
     .tabla{
-        top: 35px;
+        top: 40px;
         left: -50px;
     }
     .tabla input[type="text"]{
-        width: 200px;
+        width: 150px;
+    }
+    .tabla select {
+        width: 50px;
     }
     .ocultar-columna {
         display: none;

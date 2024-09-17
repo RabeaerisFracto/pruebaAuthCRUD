@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 //-------Tema Tabla-------
 createTheme('prueba', {
     text: {
-        primary: 'black',
+        primary: '#666',
         secondary: '#2aa198',
     },
     background: {
