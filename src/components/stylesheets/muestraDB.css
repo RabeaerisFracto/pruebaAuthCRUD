@@ -27,7 +27,7 @@
 
 }
 .tabla select {
-    width: 110px;
+    width: 6em;
 }
 .tabla input[type="text"]{
     width: 300px;
@@ -36,14 +36,15 @@
 
 @media screen and (max-width: 500px) {
     .tabla{
-        top: 40px;
+        top: 2.3em;
         left: -50px;
+        width: 24em;
     }
     .tabla input[type="text"]{
-        width: 150px;
+        width: 10em;
     }
     .tabla select {
-        width: 90px;
+        width: 6em;
     }
     .ocultar-columna {
         display: none;
