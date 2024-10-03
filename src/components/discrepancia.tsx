@@ -7,20 +7,7 @@ function Discrepancia() {
 
 const [discrepancia, setDiscrepancia] = useState("");
 const [folio, setFolio] = useState("");
-// const [user, setUser] = useState({});
-
-// useEffect(()=>{// solo para confirmar que el usuario esta logueado x consola
-//   async function getUserData(){
-//       await client.auth.getUser().then((value)=>{
-//           if(value.data?.user){
-//               setUser(value.data.user)
-//               console.log(value.data.user)
-//               console.log(user)
-//           }
-//       })}
-//   getUserData();
-// },[]);
-
+// useState DEBE estar dentro de la función principal, no puede estar fuera de ella
 
 
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

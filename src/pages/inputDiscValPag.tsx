@@ -1,12 +1,12 @@
 import EsquinaUsuario from '../components/esquinaUsuario';
-import ImportDiscValComp from '../components/inputDiscValComp';
+import InputDiscValComp from '../components/inputDiscValComp';
 
 function InputDiscValPag (){
     return(
         <div>
-            <h1 className='titulo'>Ingresar Disciplina y Valor</h1>
+            <h1 className='titulo'>Ingresar Discrepancia en validación</h1>
             <EsquinaUsuario/>
-            <ImportDiscValComp/>
+            <InputDiscValComp/>
         </div>
     )
 }

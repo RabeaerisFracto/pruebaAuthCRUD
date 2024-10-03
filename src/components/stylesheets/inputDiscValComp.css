@@ -1,0 +1,7 @@
+.label {
+    display: flex;
+}
+label select {
+    width: fit-content;
+}
+
