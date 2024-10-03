@@ -8,6 +8,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import NotFoundPage from './pages/404.tsx'
 import ListaDiscrepancias from './pages/lista.tsx'
+import InputDiscValPag from './pages/inputDiscValPag.tsx'
 import '@picocss/pico'
 import UpdateDB from './pages/upload.tsx'
 
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
   { path: '/exito', element: <Exito /> },
   { path: '/upload', element: <UpdateDB /> },
   { path: '/lista', element: <ListaDiscrepancias /> },
+  { path: '/inputDiscValPag', element: <InputDiscValPag/>}
 ]);
 
 
