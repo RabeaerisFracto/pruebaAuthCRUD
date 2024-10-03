@@ -21,6 +21,8 @@ function InputDiscValComp () {
             }]);
             console.log(data, error);
             console.log(nFolio + " " + discrepancia);
+            setnFolio("");
+            setDiscrepancia("");        
         } catch (error) {
             console.log("error en CRUD "+ error);
         }
@@ -42,6 +44,7 @@ function InputDiscValComp () {
                         name="folio"
                         placeholder="Numero de folio"
                         required
+                        value={nFolio}
                         onChange={e=>setnFolio(e.target.value)}/>
                 </label>
                 <label>
@@ -50,6 +53,7 @@ function InputDiscValComp () {
                     name="discrepancia"
                     placeholder="Discrepancia y observaciones"
                     required
+                    value={discrepancia}
                     onChange={e=>setDiscrepancia(e.target.value)}/>
                 </label>
                 <input type="submit" value="Submit" />
