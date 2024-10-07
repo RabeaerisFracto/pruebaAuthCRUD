@@ -4,4 +4,14 @@
 label select {
     width: fit-content;
 }
-
+a {
+    display: none;
+}
+.filepond--drip {
+    height: fit-content;
+}
+.filepond--item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

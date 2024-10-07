@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { client } from "../supabase/client";
 import "../components/stylesheets/inputDiscValComp.css";
 
+import {useDropzone} from 'react-dropzone'
+
 
 function InputDiscValComp () {
+    const [files, setFiles] = useState<File[]>([]);
+    const [fileName, setFileName] = useState<string>('');
     const [nFolio, setnFolio] = useState("");
     const [discrepancia, setDiscrepancia] = useState("");
     const [selectValue, setSelectValue] = useState("G");
     const folio = selectValue + nFolio;
+
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -19,8 +24,12 @@ function InputDiscValComp () {
                 UserID: nombreUsuario?.id,
                 UserName: (nombreUsuario?.user_metadata.full_name === null ? nombreUsuario?.email?.split("@")[0] : nombreUsuario?.user_metadata.full_name),
             }]);
+            const { data: uploadPhoto, error: uploadError } = await client.storage
+            .from('fotosDiscrepancia')
+            .upload(`fotos/${folio}`, files[0]);
             console.log(data, error);
             console.log(nFolio + " " + discrepancia);
+            console.log(uploadPhoto, uploadError);
             setnFolio("");
             setDiscrepancia("");        
         } catch (error) {
@@ -28,6 +37,23 @@ function InputDiscValComp () {
         }
     }
 
+    const onDrop = useCallback((acceptedFiles: File[]) => {
+        setFiles(acceptedFiles);
+        setFileName(acceptedFiles[0].name);
+        console.log(acceptedFiles[0].name);
+    } , []);
+
+    const {getRootProps, getInputProps, isDragActive, fileRejections} = useDropzone({
+        onDrop,
+        accept: {'image/*': ['.jpeg', '.jpg', '.png', '.gif']},
+        maxFiles: 1
+    })
+    useEffect(() => {
+        if (fileRejections.length === 1) {
+            alert(`Archivo no permitido, solo se permiten imagenes`);
+            }
+            }//useEffect para que solo aparezca una vez el alert
+            , [fileRejections]);
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -56,7 +82,15 @@ function InputDiscValComp () {
                     value={discrepancia}
                     onChange={e=>setDiscrepancia(e.target.value)}/>
                 </label>
-                <input type="submit" value="Submit" />
+                <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    {
+                        isDragActive ?
+                        <div className='dragZoneActive'>Suelta aquí tu archivo ...</div> :
+                        <div className='dragZone'>{fileName !== '' ? fileName : 'Arrastra un archivo aca, o click para seleccionarlo'}</div>
+                    }
+                    </div>
+                <input type="submit" value="Enviar Discrepancia" />
             </form>
         </div>
     )
