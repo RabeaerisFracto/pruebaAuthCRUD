@@ -91,7 +91,10 @@ const thumbs = files.map((file: { preview: string; }) => (
                         <option value="C">C</option>
                     </select>
                     <input
-                        type="text"
+                        type="number"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        maxLength={6}
                         name="folio"
                         placeholder="Numero de folio"
                         required
