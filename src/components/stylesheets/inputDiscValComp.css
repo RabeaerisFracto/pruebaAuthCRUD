@@ -22,3 +22,10 @@ aside {
     border-radius: 9px;
     margin: 40px;
 }
+
+
+@media screen and (max-width: 500px) {
+    .letrafolio {
+        width: 25%;
+    }
+}

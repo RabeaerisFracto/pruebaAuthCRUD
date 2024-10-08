@@ -22,6 +22,7 @@ async function SignOutUser(){
             <button className='botonHome' onClick={()=> navigate("/home")}>Discrepancia</button>
             <button className='botonLista' onClick={()=> navigate("/lista")}>Lista</button>
             <button className='botonUpdate' onClick={()=> navigate("/upload")}>Subir DB</button>
+            <button className='botonValid' onClick={()=> navigate("/InputDiscValPag")}>Validaciones</button>
             <button className='botonLogout' onClick={()=> SignOutUser()}>SignOut</button>
         </div>
         </>

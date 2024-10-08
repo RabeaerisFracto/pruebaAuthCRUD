@@ -83,7 +83,7 @@ const thumbs = files.map((file: { preview: string; }) => (
         <div>
             <form onSubmit={handleSubmit}>
                 <label className="label">
-                    <select 
+                    <select className="letrafolio"
                         onChange={e => setSelectValue(e.target.value)}>
                         <option value="G">G</option>
                         <option value="L">L</option>
