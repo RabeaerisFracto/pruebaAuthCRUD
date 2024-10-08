@@ -6,48 +6,53 @@ import {useDropzone} from 'react-dropzone'
 
 
 function InputDiscValComp () {
-    const [files, setFiles] = useState<File[]>([]);
-    const [fileName, setFileName] = useState<string>('');
-    const [nFolio, setnFolio] = useState("");
-    const [discrepancia, setDiscrepancia] = useState("");
-    const [selectValue, setSelectValue] = useState("G");
-    const folio = selectValue + nFolio;
+    const [files, setFiles] = useState<File[]>([]);//archivo
+    const [fileName, setFileName] = useState<string>('');//nombre de archivo
+    const [nFolio, setnFolio] = useState("");//N° de folio, sin letra
+    const [discrepancia, setDiscrepancia] = useState("");//discrepancia
+    const [selectValue, setSelectValue] = useState("G");//Valor de select, letra folio
+    const folio = selectValue + nFolio;//Letra folio + N° folio
 
-
+//--------------------Funcion para enviar datos a la base de datos--------------------
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const { data: { user: nombreUsuario} } = await client.auth.getUser();
+        e.preventDefault();//evita la recarga de la pagina
+        const { data: { user: nombreUsuario} } = await client.auth.getUser();//para nombvre y ID de usuario.
         try {
+            //Insertar datos en la tabla DiscrepanciaValidacion
             const  { data, error } = await client.from('DiscrepanciaValidacion').insert([{
                 Folio: folio,
                 Discrepancia: discrepancia,
                 UserID: nombreUsuario?.id,
                 UserName: (nombreUsuario?.user_metadata.full_name === null ? nombreUsuario?.email?.split("@")[0] : nombreUsuario?.user_metadata.full_name),
             }]);
+            //Subir foto al storage bucket fotosDiscrepancia
             const { data: uploadPhoto, error: uploadError } = await client.storage
-            .from('fotosDiscrepancia')
-            .upload(`fotos/${folio}`, files[0]);
+            .from('fotosDiscrepancia')//nombre del bucket
+            .upload(`fotos/${folio}`, files[0]);//('ruta en el bucket/nombreque le quedara al archivo', archivo)
             console.log(data, error);
             console.log(nFolio + " " + discrepancia);
             console.log(uploadPhoto, uploadError);
             setnFolio("");
-            setDiscrepancia("");        
+            setDiscrepancia("");
+            setFileName("");
+            setFiles([]);
         } catch (error) {
             console.log("error en CRUD "+ error);
         }
     }
-
+//--------------------Funcion para aceptar el archivo--------------------
     const onDrop = useCallback((acceptedFiles: File[]) => {
         setFiles(acceptedFiles);
         setFileName(acceptedFiles[0].name);
         console.log(acceptedFiles[0].name);
     } , []);
-
+//--------------------Funcion para habilitar dropzone--------------------
     const {getRootProps, getInputProps, isDragActive, fileRejections} = useDropzone({
-        onDrop,
-        accept: {'image/*': ['.jpeg', '.jpg', '.png', '.gif']},
+        onDrop,//callback para aceptar el archivo
+        accept: {'image/*': ['.jpeg', '.jpg', '.png', '.gif']},//aceptar solo imagenes
         maxFiles: 1
     })
+//--------------------Alerta para archivos no permitidos----------------
     useEffect(() => {
         if (fileRejections.length === 1) {
             alert(`Archivo no permitido, solo se permiten imagenes`);
