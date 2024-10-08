@@ -7,14 +7,6 @@ label select {
 a {
     display: none;
 }
-.filepond--drip {
-    height: fit-content;
-}
-.filepond--item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 aside {
     display: flex;
     justify-content: space-between;
@@ -26,6 +18,11 @@ aside {
 
 @media screen and (max-width: 500px) {
     .letrafolio {
-        width: 25%;
+        width: 27%;
+        font-size: medium;
+    }
+    .especie {
+        width: 33%;
+        font-size: small;
     }
 }

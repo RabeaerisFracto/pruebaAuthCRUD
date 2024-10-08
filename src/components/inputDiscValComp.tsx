@@ -8,6 +8,7 @@ import {useDropzone} from 'react-dropzone'
 function InputDiscValComp () {
     const [files, setFiles] = useState<any>([]);//archivo, de type any, xke preview no esta en el type File
     const [fileName, setFileName] = useState<string>('');//nombre de archivo
+    const [especie, setEspecie] = useState("PA");//Especie
     const [nFolio, setnFolio] = useState("");//N° de folio, sin letra
     const [discrepancia, setDiscrepancia] = useState("");//discrepancia
     const [selectValue, setSelectValue] = useState("G");//Valor de select, letra folio
@@ -26,6 +27,7 @@ function InputDiscValComp () {
                 const  { data, error } = await client.from('DiscrepanciaValidacion').insert([{
                     Folio: folio,
                     Discrepancia: discrepancia,
+                    Especie: especie,
                     UserID: nombreUsuario?.id,
                     UserName: (nombreUsuario?.user_metadata.full_name === null ? nombreUsuario?.email?.split("@")[0] : nombreUsuario?.user_metadata.full_name),
                 }]);
@@ -83,6 +85,12 @@ const thumbs = files.map((file: { preview: string; }) => (
         <div>
             <form onSubmit={handleSubmit}>
                 <label className="label">
+                    <select className="especie"
+                        onChange={e=> setEspecie(e.target.value)}>
+                        <option value="PA">MN</option>
+                        <option value="MN">PA</option>
+                        <option value="CE">CE</option>
+                    </select>
                     <select className="letrafolio"
                         onChange={e => setSelectValue(e.target.value)}>
                         <option value="G">G</option>
@@ -96,7 +104,7 @@ const thumbs = files.map((file: { preview: string; }) => (
                         pattern="[0-9]*"
                         maxLength={6}
                         name="folio"
-                        placeholder="Numero de folio"
+                        placeholder="N° de folio"
                         required
                         value={nFolio}
                         onChange={e=>setnFolio(e.target.value)}/>
