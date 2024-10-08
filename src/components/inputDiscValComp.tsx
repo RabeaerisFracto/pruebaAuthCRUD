@@ -87,8 +87,8 @@ const thumbs = files.map((file: { preview: string; }) => (
                 <label className="label">
                     <select className="especie"
                         onChange={e=> setEspecie(e.target.value)}>
-                        <option value="PA">MN</option>
-                        <option value="MN">PA</option>
+                        <option value="PA">PA</option>
+                        <option value="MN">MN</option>
                         <option value="CE">CE</option>
                     </select>
                     <select className="letrafolio"
