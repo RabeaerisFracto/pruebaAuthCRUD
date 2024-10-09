@@ -34,16 +34,6 @@ export default function EsquinaUsuario() {
         }
     }, [user, EsquinaUsuario])
 
-    // const navigate = useNavigate();
-
-    // async function SignOutUser(){
-    //     const { error } = await client.auth.signOut();
-    //     if (error) {console.log('Error al desconectar:', error.message)}
-    //     else{
-    //         navigate("/login");
-    //         console.log('Desconectado')}
-    //     }
-
     const [isChecked, setIsChecked] = useState(true);
 
     const handleCheckboxChange = () => {
@@ -80,6 +70,7 @@ export default function EsquinaUsuario() {
             <button className='botonLista' onClick={()=> navigate("/lista")}>Lista</button>
             <button className='botonUpdate' onClick={()=> navigate("/upload")}>Subir DB</button>
             <button className='botonValid' onClick={()=> navigate("/InputDiscValPag")}>Validaciones</button>
+            <button className='botonTabValid' onClick={()=> navigate("/tableDiscValPag")}>Lista Disc</button>
             <button className='botonLogout' onClick={()=> SignOutUser()}>
                 {user ? 'SignOut' : 'Log In'}
             </button>

@@ -33,7 +33,7 @@ useEffect(()=>{
         queryFn: async () => await client.from('Discrepancia').select('*,RecepciónCarozo(*)'),//Union de 2 tablas
         queryKey: ['dataDiscrepancias'],
     });
-    console.log(dataDiscrepancias?.data?.map((item: Discrepancia) => item.RecepciónCarozo));//mapeo data en cosola
+    console.log(dataDiscrepancias?.data?.map((item: Discrepancia) => item.RecepciónCarozo));//mapeo data en consola
 //-------Filtro de busqueda-------
     const [filteredRecords, setFilteredRecords] = useState<Discrepancia[]>(dataDiscrepancias?.data);
     useEffect(() => {

@@ -178,6 +178,20 @@
     outline: none; */
     z-index: 500000;
 }
+.botonTabValid {
+    display: block;
+    width: 180px;
+    height: auto;
+    top: 410px;
+    left: 60px;
+    /* border-radius: 15px; */
+    position: fixed;
+    margin: auto;
+    text-align: center;
+    /* background: transparent;
+    outline: none; */
+    z-index: 500000;
+}
 
 /* clases de css en componente padre afectan a componente hijo */
 @media screen and (max-width: 500px) {

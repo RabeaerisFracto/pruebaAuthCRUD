@@ -11,6 +11,7 @@ import ListaDiscrepancias from './pages/lista.tsx'
 import InputDiscValPag from './pages/inputDiscValPag.tsx'
 import '@picocss/pico'
 import UpdateDB from './pages/upload.tsx'
+import TableDiscPag from './pages/tableDiscValPag.tsx'
 
 
 const router = createBrowserRouter([
@@ -20,7 +21,8 @@ const router = createBrowserRouter([
   { path: '/exito', element: <Exito /> },
   { path: '/upload', element: <UpdateDB /> },
   { path: '/lista', element: <ListaDiscrepancias /> },
-  { path: '/inputDiscValPag', element: <InputDiscValPag/>}
+  { path: '/inputDiscValPag', element: <InputDiscValPag/>},
+  { path: '/tableDiscValPag', element: <TableDiscPag/>},
 ]);
 
 

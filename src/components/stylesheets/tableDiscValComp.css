@@ -1,0 +1,27 @@
+.expandable-component{
+    top: 10px;
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Ajusta las proporciones según sea necesario */
+    grid-gap: 5px;
+    grid-template-areas:
+        "Info Foto";
+}
+.tablaDiscrepancia {
+    margin-top: 80px;
+}
+.fotoDisc {
+    grid-area: Foto; /* Asigna el área de la cuadrícula */
+    display: block;
+    flex: 1;
+}
+.infoDisc {
+    grid-area: Info; /* Asigna el área de la cuadrícula */
+    margin-right: 20px;
+    float: left;
+}
+.infoDisc div {
+    display: block;
+    margin-right: 20px;
+    float: left;
+    clear: left;
+}
