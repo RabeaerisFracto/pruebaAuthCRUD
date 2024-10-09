@@ -24,9 +24,8 @@ export default function TableDiscValComp() {
         queryFn: async () => await client.from('DiscrepanciaValidacion').select('*'),
         queryKey: ['dataDiscrepancias'],
     });
-    console.log(dataDiscrepancias)
+    if (error) {console.log("error en la tabla "+ error);}
     console.log(dataDiscrepancias?.data?.map((item: DiscValidacion) => item.Folio));//mapeo data en consola
-    console.log(error);
 
 //-------Componente expandible-------
 const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (

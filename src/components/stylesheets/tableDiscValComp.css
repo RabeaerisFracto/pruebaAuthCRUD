@@ -5,14 +5,19 @@
     grid-gap: 5px;
     grid-template-areas:
         "Info Foto";
+    z-index: 0;
 }
 .tablaDiscrepancia {
     margin-top: 80px;
+    position: relative;/*Para que z-index haga efecto, debe ser position:relative*/
+    z-index: 0;
 }
 .fotoDisc {
     grid-area: Foto; /* Asigna el área de la cuadrícula */
     display: block;
     flex: 1;
+    border-radius: 7px;
+    margin: 10px;
 }
 .infoDisc {
     grid-area: Info; /* Asigna el área de la cuadrícula */

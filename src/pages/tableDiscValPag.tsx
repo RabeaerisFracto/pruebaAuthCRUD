@@ -10,7 +10,6 @@ function TableDiscValPag (){
     return(
         <QueryClientProvider client={queryClient}>
         <div>
-            {/* <h1 className='titulo'>Discrepancia en validación</h1> */}
             <TableDiscValComp/>
             <EsquinaUsuario/>
         </div>
