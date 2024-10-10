@@ -13,10 +13,17 @@ function InputDiscValComp () {
     const [discrepancia, setDiscrepancia] = useState("");//discrepancia
     const [selectValue, setSelectValue] = useState("G");//Valor de select, letra folio
     const folio = selectValue + nFolio;//Letra folio + N° folio
+    const [submitDisabled, setSubmitDisabled] = useState(false);//Para deshabilitar boton de submit
+    const [submitValue, setSubmitValue] = useState("Enviar Discrepancia");//Para cambiar value del boton de submit
+
 
 //--------------------Funcion para enviar datos a la base de datos--------------------
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();//evita la recarga de la pagina
+        
+        setSubmitDisabled(true);//deshabilita el boton de submit
+        setSubmitValue("Enviando datos...");//Se cambia mensaje del boton de submit
+
         const { data: { user: nombreUsuario} } = await client.auth.getUser();//para nombvre y ID de usuario.
         if (files.length === 0) {
             alert("No se ha seleccionado ningun archivo");
@@ -42,6 +49,9 @@ function InputDiscValComp () {
                 setDiscrepancia("");
                 setFileName("");
                 setFiles([]);
+
+                setSubmitDisabled(false);//Se habilita boton una vez files se "vacia"
+                setSubmitValue("Enviar Discrepancia");//Se cambiamensaje una vez files se "vacia"
             } catch (error) {
                 console.log("error en CRUD "+ error);
             }
@@ -129,7 +139,9 @@ const thumbs = files.map((file: { preview: string; }) => (
                     <aside>
                         {thumbs}
                     </aside>
-                <input type="submit" value="Enviar Discrepancia" />
+                <button type="submit" value="Enviar Discrepancia" disabled={submitDisabled}>{submitValue}</button>
+                {/* Se usa button en vez de submit para mayor control de value.
+                Atributo disabled, si true, inhabilitado. */}
             </form>
         </div>
     )

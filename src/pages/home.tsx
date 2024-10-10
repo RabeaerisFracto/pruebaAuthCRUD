@@ -21,8 +21,8 @@ function Home (){
                 {folio1}<br/>
                 {folio2}<br/>
                 {folio3}<br/>
-                {folio4}<br/>
-                {folio5}<br/>
+                {/* {folio4}<br/>
+                {folio5}<br/> */}
             </h2>
         </div>
     )

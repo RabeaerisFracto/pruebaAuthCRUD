@@ -36,12 +36,12 @@ export default function EsquinaUsuario() {
         }
     }, [user, EsquinaUsuario])
 
+    //--------------Colapsar menu contextual-------------------
     const [isChecked, setIsChecked] = useState(true);
-
-    const handleCheckboxChange = () => {
+    function handleCheckboxChange() {//Como funcion tradicional para facilitar llamado en JSX
         setIsChecked(!isChecked);
     };
-
+    //--------------Log Out-------------------
     async function SignOutUser(){
         const { error } = await client.auth.signOut();
         if (error) {console.log('Error al desconectar:', error.message)}
@@ -70,11 +70,11 @@ export default function EsquinaUsuario() {
         </div>
         <div className={`div-menu ${isChecked ? 'div-menu-shifted' : ''}`} >
         <div className='barra-menu' >
-            <button className='botonHome' onClick={()=> navigate("/home")}>Discrepancia</button>
-            <button className='botonLista' onClick={()=> navigate("/lista")}>Lista</button>
-            <button className='botonUpdate' onClick={()=> navigate("/upload")}>Subir DB</button>
-            <button className='botonValid' onClick={()=> navigate("/InputDiscValPag")}>Validaciones</button>
-            <button className='botonTabValid' onClick={()=> navigate("/tableDiscValPag")}>Lista Disc</button>
+            <button className='botonHome' onClick={()=> {navigate("/home"); handleCheckboxChange()}}>Discrepancia</button>
+            <button className='botonLista' onClick={()=> {navigate("/lista"); handleCheckboxChange()}}>Lista</button>
+            <button className='botonUpdate' onClick={()=> {navigate("/upload"); handleCheckboxChange()}}>Subir DB</button>
+            <button className='botonValid' onClick={()=> {navigate("/InputDiscValPag"); handleCheckboxChange()}}>Validaciones</button>
+            <button className='botonTabValid' onClick={()=> {navigate("/tableDiscValPag"); handleCheckboxChange()}}>Lista Disc</button>
             <button className='botonLogout' onClick={()=> SignOutUser()}>
                 {user ? 'SignOut' : 'Log In'}
             </button>
