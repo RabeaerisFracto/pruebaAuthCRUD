@@ -1,4 +1,3 @@
-import EsquinaUsuario from '../components/esquinaUsuario';
 import TableDiscValComp from '../components/tableDiscValComp';
 import './stylesheets/pags.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -11,7 +10,6 @@ function TableDiscValPag (){
         <QueryClientProvider client={queryClient}>
         <div>
             <TableDiscValComp/>
-            <EsquinaUsuario/>
         </div>
         </QueryClientProvider>
     )

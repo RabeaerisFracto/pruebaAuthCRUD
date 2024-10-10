@@ -4,7 +4,6 @@ import { client } from "../supabase/client";
 import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from "react";
 import { UserContext } from "../context/UserContext";
-import EsquinaUsuario from '../components/esquinaUsuario';
 import useUserStore from "../store/userDataStore";
 // import DataOnScreen from "../components/dataOnScreen.tsx";
 import '../pages/stylesheets/pags.css'
@@ -56,7 +55,6 @@ function Exito(){
     //  llamar info dentro de este mismo return
     return(
         <div>
-            <EsquinaUsuario/>
             <UserContext.Provider value={user}>
             {user && Object.keys(user).length !== 0 && typeof email === 'string' ?
             <>

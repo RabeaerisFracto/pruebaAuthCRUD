@@ -4,7 +4,6 @@
 // import { useNavigate } from "react-router-dom";
 import Discrepancia from "../components/discrepancia";
 import { useZustand } from "../store/loginDataStore";
-import EsquinaUsuario from '../components/esquinaUsuario';
 import '../pages/stylesheets/pags.css'
 
 
@@ -25,7 +24,6 @@ function Home (){
                 {folio4}<br/>
                 {folio5}<br/>
             </h2>
-            <EsquinaUsuario/>
         </div>
     )
 }

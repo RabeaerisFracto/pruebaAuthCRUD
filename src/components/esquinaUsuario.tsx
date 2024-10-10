@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import UserData from './userData';
 import useUserStore from '../store/userDataStore';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+//Se añade Outlet para que se renderice el contenido de las rutas hijas.
 import { client } from "../supabase/client";
 
 import '../components/stylesheets/esquinaUsuario.css'
+
 
 
 export default function EsquinaUsuario() {
@@ -50,6 +52,8 @@ export default function EsquinaUsuario() {
 
     return (
         <>
+        <Outlet/>
+        {/* Se ubica Outlet antes del resto del codigo para que Layout quede por sobre pagina ruteada */}
         <div className='esquina-usuario'>
             <label className='label-menu' htmlFor='checkbox-menu'>
                 {user ?
