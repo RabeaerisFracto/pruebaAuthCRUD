@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import DiscValidacion from "../interfaces/DiscValidacion";
 import './stylesheets/tableDiscValComp.css';
 
-import Skeleton from 'react-loading-skeleton'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useState } from "react";
 
@@ -23,7 +23,7 @@ createTheme('prueba', {
 
 //-------Funcion principal-------
 export default function TableDiscValComp() {
-    //-------Solicitud a DB mediante useQuery(tanstack)-------
+//-------Solicitud a DB mediante useQuery(tanstack)-------
     const { data: dataDiscrepancias, isLoading, error } = useQuery<any>({
         queryFn: async () => await client.from('DiscrepanciaValidacion').select('*'),
         queryKey: ['dataDiscrepancias'],
@@ -31,12 +31,15 @@ export default function TableDiscValComp() {
     if (error) {console.log("error en la tabla "+ error);}
     console.log(dataDiscrepancias?.data?.map((item: DiscValidacion) => item.Folio));//mapeo data en consola
 
-//-------Componente expandible-------
+//--------------------Skeleton--------------------
 const [isLoadingX, setIsLoadingX] = useState(true);
 function skeletonX() {
     setIsLoadingX(false);
     console.log("Imagen Cargada");
 }
+
+//-------Componente expandible-------
+
 const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
     <div className="expandable-component">
         <div className="infoDisc">
@@ -46,7 +49,7 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
         </div>
         <div className="fotoDisc" >
             <div className="IMGContainer">
-                {isLoadingX && <Skeleton enableAnimation direction="ltr" duration={0.3} height={300} width={300} />}
+                {isLoadingX && <SkeletonTheme><Skeleton enableAnimation direction="ltr" duration={0.3} height={300} width={300}/></SkeletonTheme>}
                     <img
                         src={imgfolio(data.Folio).data.publicUrl}
                         loading="lazy"
@@ -57,6 +60,7 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
         </div>
     </div>
 );
+if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} width={"650px"} /></div>;
 //-------Funcion para obtener URL de imagen-------
 const imgfolio = (NF: string) => client.storage
     .from('fotosDiscrepancia')
@@ -66,12 +70,12 @@ const imgfolio = (NF: string) => client.storage
     return (
         <div className="tablaDiscrepancia">
         <DataTable
-            title="Discrepancias"
+            // title="Discrepancias"
             theme="prueba"
             columns={[
                 {name: 'Folio', sortable:true,selector:(row: DiscValidacion) => row.Folio},
-                {name: 'Usuario',grow:2, sortable:true,selector:(row: DiscValidacion) => row.UserName},
-                {name: 'Discrepancia',grow:5,sortable:true, selector:(row: DiscValidacion) => row.Discrepancia},
+                {name: 'Usuario',grow:1, sortable:true,selector:(row: DiscValidacion) => row.UserName},
+                {name: 'Discrepancia',grow:2,sortable:true, selector:(row: DiscValidacion) => row.Discrepancia},
             ]}
             data={dataDiscrepancias?.data || []}
             pagination
@@ -83,6 +87,7 @@ const imgfolio = (NF: string) => client.storage
             expandOnRowClicked
             expandableRowsHideExpander
         />
+        <div><Skeleton count={5} width={"650px"}/></div>
         </div>
     )
 }
