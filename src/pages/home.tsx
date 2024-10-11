@@ -11,8 +11,8 @@ function Home (){
     const folio1 = useZustand(state => state.folio1);
     const folio2 = useZustand(state => state.folio2);
     const folio3 = useZustand(state => state.folio3);
-    const folio4 = useZustand(state => state.folio4);
-    const folio5 = useZustand(state => state.folio5);
+    // const folio4 = useZustand(state => state.folio4);
+    // const folio5 = useZustand(state => state.folio5);
     return(
         <div className="Login">
             <h1 className='titulo'>Discrepancias</h1>
