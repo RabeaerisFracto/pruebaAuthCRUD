@@ -5,6 +5,10 @@ import { useQuery } from "@tanstack/react-query";
 import DiscValidacion from "../interfaces/DiscValidacion";
 import './stylesheets/tableDiscValComp.css';
 
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { useState } from "react";
+
 //-------Tema Tabla-------
 createTheme('prueba', {
     text: {
@@ -28,15 +32,28 @@ export default function TableDiscValComp() {
     console.log(dataDiscrepancias?.data?.map((item: DiscValidacion) => item.Folio));//mapeo data en consola
 
 //-------Componente expandible-------
+const [isLoadingX, setIsLoadingX] = useState(true);
+function skeletonX() {
+    setIsLoadingX(false);
+    console.log("Imagen Cargada");
+}
 const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
     <div className="expandable-component">
         <div className="infoDisc">
-            <div><strong>Fecha de Recepción:</strong> {data.created_at.toString()}</div>
+            <div><strong>Fecha de Recepción:</strong> {data.created_at.toString().replace("T", " ").slice(0,19)}</div>
             <div><strong>Folio:</strong> {data.Folio}</div>
             <div><strong>Discrepancia:</strong> {data.Discrepancia}</div>
         </div>
         <div className="fotoDisc" >
-        <img src={imgfolio(data.Folio).data.publicUrl} loading="lazy" style={{ width: '15vw', minWidth: '230px', maxWidth: '300px' }}/>
+            <div className="IMGContainer">
+                {isLoadingX && <Skeleton enableAnimation direction="ltr" duration={0.3} height={300} width={300} />}
+                    <img
+                        src={imgfolio(data.Folio).data.publicUrl}
+                        loading="lazy"
+                        style={{ width: '15vw', minWidth: '230px', maxWidth: '300px' }}
+                        onLoad={skeletonX}
+                    />
+            </div>
         </div>
     </div>
 );

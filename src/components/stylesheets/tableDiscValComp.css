@@ -1,7 +1,7 @@
 .expandable-component{
     top: 10px;
     display: grid;
-    grid-template-columns: 2fr 1fr; /* Ajusta las proporciones según sea necesario */
+    grid-template-columns: 1fr 1fr; /* Proporcion */
     grid-gap: 5px;
     grid-template-areas:
         "Info Foto";
@@ -13,20 +13,72 @@
     z-index: 0;
 }
 .fotoDisc {
-    grid-area: Foto; /* Asigna el área de la cuadrícula */
+    grid-area: Foto;
     display: block;
     flex: 1;
     border-radius: 7px;
     margin: 10px;
 }
+.IMGContainer {
+    display: block;
+    flex: 1;
+    border-radius: 7px;
+    margin: 10px;
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+}
 .infoDisc {
-    grid-area: Info; /* Asigna el área de la cuadrícula */
+    grid-area: Info;
     margin-right: 20px;
     float: left;
+    font-size: large;
 }
 .infoDisc div {
     display: block;
     margin-right: 20px;
     float: left;
     clear: left;
+    margin-right: 0px;
+    text-align: left;
+}
+
+@media screen and (max-width: 500px) {
+    .expandable-component {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "Info"
+            "Foto";
+    }
+    .infoDisc {
+        margin-right: 0px;
+        font-size: medium;
+    }
+    .infoDisc div {
+        margin-right: 0px;
+        text-align: left;
+    }
+
+    .IMGContainer {
+        display: block;
+        flex: 1;
+        border-radius: 7px;
+        height: 200px;
+        width: 200px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .fotoDisc {
+        position: relative;
+        margin-left: 5em;
+        border-radius: 7px;
+        height: 200px;
+        width: 200px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
