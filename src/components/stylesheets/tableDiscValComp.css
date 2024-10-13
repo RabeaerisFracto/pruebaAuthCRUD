@@ -53,6 +53,7 @@
         grid-template-areas:
             "Info"
             "Foto";
+        overflow-x: hidden;
     }
     .infoDisc {
         margin-right: 0px;
@@ -61,6 +62,13 @@
     .infoDisc div {
         margin-right: 0px;
         text-align: left;
+        max-width: 100%;
+    }
+    .discrepanciaExpandable {
+        display: flex;
+        flex: 1;
+        width: 100vw;
+        overflow: hidden;
     }
 
     .IMGContainer {

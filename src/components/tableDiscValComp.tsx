@@ -7,7 +7,7 @@ import './stylesheets/tableDiscValComp.css';
 
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //-------Tema Tabla-------
 createTheme('prueba', {
@@ -31,6 +31,16 @@ export default function TableDiscValComp() {
     if (error) {console.log("error en la tabla "+ error);}
     console.log(dataDiscrepancias?.data?.map((item: DiscValidacion) => item.Folio));//mapeo data en consola
 
+
+//-------Renderizado de comumnas mobile-------
+const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
+useEffect(()=>{
+    const handleResize = () =>{setIsMobile(window.innerWidth < 500)};
+    window.addEventListener('resize', handleResize);
+    return () => {window.removeEventListener('resize', handleResize)};
+},[]);
+
+const textWrapStyle: React.CSSProperties = {whiteSpace: 'normal', wordBreak: 'break-word'};
 //--------------------Skeleton--------------------
 const [isLoadingX, setIsLoadingX] = useState(true);
 function skeletonX() {
@@ -45,7 +55,7 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
         <div className="infoDisc">
             <div><strong>Fecha de Recepción:</strong> {data.created_at.toString().replace("T", " ").slice(0,19)}</div>
             <div><strong>Folio:</strong> {data.Folio}</div>
-            <div><strong>Discrepancia:</strong> {data.Discrepancia}</div>
+            <div className="discrepanciaExpandable"><strong>Discrepancia:</strong> {data.Discrepancia}</div>
         </div>
         <div className="fotoDisc" >
             <div className="IMGContainer">
@@ -73,9 +83,12 @@ const imgfolio = (NF: string) => client.storage
             // title="Discrepancias"
             theme="prueba"
             columns={[
-                {name: 'Folio', sortable:true,selector:(row: DiscValidacion) => row.Folio},
-                {name: 'Usuario',grow:1, sortable:true,selector:(row: DiscValidacion) => row.UserName},
-                {name: 'Discrepancia',grow:2,sortable:true, selector:(row: DiscValidacion) => row.Discrepancia},
+                {name: 'Folio',grow:1, sortable:true,selector:(row: DiscValidacion) => row.Folio},
+                {name: 'Usuario',grow:2, sortable:true,selector:(row: DiscValidacion) => row.UserName, cell: (row:DiscValidacion) => <div className={isMobile ? 'ocultar-columna' : ''}>{row.UserName}</div>, omit: isMobile},
+                {name: 'Discrepancia',grow:7,sortable:true, selector:(row: DiscValidacion) => row.Discrepancia,cell: (row: DiscValidacion) => (
+                    <div data-tag="allowRowEvents" style={textWrapStyle}>
+                        {row.Discrepancia}
+                    </div>)},
             ]}
             data={dataDiscrepancias?.data || []}
             pagination
