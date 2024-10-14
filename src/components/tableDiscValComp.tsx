@@ -32,15 +32,33 @@ export default function TableDiscValComp() {
     console.log(dataDiscrepancias?.data?.map((item: DiscValidacion) => item.Folio));//mapeo data en consola
 
 
-//-------Renderizado de comumnas mobile-------
-const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
+//-------Renderizado de columnas mobile-------
+const [isMobile, setIsMobile] = useState(window.innerWidth < 500);//useState 'thruthy' si es menor a 500px
 useEffect(()=>{
     const handleResize = () =>{setIsMobile(window.innerWidth < 500)};
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize);//escucha evento resize, se ser asi, se aplica setIsMobile
+    //Al aplicarse, use state verifica si estado es o no true.
     return () => {window.removeEventListener('resize', handleResize)};
+    //Return para limpiar evento (removeEvent) al desmontar componente, verifica nuevamente pxs, evita memory leak.
 },[]);
 
-const textWrapStyle: React.CSSProperties = {whiteSpace: 'normal', wordBreak: 'break-word'};
+const textWrapStyle: React.CSSProperties = {whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'left'};
+//Estilo en una constante para mayor orden en jsx.
+//Las 2 1eras para wraping de texto cuando tamaño de vp disminuye, 3era para alinear a izq nueva celda.
+
+//--------------------Conseguir id de fila expandida--------------------
+const [expandedRow, setExpandedRow] = useState<string | null>(null);
+//Ultimo row.id que se expandió.
+const handleExpandedRowToggle = (expanded:Boolean, row: DiscValidacion) => {
+    //expanded no lo estamos usando ahora, pero con console.log evito advertencia x retorno de onRowExpandToggled
+    //podria ser solo row, pero onRowExpandToggled retorna 2, si los acepto, debo recibirlos en esta funcion
+    setExpandedRow((rowAnterior) => (rowAnterior === row.id ? null : row.id))
+    //Si row.id que envia el toggle en jsx es igual a rowAnterior, se cierra, sino se expande.
+    //setExpandedRow((valor anterior de seteo)=>(condicion ? null si true : si false se aplica seteo a nuevo row.id))
+    console.log(expanded, row);
+    //console.log para evitar advertencia de retorno de onRowExpandToggled
+}
+
 //--------------------Skeleton--------------------
 const [isLoadingX, setIsLoadingX] = useState(true);
 function skeletonX() {
@@ -87,6 +105,7 @@ const imgfolio = (NF: string) => client.storage
                 {name: 'Usuario',grow:2, sortable:true,selector:(row: DiscValidacion) => row.UserName, cell: (row:DiscValidacion) => <div className={isMobile ? 'ocultar-columna' : ''}>{row.UserName}</div>, omit: isMobile},
                 {name: 'Discrepancia',grow:7,sortable:true, selector:(row: DiscValidacion) => row.Discrepancia,cell: (row: DiscValidacion) => (
                     <div data-tag="allowRowEvents" style={textWrapStyle}>
+                        {/* data-tag permite interaccion con nueva celda, style aplica css a nueva celda */}
                         {row.Discrepancia}
                     </div>)},
             ]}
@@ -97,6 +116,10 @@ const imgfolio = (NF: string) => client.storage
             progressPending={isLoading}
             expandableRows
             expandableRowsComponent={ExpandableComponent}
+            expandableRowExpanded={(row)=> row.id === expandedRow}
+            //compara id con ultima fila expandida, si false, no se expande.
+            onRowExpandToggled={(expanded, row) => handleExpandedRowToggle(expanded, row)}
+            //(expandido?, si true = numero id, si false = no se ejecuta handleExpandedRowToggle)
             expandOnRowClicked
             expandableRowsHideExpander
         />

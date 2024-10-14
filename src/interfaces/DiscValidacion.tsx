@@ -5,4 +5,5 @@ export default interface DiscValidacion {
     UserName: string;
     Especie: string;
     UserID: string;
+    id: string;
 }

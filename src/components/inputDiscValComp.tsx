@@ -129,7 +129,7 @@ const thumbs = files.map((file: { preview: string; }) => (
                     onChange={e=>setDiscrepancia(e.target.value)}/>
                 </label>
                 <div {...getRootProps()}>
-                    <input {...getInputProps()} />
+                    <input {...getInputProps({capture: 'environment'})} />
                     {
                         isDragActive ?
                         <div className='dragZoneActive'>Suelta aquí tu archivo ...</div> :
