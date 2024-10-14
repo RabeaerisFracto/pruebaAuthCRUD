@@ -3,9 +3,15 @@ top: 100px;
 height: 70px;
 margin-top: 40px;
 }
+.login{
+    height: 70px;
+}
 @media screen and (max-width: 500px) {
     .titulo{
         margin-top: 100px;
         height: 3em;
+    }
+    .Login {
+        margin-top: 80px;
     }
 }

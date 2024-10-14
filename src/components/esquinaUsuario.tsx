@@ -34,7 +34,7 @@ export default function EsquinaUsuario() {
             setProvider(user.app_metadata.provider)
             setAvatar(user.user_metadata.avatar_url)
         }
-    }, [user, EsquinaUsuario])
+    }, [user, EsquinaUsuario, SignOutUser]);
 
     //--------------Colapsar menu contextual-------------------
     const [isChecked, setIsChecked] = useState(true);
@@ -47,6 +47,11 @@ export default function EsquinaUsuario() {
         if (error) {console.log('Error al desconectar:', error.message)}
         else{
             navigate("/login");
+            setGlobalname(undefined)
+            setEmail(undefined)
+            setProvider(undefined)
+            setAvatar(undefined);
+            window.location.reload();
             console.log('Desconectado')}
         }
 

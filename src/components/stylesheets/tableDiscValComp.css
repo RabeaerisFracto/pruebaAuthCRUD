@@ -16,8 +16,6 @@
     grid-area: Foto;
     display: block;
     flex: 1;
-    border-radius: 7px;
-    margin: 10px;
 }
 .IMGContainer {
     display: block;
@@ -30,15 +28,9 @@
 }
 .infoDisc {
     grid-area: Info;
-    margin-right: 20px;
-    float: left;
-    font-size: large;
 }
 .infoDisc div {
     display: block;
-    margin-right: 20px;
-    float: left;
-    clear: left;
     margin-right: 0px;
     text-align: left;
 }
@@ -53,39 +45,21 @@
         grid-template-areas:
             "Info"
             "Foto";
-        overflow-x: hidden;
     }
     .infoDisc {
-        margin-right: 0px;
-        font-size: medium;
+        font-size: small;
     }
     .infoDisc div {
         margin-right: 0px;
         text-align: left;
-        max-width: 100%;
+        max-width: 100%; /* Para que no se salga de la pantalla (wrap) */
     }
-    .discrepanciaExpandable {
-        display: flex;
-        flex: 1;
-        width: 100vw;
-        overflow: hidden;
-    }
-
     .IMGContainer {
-        display: block;
-        flex: 1;
-        border-radius: 7px;
-        height: 200px;
-        width: 200px;
-        overflow: hidden;
         display: flex;
-        justify-content: center;
-        align-items: center;
     }
     .fotoDisc {
         position: relative;
         margin-left: 5em;
-        border-radius: 7px;
         height: 200px;
         width: 200px;
         overflow: hidden;

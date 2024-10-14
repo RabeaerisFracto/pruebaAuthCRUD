@@ -73,7 +73,7 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
         <div className="infoDisc">
             <div><strong>Fecha de Recepción:</strong> {data.created_at.toString().replace("T", " ").slice(0,19)}</div>
             <div><strong>Folio:</strong> {data.Folio}</div>
-            <div className="discrepanciaExpandable"><strong>Discrepancia:</strong> {data.Discrepancia}</div>
+            <div><strong>Discrepancia:</strong> {data.Discrepancia}</div>
         </div>
         <div className="fotoDisc" >
             <div className="IMGContainer">
