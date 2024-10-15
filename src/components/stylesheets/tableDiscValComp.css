@@ -34,6 +34,10 @@
     margin-right: 0px;
     text-align: left;
 }
+.tablaDiscrepancia div {
+    max-height: 100%;
+    /* Para evitar overflow de clase exclusiva de componente */
+}
 [aria-busy=true]:not(input,select,textarea,html)::before {
     display: none;
     /* span circulo de carga */

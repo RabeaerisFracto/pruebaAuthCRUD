@@ -38,12 +38,38 @@ function InputDiscValComp () {
                     UserID: nombreUsuario?.id,
                     UserName: (nombreUsuario?.user_metadata.full_name === null ? nombreUsuario?.email?.split("@")[0] : nombreUsuario?.user_metadata.full_name),
                 }]);
+                console.log(data, error);
+                if(error?.code === '23505'){
+                    if(confirm('Discrepancia en folio ya ingresada, desea actualizar??')){
+                        const update = await client
+                        .from('DiscrepanciaValidacion')
+                        .update(
+                            {
+                                Discrepancia: discrepancia,
+                                UserID: nombreUsuario?.id,
+                                UserName: (nombreUsuario?.user_metadata.full_name === null ? nombreUsuario?.email?.split("@")[0] : nombreUsuario?.user_metadata.full_name),
+                            }
+                        )
+                        .eq('Folio', folio);
+                        //Condicion para actualizar discrepancia, campo Folio debe ser igual a variable folio.
+                        console.log(update);
+                        alert('Discrepancia actualizada');
+                        console.log('Discrepancia actualizada');
+                    }
+                }
                 //Subir foto al storage bucket fotosDiscrepancia
                 const { data: uploadPhoto, error: uploadError } = await client.storage
                 .from('fotosDiscrepancia')//nombre del bucket
                 .upload(`fotos/${folio}`, files[0]);//('ruta en el bucket/nombreque le quedara al archivo', archivo)
                 console.log(data, error);
-                console.log(nFolio + " " + discrepancia);
+                if(error?.code === '23505'){//Si ya existe la foto
+                    if(confirm('Foto ya ingresada, desea actualizar??')){
+                        const updatePhoto = await client.storage
+                        .from('fotosDiscrepancia')
+                        .update(`fotos/${folio}`, files[0]);
+                        console.log(updatePhoto);
+                        alert('Foto actualizada');
+                }}
                 console.log(uploadPhoto, uploadError);
                 setnFolio("");
                 setDiscrepancia("");

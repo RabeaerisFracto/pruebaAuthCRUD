@@ -45,6 +45,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           }
         )
         .eq('folio', folio);
+        //Condicion para actualizar discrepancia, campo Folio debe ser igual a variable folio.
         console.log(update);
         alert('Discrepancia actualizada');
       }}

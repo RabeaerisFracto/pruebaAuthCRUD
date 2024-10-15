@@ -123,7 +123,6 @@ const imgfolio = (NF: string) => client.storage
             expandOnRowClicked
             expandableRowsHideExpander
         />
-        <div><Skeleton count={5} width={"650px"}/></div>
         </div>
     )
 }
