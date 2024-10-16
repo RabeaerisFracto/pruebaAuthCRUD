@@ -61,16 +61,19 @@ function InputDiscValComp () {
                 const { data: uploadPhoto, error: uploadError } = await client.storage
                 .from('fotosDiscrepancia')//nombre del bucket
                 .upload(`fotos/${folio}`, files[0]);//('ruta en el bucket/nombreque le quedara al archivo', archivo)
-                console.log(data, error);
+                console.log(uploadPhoto, uploadError);
                 if(error?.code === '23505'){//Si ya existe la foto
                     if(confirm('Foto ya ingresada, desea actualizar??')){
-                        const updatePhoto = await client.storage
+                        const {data: removePhoto, error:removeError} = await client.storage
                         .from('fotosDiscrepancia')
-                        .update(`fotos/${folio}`, files[0]);
-                        console.log(updatePhoto);
+                        .remove([`fotos/${folio.trim()}`]);
+                        console.log(removePhoto, removeError);
+                        const uploadPhoto = await client.storage
+                        .from('fotosDiscrepancia')
+                        .upload(`fotos/${folio.trim()}`, files[0]);
+                        console.log(uploadPhoto);
                         alert('Foto actualizada');
                 }}
-                console.log(uploadPhoto, uploadError);
                 setnFolio("");
                 setDiscrepancia("");
                 setFileName("");
