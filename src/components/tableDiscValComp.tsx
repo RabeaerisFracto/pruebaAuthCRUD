@@ -111,7 +111,7 @@ const imgfolio = (NF: string) => client.storage
             ]}
             data={dataDiscrepancias?.data || []}
             pagination
-            // paginationPerPage={4}
+            paginationPerPage={6}
             fixedHeader
             progressPending={isLoading}
             expandableRows

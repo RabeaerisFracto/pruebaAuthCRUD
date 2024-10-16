@@ -21,14 +21,16 @@ function InputDiscValComp () {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();//evita la recarga de la pagina
         
-        setSubmitDisabled(true);//deshabilita el boton de submit
-        setSubmitValue("Enviando datos...");//Se cambia mensaje del boton de submit
+
 
         const { data: { user: nombreUsuario} } = await client.auth.getUser();//para nombvre y ID de usuario.
         if (files.length === 0) {
+            setSubmitDisabled(false);//deshabilita el boton de submit
             alert("No se ha seleccionado ningun archivo");
             return;
         }else{
+            setSubmitDisabled(true);
+            setSubmitValue("Enviando Discrepancia...");
             try {
                 //Insertar datos en la tabla DiscrepanciaValidacion
                 const  { data, error } = await client.from('DiscrepanciaValidacion').insert([{
@@ -74,13 +76,18 @@ function InputDiscValComp () {
                         console.log(uploadPhoto);
                         alert('Foto actualizada');
                 }}
-                setnFolio("");
-                setDiscrepancia("");
-                setFileName("");
-                setFiles([]);
-
+                if (files.length !== 0) {
+                    setnFolio("");
+                    setDiscrepancia("");
+                    setFileName("");
+                    setFiles([]);
+                }else{
+                    setSubmitDisabled(false);//Se habilita boton una vez files se "vacia"
+                    setSubmitValue("Enviar Discrepancia");//Se cambiamensaje una vez files se "vacia"
+                }
                 setSubmitDisabled(false);//Se habilita boton una vez files se "vacia"
                 setSubmitValue("Enviar Discrepancia");//Se cambiamensaje una vez files se "vacia"
+
             } catch (error) {
                 console.log("error en CRUD "+ error);
             }
@@ -158,7 +165,7 @@ const thumbs = files.map((file: { preview: string; }) => (
                     onChange={e=>setDiscrepancia(e.target.value)}/>
                 </label>
                 <div {...getRootProps()}>
-                    <input {...getInputProps({capture: 'environment'})} />
+                    <input {...getInputProps({capture: 'environment', name: 'fileInput'})}/>
                     {
                         isDragActive ?
                         <div className='dragZoneActive'>Suelta aquí tu archivo ...</div> :

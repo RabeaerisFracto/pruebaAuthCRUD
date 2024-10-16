@@ -17,9 +17,8 @@ import EsquinaUsuario from './components/esquinaUsuario.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<EsquinaUsuario />}>
+    <><Route path="/" element={<EsquinaUsuario />}>
       <Route index element={<App />} errorElement={<NotFoundPage />} />
-      <Route path="login" element={<Login />} />
       <Route path="home" element={<Home />} />
       <Route path="exito" element={<Exito />} />
       <Route path="upload" element={<UpdateDB />} />
@@ -27,6 +26,8 @@ const router = createBrowserRouter(
       <Route path="inputDiscValPag" element={<InputDiscValPag />} />
       <Route path="tableDiscValPag" element={<TableDiscPag />} />
     </Route>
+    <Route path="login" element={<Login />} /></>
+
   )
 );
 
