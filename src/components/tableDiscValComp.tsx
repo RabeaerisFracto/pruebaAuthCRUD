@@ -73,7 +73,9 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
         <div className="infoDisc">
             <div><strong>Fecha de Recepción:</strong> {data.created_at.toString().replace("T", " ").slice(0,19)}</div>
             <div><strong>Folio:</strong> {data.Folio}</div>
+            <div><strong>Especie:</strong>{data.Especie}</div>
             <div><strong>Discrepancia:</strong> {data.Discrepancia}</div>
+            <div><strong>Usuario:</strong> {data.UserName}</div>
         </div>
         <div className="fotoDisc" >
             <div className="IMGContainer">
@@ -88,28 +90,60 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
         </div>
     </div>
 );
-if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} width={"650px"} /></div>;
+
 //-------Funcion para obtener URL de imagen-------
 const imgfolio = (NF: string) => client.storage
     .from('fotosDiscrepancia')
     .getPublicUrl(`fotos/${NF}`);
 
+
+//------------------Buscador------------------
+const [elementosFiltrados, setElementosFiltrados] = useState<DiscValidacion[]>(dataDiscrepancias?.data || []);
+useEffect(() => {
+    setElementosFiltrados(dataDiscrepancias?.data);
+}, [(dataDiscrepancias?.data)]);
+
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filtrado = (dataDiscrepancias?.data || []).filter((record: DiscValidacion) => {
+        if (campoFiltrado === 'folio') {
+            return record.Folio.toLowerCase().includes(value);
+        } else if (campoFiltrado === 'Usuario') {
+            return record.UserName.toLowerCase().includes(value);
+        }
+        return false
+    });
+    setElementosFiltrados(filtrado);
+}
+
+const [campoFiltrado, setCampoFiltrado] = useState<string>('folio');
+const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCampoFiltrado(e.target.value)
+}
+console.log(campoFiltrado)
     
+if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} width={"650px"} /></div>;
+//EARLY RETURN AL FINAL, asi se evita error de hooks despues de un render condicional.
     return (
         <div className="tablaDiscrepancia">
+            <input type="text" placeholder={`Busca por ${campoFiltrado === 'folio' ? 'Folio' : 'Usuario'}`} onChange={handleChange}></input><select onChange={handleSelectChange}>
+                <option value="folio">Folio</option>
+                <option value="Usuario">Usuario</option>
+            </select>
         <DataTable
             // title="Discrepancias"
             theme="prueba"
+            title="Discrepancias en Validacion"
             columns={[
                 {name: 'Folio',grow:1, sortable:true,selector:(row: DiscValidacion) => row.Folio},
                 {name: 'Usuario',grow:2, sortable:true,selector:(row: DiscValidacion) => row.UserName, cell: (row:DiscValidacion) => <div className={isMobile ? 'ocultar-columna' : ''}>{row.UserName}</div>, omit: isMobile},
-                {name: 'Discrepancia',grow:7,sortable:true, selector:(row: DiscValidacion) => row.Discrepancia,cell: (row: DiscValidacion) => (
+                {name: 'Discrepancia',grow:7,sortable:true, maxWidth: '60em',selector:(row: DiscValidacion) => row.Discrepancia,cell: (row: DiscValidacion) => (
                     <div data-tag="allowRowEvents" style={textWrapStyle}>
                         {/* data-tag permite interaccion con nueva celda, style aplica css a nueva celda */}
                         {row.Discrepancia}
                     </div>)},
             ]}
-            data={dataDiscrepancias?.data || []}
+            data={elementosFiltrados || []}
             pagination
             paginationPerPage={6}
             fixedHeader
