@@ -65,6 +65,11 @@ function skeletonX() {
     setIsLoadingX(false);
     console.log("Imagen Cargada");
 }
+//--------------------No Display IMG--------------------
+const [noDisplayIMG, setNoDisplayIMG] = useState<boolean>(true);
+const handleNoDisplayIMG = () => {
+    setNoDisplayIMG(!noDisplayIMG);
+}
 
 //-------Componente expandible-------
 
@@ -78,14 +83,29 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
             <div><strong>Usuario:</strong> {data.UserName}</div>
         </div>
         <div className="fotoDisc" >
-            <div className="IMGContainer">
+            <div className={noDisplayIMG ? "IMGContainer" : "muestraFotoGrande"} id="IMGcontainer">
+            <input type="checkbox" id="checkIMG" onChange={handleNoDisplayIMG} />
                 {isLoadingX && <SkeletonTheme><Skeleton enableAnimation direction="ltr" duration={0.3} height={300} width={300}/></SkeletonTheme>}
-                    <img
-                        src={imgfolio(data.Folio).data.publicUrl}
-                        loading="lazy"
-                        style={{ width: '15vw', minWidth: '230px', maxWidth: '300px' }}
-                        onLoad={skeletonX}
-                    />
+                <label htmlFor='checkIMG' className={noDisplayIMG ? "lnoLabel" : "labelFoto"}>
+                    {noDisplayIMG ? 
+                    <div className="fotoChica">
+                        <img
+                            src={imgfolio(data.Folio).data.publicUrl}
+                            loading="lazy"
+                            style={{ width: '15vw', minWidth: '230px', maxWidth: '300px'}}
+                            onLoad={skeletonX}
+                        />
+                    </div> :
+                    <div className="fotoGrande">
+                        <img
+                            src={imgfolio(data.Folio).data.publicUrl}
+                            loading="lazy"
+                            style={{ width: '150vw', minWidth: '600px', maxWidth: '600px' }}
+                            onLoad={skeletonX}
+                        />
+                    </div>}
+                </label>
+
             </div>
         </div>
     </div>
@@ -124,6 +144,8 @@ console.log(campoFiltrado)
     
 if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} width={"650px"} /></div>;
 //EARLY RETURN AL FINAL, asi se evita error de hooks despues de un render condicional.
+
+//--------------Renderizado de Tabla-----------------
     return (
         <div className="tablaDiscrepancia">
             <input type="text" placeholder={`Busca por ${campoFiltrado === 'folio' ? 'Folio' : 'Usuario'}`} onChange={handleChange}></input><select onChange={handleSelectChange}>
@@ -157,6 +179,6 @@ if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} w
             expandOnRowClicked
             expandableRowsHideExpander
         />
-        </div>
+        </div>     
     )
 }
