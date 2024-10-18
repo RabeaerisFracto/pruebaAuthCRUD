@@ -40,9 +40,10 @@
     overflow: visible;
     position: absolute;
     left: 0;
-    top: 0;
+    top: 30vh;
     z-index: 1;
-    margin: 0 0 0 15vw;
+    margin: 0 0 0 0;
+    scale: 2.3;
 }
 @media screen and (max-width: 800px) {
     .muestraFotoGrande {
@@ -53,6 +54,7 @@
 }
 .muestraFotoGrande img {
     border-radius: 15px;
+    position: absolute;
 }
 .labelFoto {
     height: 500px;
@@ -123,17 +125,17 @@
         margin-left: 5em;
         height: 200px;
         width: 200px;
-        overflow: hidden;
+        overflow: visible;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     .muestraFotoGrande {
         overflow: visible;
-        position: fixed;
-        scale: 0.7;
-        top: 100px;
-        left: -70px;
-        margin: 0 0 0 1vw;
+        position: absolute;
+        scale: 1.5;
+        top: 0px;
+        left: 0px;
+        margin: 0 0 0 0px;
     }
 }

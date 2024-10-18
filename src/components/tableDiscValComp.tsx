@@ -67,12 +67,13 @@ function skeletonX() {
 }
 //--------------------No Display IMG--------------------
 const [noDisplayIMG, setNoDisplayIMG] = useState<boolean>(true);
-const handleNoDisplayIMG = () => {
+const handleNoDisplayIMG = (data:DiscValidacion) => {
     setNoDisplayIMG(!noDisplayIMG);
+    setUrlActual(imgfolio(data.Folio).data.publicUrl)
 }
 
 //-------Componente expandible-------
-
+const [urlActual, setUrlActual] = useState<string>('');
 const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
     <div className="expandable-component">
         <div className="infoDisc">
@@ -83,11 +84,10 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
             <div><strong>Usuario:</strong> {data.UserName}</div>
         </div>
         <div className="fotoDisc" >
-            <div className={noDisplayIMG ? "IMGContainer" : "muestraFotoGrande"} id="IMGcontainer">
-            <input type="checkbox" id="checkIMG" onChange={handleNoDisplayIMG} />
+            <div className="IMGContainer">
+            <input type="checkbox" id="checkIMG" onChange={() => handleNoDisplayIMG(data)} />
                 {isLoadingX && <SkeletonTheme><Skeleton enableAnimation direction="ltr" duration={0.3} height={300} width={300}/></SkeletonTheme>}
                 <label htmlFor='checkIMG' className={noDisplayIMG ? "lnoLabel" : "labelFoto"}>
-                    {noDisplayIMG ? 
                     <div className="fotoChica">
                         <img
                             src={imgfolio(data.Folio).data.publicUrl}
@@ -95,17 +95,8 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
                             style={{ width: '15vw', minWidth: '230px', maxWidth: '300px'}}
                             onLoad={skeletonX}
                         />
-                    </div> :
-                    <div className="fotoGrande">
-                        <img
-                            src={imgfolio(data.Folio).data.publicUrl}
-                            loading="lazy"
-                            style={{ width: '150vw', minWidth: '600px', maxWidth: '600px' }}
-                            onLoad={skeletonX}
-                        />
-                    </div>}
+                    </div>
                 </label>
-
             </div>
         </div>
     </div>
@@ -179,6 +170,14 @@ if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} w
             expandOnRowClicked
             expandableRowsHideExpander
         />
+        <div className="fotoGrande">
+            <img
+                src={urlActual}
+                loading="lazy"
+                style={{ width: '15vw', minWidth: '430px', maxWidth: '400px'}}
+                onLoad={skeletonX}
+                            />
+        </div>
         </div>     
     )
 }
