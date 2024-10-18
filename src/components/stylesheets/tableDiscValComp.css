@@ -132,7 +132,7 @@
         overflow: visible;
         position: fixed;
         scale: 0.7;
-        top: auto;
+        top: 100px;
         left: -70px;
         margin: 0 0 0 1vw;
     }
