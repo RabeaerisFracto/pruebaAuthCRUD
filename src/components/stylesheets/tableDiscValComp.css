@@ -12,6 +12,9 @@
     position: relative;/*Para que z-index haga efecto, debe ser position:relative*/
     z-index: 0;
 }
+.lbJhKe {
+    max-height: fit-content !important;
+}
 
 /* ----------Imagen-------------- */
 .fotoDisc {
@@ -92,6 +95,9 @@
         grid-template-areas:
             "Info"
             "Foto";
+    }
+    .lbJhKe {
+        max-height: fit-content !important;
     }
     .tablaDiscrepancia {
         margin-top: 90px;
