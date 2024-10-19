@@ -30,42 +30,38 @@
 }
 .fotoGrande {
     display: block;
+    position: absolute;
     flex: 1;
     border-radius: 7px;
-    height: 500px;
-    width: 500px;
-    overflow:visible;
-}
-.muestraFotoGrande {
+    height: auto;
+    width: auto;
     overflow: visible;
-    position: absolute;
-    left: 0;
-    top: 30vh;
+    top: 17%;
+    right: 10%;
     z-index: 1;
-    margin: 0 0 0 0;
-    scale: 2.3;
 }
-@media screen and (max-width: 800px) {
-    .muestraFotoGrande {
-        margin: 0 0 0 1vw;
-        scale: 0.8;
-    }
-    
+.fotoGrande img {
+    scale: 1.3;
 }
-.muestraFotoGrande img {
-    border-radius: 15px;
-    position: absolute;
-}
-.labelFoto {
-    height: 500px;
-    overflow: visible;
-}
-#IMGcontainer input {
+.labelNoDisplay {
     display: none;
 }
-.iQXSFR {
-    overflow: hidden;
+.labelGrande {
+    display: block;
+    position: inherit;
 }
+#checkIMG {
+    display: none;
+}
+#uncheckIMG {
+    display: none;
+}
+/* #checkIMG:checked + .fotoGrande {
+    display: block;
+} */
+/* .iQXSFR {
+    overflow: hidden;
+} */
 /* --------------Info----------------- */
 .infoDisc {
     grid-area: Info;
@@ -74,6 +70,7 @@
     display: block;
     margin-right: 0px;
     text-align: left;
+    max-width: 24em;
 }
 .tablaDiscrepancia select {
     width: 6em;
@@ -82,10 +79,7 @@
     width: 300px;
     margin-right: 20px;
 }
-.tablaDiscrepancia div {
-    max-height: 100%;
-    /* Para evitar overflow de clase exclusiva de componente */
-}
+
 [aria-busy=true]:not(input,select,textarea,html)::before {
     display: none;
     /* span circulo de carga */
@@ -130,12 +124,21 @@
         justify-content: center;
         align-items: center;
     }
-    .muestraFotoGrande {
-        overflow: visible;
+    .fotoGrande {
         position: absolute;
-        scale: 1.5;
-        top: 0px;
-        left: 0px;
-        margin: 0 0 0 0px;
+        left: 0;
+        right:0;
+        top: 0;
+        bottom: 0; 
+        margin: auto;
+    }
+    .fotoGrande img {
+        position: relative;
+        scale: 0.9;
+        left: 0;
+        right:0;
+        top: 0;
+        bottom: 0; 
+        margin: 0 0 0 -6em;
     }
 }

@@ -69,7 +69,14 @@ function skeletonX() {
 const [noDisplayIMG, setNoDisplayIMG] = useState<boolean>(true);
 const handleNoDisplayIMG = (data:DiscValidacion) => {
     setNoDisplayIMG(!noDisplayIMG);
+    setCerrarIMG(!cerrarIMG);
     setUrlActual(imgfolio(data.Folio).data.publicUrl)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+const [cerrarIMG, setCerrarIMG] = useState<boolean>(false);
+const uncheckedIMG = () => {
+    setCerrarIMG(!cerrarIMG);
+    console.log("Imagen Cerrada");
 }
 
 //-------Componente expandible-------
@@ -170,6 +177,8 @@ if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} w
             expandOnRowClicked
             expandableRowsHideExpander
         />
+        <input type="checkbox" id="uncheckIMG" onChange={uncheckedIMG}></input>
+        <label htmlFor="uncheckIMG" className={!cerrarIMG ? 'labelGrande' : 'labelNoDisplay'}>
         <div className="fotoGrande">
             <img
                 src={urlActual}
@@ -178,6 +187,7 @@ if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} w
                 onLoad={skeletonX}
                             />
         </div>
+        </label>
         </div>     
     )
 }
