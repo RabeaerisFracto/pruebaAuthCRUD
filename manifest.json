@@ -7,56 +7,35 @@
     "license": "MIT",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
+    "display_override": ["minimal-ui", "standalone"],
     "display": "minimal-ui",
+    "id": "/tableDiscValPag",
     "start_url": "/tableDiscValPag",
     "icons":[
         {
-        "purpose": "maskable",
-        "sizes": "512x512",
-        "src": "maskable_icon.png",
-        "type": "image/png"
-        },
-        {
-        "purpose": "maskable",
-        "sizes": "48x48",
-        "src": "maskable_icon_x48.png",
-        "type": "image/png"
-        },
-        {
-        "purpose": "maskable",
-        "sizes": "72x72",
-        "src": "maskable_icon_x72.png",
-        "type": "image/png"
-        },
-        {
-        "purpose": "maskable",
-        "sizes": "96x96",
-        "src": "maskable_icon_x96.png",
-        "type": "image/png"
-        },
-        {
-        "purpose": "maskable",
-        "sizes": "128x128",
-        "src": "maskable_icon_x128.png",
-        "type": "image/png"
-        },
-        {
-        "purpose": "maskable",
+        "src": "/src/resources/pwa-192x192.png",
         "sizes": "192x192",
-        "src": "maskable_icon_x192.png",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "any"
         },
         {
-        "purpose": "any",
-        "sizes": "144x144",
-        "src": "maskable_icon_x384.png",
-        "type": "image/png"
-        },
-        {
-        "purpose": "maskable",
+        "src": "/src/resources/pwa-512x512.png",
         "sizes": "512x512",
-        "src": "maskable_icon_x512.png",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "any"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/src/resources/screenshot.PNG",
+            "sizes": "1920x1080",
+            "type": "image/png",
+            "form_factor": "wide"
+        },
+        {
+            "src": "/src/resources/screenshot_responsive.PNG",
+            "sizes": "377x665",
+            "type": "image/png"
         }
     ]
 }
