@@ -63,9 +63,9 @@ export default function EsquinaUsuario() {
             <label className='label-menu' htmlFor='checkbox-menu'>
                 {user ?
                 <>
-                <h4>{email}<br/>
+                <h1>{email}<br/>
                     {globalname ? globalname?.charAt(0).toUpperCase() + globalname?.slice(1) : ''}<br/>
-                    {provider ? provider.charAt(0).toUpperCase() + provider.slice(1) : ''}<br/></h4>
+                    {provider ? provider.charAt(0).toUpperCase() + provider.slice(1) : ''}<br/></h1>
                     <img src={avatar} alt='' />
                 </>
                 : <button className='login' onClick={() => navigate("/login")}>LogIn</button>}

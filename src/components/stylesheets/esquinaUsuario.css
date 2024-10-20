@@ -14,7 +14,7 @@
     background-position: 0 0;
     background-size: 290px 110px; */
 }
-.esquina-usuario h4 {
+.esquina-usuario h1 {
     font-size: 0.7em;
     /* font-style: italic ; */
     font-family: 'roboto', sans-serif;
@@ -91,11 +91,12 @@
     .botonHome {
         width: 75vw;
     }
-    .esquina-usuario h4 {
-        font-size: 1em;
+    .esquina-usuario h1 {
+        font-size: 0.9em;
         margin: 30px 50px 20px 50px;
     }
     .login {
+        top:35px;
         width: 80%;
         left: 10%;
     }

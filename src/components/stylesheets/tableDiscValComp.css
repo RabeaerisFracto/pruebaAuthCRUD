@@ -61,6 +61,7 @@
 } */
 .lbJhKe {
     max-height: fit-content !important;
+    overflow-y: hidden !important; /* Evitar overflow-y en navegadores móviles pequeños */
     /* Para comprobar si hay overflow por interfaz de navegador en iphone SE */
 }
 /* --------------Info----------------- */

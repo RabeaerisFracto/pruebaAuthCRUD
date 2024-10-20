@@ -98,6 +98,7 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
                     <div className="fotoChica">
                         <img
                             src={imgfolio(data.Folio).data.publicUrl}
+                            alt="Presiona para agrandar imagen"
                             loading="lazy"
                             style={{ width: '15vw', minWidth: '230px', maxWidth: '300px'}}
                             onLoad={skeletonX}
@@ -151,9 +152,8 @@ if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} w
                 <option value="Usuario">Usuario</option>
             </select>
         <DataTable
-            // title="Discrepancias"
             theme="prueba"
-            title="Discrepancias en Validacion"
+            title="Discrepancias"
             columns={[
                 {name: 'Folio',grow:1, sortable:true,selector:(row: DiscValidacion) => row.Folio},
                 {name: 'Usuario',grow:2, sortable:true,selector:(row: DiscValidacion) => row.UserName, cell: (row:DiscValidacion) => <div className={isMobile ? 'ocultar-columna' : ''}>{row.UserName}</div>, omit: isMobile},
@@ -182,6 +182,7 @@ if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} w
         <div className="fotoGrande">
             <img
                 src={urlActual}
+                alt="Foto de Discrepancia"
                 loading="lazy"
                 style={{ width: '15vw', minWidth: '430px', maxWidth: '400px'}}
                 onLoad={skeletonX}

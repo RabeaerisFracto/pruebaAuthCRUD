@@ -3,6 +3,9 @@ top: 100px;
 height: 70px;
 margin-top: 40px;
 }
+h1, h2 {
+    overflow-x: visible;
+}
 /* .login{
     height: 70px;
 } */

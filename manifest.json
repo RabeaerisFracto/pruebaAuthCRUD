@@ -1,0 +1,40 @@
+{   
+    "short_name": "Hornet",
+    "name": "Hornet-Discrepancias",
+    "version": "0.9.5",
+    "description": "Ingreso de discrepancias de Granel y SEF",
+    "author": "Aarón Moncada",
+    "license": "MIT",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "display": "minimal-ui",
+    "start_url": "/tableDiscValPag",
+    "icons":[
+        {  
+        "src": "src/resources/hornet512.ico",  
+        "type": "image/png",  
+        "sizes": "512x512",  
+        "purpose": "any"
+        },
+        {
+        "src": "src/resources/hornet512.ico",  
+        "type": "image/png",  
+        "sizes": "192x192", 
+        "purpose": "any"  
+        },
+        {
+        "src": "src/resources/hornet512.ico",  
+        "type": "image/png",  
+        "sizes": "144x144", 
+        "purpose": "any"  
+        },
+        {
+        "src": "src/resources/hornet512.ico",
+        "sizes": "256x256",
+        "type": "image/png",
+        "purpose": "maskable"
+        },
+        {
+        }
+    ] 
+}
