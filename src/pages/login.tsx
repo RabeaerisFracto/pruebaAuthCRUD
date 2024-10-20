@@ -24,7 +24,7 @@ verificarToken();
             <header className="Login-header">
                 <Auth 
                 supabaseClient={client}
-                providers={["discord","google","twitch"]}
+                providers={["discord","google","twitch","azure"]}
                 theme="dark"
                 redirectTo="http://localhost:5173/exito"
                 queryParams={{

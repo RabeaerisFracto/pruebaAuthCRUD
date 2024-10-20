@@ -12,9 +12,6 @@
     position: relative;/*Para que z-index haga efecto, debe ser position:relative*/
     z-index: 0;
 }
-.lbJhKe {
-    max-height: fit-content !important;
-}
 
 /* ----------Imagen-------------- */
 .fotoDisc {
@@ -62,9 +59,10 @@
 /* #checkIMG:checked + .fotoGrande {
     display: block;
 } */
-/* .iQXSFR {
-    overflow: hidden;
-} */
+.lbJhKe {
+    max-height: fit-content !important;
+    /* Para comprobar si hay overflow por interfaz de navegador en iphone SE */
+}
 /* --------------Info----------------- */
 .infoDisc {
     grid-area: Info;
@@ -95,9 +93,6 @@
         grid-template-areas:
             "Info"
             "Foto";
-    }
-    .lbJhKe {
-        max-height: fit-content !important;
     }
     .tablaDiscrepancia {
         margin-top: 90px;
