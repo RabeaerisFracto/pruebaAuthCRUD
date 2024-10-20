@@ -100,7 +100,6 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
                             src={imgfolio(data.Folio).data.publicUrl}
                             alt="Presiona para agrandar imagen"
                             loading="lazy"
-                            style={{ width: '15vw', minWidth: '230px', maxWidth: '300px'}}
                             onLoad={skeletonX}
                         />
                     </div>
@@ -184,7 +183,6 @@ if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} w
                 src={urlActual}
                 alt="Foto de Discrepancia"
                 loading="lazy"
-                style={{ width: '15vw', minWidth: '430px', maxWidth: '400px'}}
                 onLoad={skeletonX}
                             />
         </div>

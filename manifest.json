@@ -23,13 +23,13 @@
         "purpose": "any"  
         },
         {
-        "src": "src/resources/hornet512.ico",  
+        "src": "src/resources/maskable-icon(1).png",  
         "type": "image/png",  
         "sizes": "144x144", 
         "purpose": "any"  
         },
         {
-        "src": "src/resources/hornet512.ico",
+        "src": "src/resources/maskable-icon(1).png",
         "sizes": "256x256",
         "type": "image/png",
         "purpose": "maskable"
