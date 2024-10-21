@@ -1,6 +1,6 @@
 
 .esquina-usuario {
-    z-index: -1;
+    z-index: 6000;
     /* border: 2px solid #9b9b9b; */
     display: flex;
     width: 300px;
@@ -9,7 +9,7 @@
     left: 0;
     /* border-radius: 15px; */
     position: fixed;
-    background: linear-gradient(to right, #2179acfd, transparent);
+    background: linear-gradient(to right, #2179acfd, #5a5);
     /* background: radial-gradient(circle  at top left, #2179acfd, white, transparent);
     background-position: 0 0;
     background-size: 290px 110px; */
@@ -103,24 +103,24 @@
 }
 
 /* Menu */
-
 .barra-menu {
-    border: 5px solid linear-gradient(to right, #2179acfd, transparent);
-    background: linear-gradient(to right, #2179acfd, transparent);
+    border: 5px solid linear-gradient(to right, #2179acfd, #5a5);
+    background: linear-gradient(to right, #2179acfd, #5a5);
     position: fixed;
     top: 118px;
     height: 100%;
     width: 300px;
     z-index: 5000;
     left: 0px;
+    box-shadow: 5px 0px 15px #5a5;
 }
 .botonLogout {
     display: block;
-    width: 180px;
+    background-color: transparent;
+    width: 300px;
     bottom: 20px;
     height: auto;
-    left: 60px;
-    /* border-radius: 15px; */
+    border-radius: 0%;
     position: fixed;
     margin: auto;
     text-align: center;

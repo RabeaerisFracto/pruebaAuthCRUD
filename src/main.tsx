@@ -9,7 +9,6 @@ import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } 
 import NotFoundPage from './pages/404.tsx'
 import ListaDiscrepancias from './pages/lista.tsx'
 import InputDiscValPag from './pages/inputDiscValPag.tsx'
-import '@picocss/pico'
 import UpdateDB from './pages/upload.tsx'
 import TableDiscPag from './pages/tableDiscValPag.tsx'
 import EsquinaUsuario from './components/esquinaUsuario.tsx'
