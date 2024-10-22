@@ -73,7 +73,7 @@ const handleNoDisplayIMG = (data:DiscValidacion) => {
     setUrlActual(imgfolio(data.Folio).data.publicUrl)
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-const [cerrarIMG, setCerrarIMG] = useState<boolean>(false);
+const [cerrarIMG, setCerrarIMG] = useState<boolean>(true);
 const uncheckedIMG = () => {
     setCerrarIMG(!cerrarIMG);
     console.log("Imagen Cerrada");
@@ -97,6 +97,7 @@ const ExpandableComponent: React.FC<{ data: DiscValidacion }> = ({ data }) => (
                 <label htmlFor='checkIMG' className={noDisplayIMG ? "lnoLabel" : "labelFoto"}>
                     <div className="fotoChica">
                         <img
+                            style={{ overflowX: 'visible' }}
                             src={imgfolio(data.Folio).data.publicUrl}
                             alt="Presiona para agrandar imagen"
                             loading="lazy"

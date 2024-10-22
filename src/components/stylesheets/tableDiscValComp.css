@@ -5,7 +5,6 @@
     grid-gap: 5px;
     grid-template-areas:
         "Info Foto";
-    z-index: 0;
 }
 .tablaDiscrepancia {
     margin-top: 90px;
@@ -38,10 +37,11 @@
     overflow: visible;
     top: 17%;
     right: 10%;
-    z-index: 1;
 }
 .fotoGrande img {
     scale: 1.3;
+    position: relative;
+    z-index: 1;
 }
 .labelNoDisplay {
     display: none;
