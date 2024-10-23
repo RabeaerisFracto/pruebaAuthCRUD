@@ -158,6 +158,7 @@ const thumbs = files.map((file: { preview: string; }) => (
                 <label>
                     <input
                     type="text"
+                    className="discrepancia"
                     name="discrepancia"
                     placeholder="Discrepancia y observaciones"
                     required

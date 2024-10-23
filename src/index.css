@@ -12,7 +12,36 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+input {
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 500;
+  padding: 0.6em 1em;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  background-color: #eeeeee;
+  color: #ffffff;
+  transition: all 0.5s;
+}
+input:focus {
+  outline: 2px solid #f77;
+  box-shadow: 0 0 10px #f77;
+}
+select {
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 500;
+  padding: 0.6em 1em;
+  border-radius: 8px;
+  border: 1px solid #aaaaaa;
+  background-color: #eeeeee;
+  color: #777777;
+  transition: all 0.5s;
+}
+select:focus {
+  outline: 2px solid #f77;
+  box-shadow: 0 0 10px #f77;
+}
 a {
   font-weight: 500;
   color: #646cff;
