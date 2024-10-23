@@ -28,15 +28,19 @@
     overflow: hidden;
 }
 .fotoGrande {
-    display: block;
-    position: absolute;
+    display: flex;
+    position: relative;
     flex: 1;
     border-radius: 7px;
-    height: auto;
+    height: 400px;
     width: auto;
     overflow: visible;
-    top: 17%;
-    right: 10%;
+    top: -40em;
+    left: 10em;
+}
+.fotoChica img {
+    height: auto;
+    width: 270px;
 }
 .fotoGrande img {
     scale: 1.3;
