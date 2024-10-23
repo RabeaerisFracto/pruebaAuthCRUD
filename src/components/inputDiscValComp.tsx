@@ -144,8 +144,11 @@ const thumbs = files.map((file: { preview: string; }) => (
                         <option value="H">H</option>
                         <option value="C">C</option>
                     </select>
+                </label>
+                <label>
                     <input
                         type="number"
+                        className="nfolio"
                         inputMode="numeric"
                         pattern="[0-9]*"
                         maxLength={6}
@@ -154,16 +157,14 @@ const thumbs = files.map((file: { preview: string; }) => (
                         required
                         value={nFolio}
                         onChange={e=>setnFolio(e.target.value)}/>
-                </label>
-                <label>
                     <input
-                    type="text"
-                    className="discrepancia"
-                    name="discrepancia"
-                    placeholder="Discrepancia y observaciones"
-                    required
-                    value={discrepancia}
-                    onChange={e=>setDiscrepancia(e.target.value)}/>
+                        type="text"
+                        className="discrepancia"
+                        name="discrepancia"
+                        placeholder="Discrepancia y observaciones"
+                        required
+                        value={discrepancia}
+                        onChange={e=>setDiscrepancia(e.target.value)}/>
                 </label>
                 <div {...getRootProps()}>
                     <input {...getInputProps({capture: 'environment', name: 'fileInput'})}/>

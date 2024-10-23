@@ -21,9 +21,9 @@ form {
 }
 .discrepancia {
     display: flex;
-    width: 95%;
+    width: 97%;
     left: -1em;
-    margin: 10px;
+    margin: 10px 0;
 }
 .dragZone {
     width: 100%;
@@ -44,5 +44,14 @@ form {
         position: relative;
         width: 320px;
         height: auto;
+    }
+    .nfolio {
+        width: 100%;
+        font-size: medium;
+    }
+    .discrepancia {
+        width: 100%;
+        font-size: medium;
+        margin-left: -8px;
     }
 }

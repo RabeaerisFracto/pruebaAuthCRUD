@@ -106,7 +106,6 @@
     width: 180px;
     bottom: 20px;
     height: auto;
-    left: 60px;
     /* border-radius: 15px; */
     position: fixed;
     margin: auto;
@@ -114,14 +113,23 @@
     background-color: transparent;
     width: 300px;
     border-radius: 0%;
+    border: 1px solid transparent;
+    outline: none;
+}
+.botonLogout:hover {
+    border: 1px 0 1px 0 solid white;
+    outline: none;
+    transition: all 0.5s;
+}
+.botonLogout:focus {
     border: none;
+    outline: none;
 }
 .botonLista {
     display: block;
     width: 180px;
     height: auto;
     top: 200px;
-    left: 60px;
     /* border-radius: 15px; */
     position: fixed;
     margin: auto;
@@ -136,7 +144,6 @@
     width: 180px;
     height: auto;
     top: 130px;
-    left: 60px;
     /* border-radius: 15px; */
     position: fixed;
     margin: auto;
@@ -151,7 +158,6 @@
     width: 180px;
     height: auto;
     top: 270px;
-    left: 60px;
     position: fixed;
     margin: auto;
     text-align: center;
@@ -165,7 +171,6 @@
     width: 180px;
     height: auto;
     top: 340px;
-    left: 60px;
     position: fixed;
     margin: auto;
     text-align: center;
@@ -180,7 +185,6 @@
     width: 180px;
     height: auto;
     top: 410px;
-    left: 60px;
     position: fixed;
     margin: auto;
     text-align: center;

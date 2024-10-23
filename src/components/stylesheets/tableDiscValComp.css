@@ -11,6 +11,9 @@
     position: relative;/*Para que z-index haga efecto, debe ser position:relative*/
     z-index: 0;
 }
+.lbJhKe {
+    width: fit-content !important;
+}
 
 /* ----------Imagen-------------- */
 .fotoDisc {

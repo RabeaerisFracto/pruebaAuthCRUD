@@ -17,4 +17,9 @@ h1, h2 {
     .Login {
         margin-top: 80px;
     }
+    * {
+        margin-left: -4px;
+        padding: 0;
+        width: 330px;
+    }
 }
