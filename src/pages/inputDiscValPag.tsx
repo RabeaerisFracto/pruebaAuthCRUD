@@ -3,7 +3,7 @@ import './stylesheets/pags.css';
 
 function InputDiscValPag (){
     return(
-        <div>
+        <div className='inputValidacion'>
             <h1 className='titulo'>Discrepancia en validación</h1>
             <InputDiscValComp/>
         </div>

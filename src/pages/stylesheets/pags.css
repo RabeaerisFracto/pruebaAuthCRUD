@@ -17,9 +17,27 @@ h1, h2 {
     .Login {
         margin-top: 80px;
     }
-    * {
-        margin-left: -4px;
+    .bienvenida {
+        scale: 0.6;
+        position: relative;
+        left: -2em;
+        width: fit-content;
+    }
+    #root {
+        margin: 0 1em;
         padding: 0;
-        width: 330px;
+        width: 90vw;
+    }
+    .inputValidacion {
+        width: 80vw;
+    }
+    .inputValidacion h1 {
+        position: relative;
+        left: 0.3em;
+        top: 10px;
+    }
+    .tablaValidaciones {
+        width: 80vw;
+        
     }
 }

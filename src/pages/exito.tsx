@@ -54,7 +54,7 @@ function Exito(){
     //  crear nuevo comonente dentro de return para probar si se pasa info.
     //  llamar info dentro de este mismo return
     return(
-        <div>
+        <div className="bienvenida">
             <UserContext.Provider value={user}>
             {user && Object.keys(user).length !== 0 && typeof email === 'string' ?
             <>

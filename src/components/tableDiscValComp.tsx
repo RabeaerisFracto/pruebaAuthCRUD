@@ -42,7 +42,9 @@ useEffect(()=>{
     //Return para limpiar evento (removeEvent) al desmontar componente, verifica nuevamente pxs, evita memory leak.
 },[]);
 
-const textWrapStyle: React.CSSProperties = {whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'left'};
+const textWrapStyleDesktop: React.CSSProperties = {whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'left', width: '45em'};
+
+const textWrapStyleResponsive: React.CSSProperties = {whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'left', width: '17em'};
 //Estilo en una constante para mayor orden en jsx.
 //Las 2 1eras para wraping de texto cuando tamaño de vp disminuye, 3era para alinear a izq nueva celda.
 
@@ -158,7 +160,7 @@ if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} w
                 {name: 'Folio',grow:1, sortable:true,selector:(row: DiscValidacion) => row.Folio},
                 {name: 'Usuario',grow:2, sortable:true,selector:(row: DiscValidacion) => row.UserName, cell: (row:DiscValidacion) => <div className={isMobile ? 'ocultar-columna' : ''}>{row.UserName}</div>, omit: isMobile},
                 {name: 'Discrepancia',grow:7,sortable:true, maxWidth: '60em',selector:(row: DiscValidacion) => row.Discrepancia,cell: (row: DiscValidacion) => (
-                    <div data-tag="allowRowEvents" style={textWrapStyle}>
+                    <div data-tag="allowRowEvents" style={window.innerWidth < 500 ? textWrapStyleResponsive : textWrapStyleDesktop}>
                         {/* data-tag permite interaccion con nueva celda, style aplica css a nueva celda */}
                         {row.Discrepancia}
                     </div>)},

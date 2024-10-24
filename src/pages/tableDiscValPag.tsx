@@ -8,7 +8,7 @@ const queryClient = new QueryClient();
 function TableDiscValPag (){
     return(
         <QueryClientProvider client={queryClient}>
-        <div>
+        <div className='tablaValidaciones'>
             <TableDiscValComp/>
         </div>
         </QueryClientProvider>

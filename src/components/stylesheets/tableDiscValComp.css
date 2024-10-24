@@ -12,7 +12,7 @@
     z-index: 0;
 }
 .lbJhKe {
-    width: fit-content !important;
+    width: 100vw !important;
 }
 
 /* ----------Imagen-------------- */
@@ -98,7 +98,7 @@
             "Foto";
     }
     .tablaDiscrepancia {
-        margin-top: 90px;
+        margin-top: 130px;
     }
     .tablaDiscrepancia select {
         width: 7em;
@@ -113,6 +113,10 @@
         margin-right: 0px;
         text-align: left;
         max-width: 100%; /* Para que no se salga de la pantalla (wrap) */
+    }
+    .ibjJhK {
+        width: 40vw !important;
+        height: fit-content !important;
     }
     /* ---------Imagen--------- */
     .IMGContainer {
@@ -135,13 +139,14 @@
         top: 0;
         bottom: 0; 
         margin: auto;
+        z-index: 1;
     }
     .fotoGrande img {
-        position: relative;
-        scale: 0.75;
-        left: 0;
+        position: fixed;
+        scale: 1;
+        left: 1.8em;
         right:0;
-        top: 0;
+        top: 130px;
         bottom: 0; 
         margin: 0 0 0 0;
     }
