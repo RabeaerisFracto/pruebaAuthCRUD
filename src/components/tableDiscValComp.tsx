@@ -44,7 +44,7 @@ useEffect(()=>{
 
 const textWrapStyleDesktop: React.CSSProperties = {whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'left', width: '45em'};
 
-const textWrapStyleResponsive: React.CSSProperties = {whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'left', width: '17em'};
+const textWrapStyleResponsive: React.CSSProperties = {whiteSpace: 'normal', wordBreak: 'break-word', textAlign: 'left', width: '15em'};
 //Estilo en una constante para mayor orden en jsx.
 //Las 2 1eras para wraping de texto cuando tamaño de vp disminuye, 3era para alinear a izq nueva celda.
 

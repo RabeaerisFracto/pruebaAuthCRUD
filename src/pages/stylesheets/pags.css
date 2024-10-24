@@ -34,10 +34,9 @@ h1, h2 {
     .inputValidacion h1 {
         position: relative;
         left: 0.3em;
-        top: 10px;
+        top: 25px;
     }
     .tablaValidaciones {
         width: 80vw;
-        
     }
 }
