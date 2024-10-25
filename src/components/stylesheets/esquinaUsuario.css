@@ -23,6 +23,7 @@
     scale: 0.8;
     min-width: 100px;
     margin-top: 7px;
+    border: 2px solid white;
 }
 .esquina-usuario label {
     display: flex;
@@ -101,6 +102,13 @@
     width: 300px;
     left: 0px;
 }
+.noDisplay {
+    display: none;
+}
+button {
+    color: #131d25;
+    font-size: 1em;
+}
 button:hover {
     border-top: 1px solid white;
     border-bottom: 1px solid white;
@@ -122,7 +130,7 @@ button:hover {
     border: 1px solid transparent;
     outline: none;
     }
-.botonLogout:hover {
+/* .botonLogout:hover {
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     outline: none;
@@ -132,6 +140,33 @@ button:hover {
     border: 2px 0 2px 0 solid white;
 
     outline: none;
+} */
+.botonGranel {
+    font-size: larger;
+    display: block;
+    height: auto;
+    position: inherit;
+    margin: auto;
+    text-align: center;
+    background-color: transparent;
+    width: 300px;
+    border-radius: 0%;
+    transition: border 0.5s;
+}
+.botonValidaciones {
+    font-size: larger;
+    display: block;
+    width: 180px;
+    height: auto;
+    /* top: 200px; */
+    /* border-radius: 15px; */
+    position: inherit;
+    margin: auto;
+    text-align: center;
+    background-color: transparent;
+    width: 300px;
+    border-radius: 0%;
+    transition: border 0.5s;
 }
 .botonLista {
     display: block;
@@ -139,7 +174,7 @@ button:hover {
     height: auto;
     top: 200px;
     /* border-radius: 15px; */
-    position: fixed;
+    position: inherit;
     margin: auto;
     text-align: center;
     background-color: transparent;
@@ -154,7 +189,7 @@ button:hover {
     height: auto;
     top: 130px;
     /* border-radius: 15px; */
-    position: fixed;
+    position: inherit;
     margin: auto;
     text-align: center;
     background-color: transparent;
@@ -166,19 +201,19 @@ button:hover {
     width: 180px;
     height: auto;
     top: 270px;
-    position: fixed;
+    position: inherit;
     margin: auto;
     text-align: center;
     background-color: transparent;
     width: 300px;
     border-radius: 0%;
 }
-.botonValid {
+.botonIngValid {
     display: block;
     width: 180px;
     height: auto;
     top: 340px;
-    position: fixed;
+    position: inherit;
     margin: auto;
     text-align: center;
     background-color: transparent;
@@ -191,7 +226,7 @@ button:hover {
     width: 180px;
     height: auto;
     top: 410px;
-    position: fixed;
+    position: inherit;
     margin: auto;
     text-align: center;
     background-color: transparent;

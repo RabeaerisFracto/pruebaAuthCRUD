@@ -14,6 +14,10 @@
 .lbJhKe {
     width: 100vw !important;
 }
+.zhQnV {
+    /* HeadRow de tabla */
+    position: relative !important;
+}
 
 /* ----------Imagen-------------- */
 .fotoDisc {
@@ -69,6 +73,7 @@
 /* --------------Info----------------- */
 .infoDisc {
     grid-area: Info;
+    width: 90vw;
 }
 .infoDisc div {
     display: block;

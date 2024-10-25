@@ -36,11 +36,7 @@ export default function EsquinaUsuario() {
         }
     }, [user, EsquinaUsuario, SignOutUser]);
 
-    //--------------Colapsar menu contextual-------------------
-    const [isChecked, setIsChecked] = useState(true);
-    function handleCheckboxChange() {//Como funcion tradicional para facilitar llamado en JSX
-        setIsChecked(!isChecked);
-    };
+
     //--------------Log Out-------------------
     async function SignOutUser(){
         const { error } = await client.auth.signOut();
@@ -53,6 +49,23 @@ export default function EsquinaUsuario() {
             setAvatar(undefined);
             window.location.reload();
             console.log('Desconectado')}
+        }
+            //--------------Colapsar menu contextual-------------------
+    const [isChecked, setIsChecked] = useState(true);
+    function handleCheckboxChange() {//Como funcion tradicional para facilitar llamado en JSX
+        setIsChecked(!isChecked);
+        if (isChecked) {
+            setNoDisplayGranel(true);
+            setNoDisplayValidaciones(true);
+        }
+    };
+        const [noDisplayGranel, setNoDisplayGranel] = useState(true);
+        const handleMenuDesplegableGranel = () => {
+            setNoDisplayGranel(!noDisplayGranel);
+        }
+        const [noDisplayValidaciones, setNoDisplayValidaciones] = useState(true);
+        const handleMenuDesplegableValidaciones = () => {
+            setNoDisplayValidaciones(!noDisplayValidaciones);
         }
 
     return (
@@ -75,11 +88,25 @@ export default function EsquinaUsuario() {
         </div>
         <div className={`div-menu ${isChecked ? 'div-menu-shifted' : ''}`} >
         <div className='barra-menu' >
-            <button className='botonHome' onClick={()=> {navigate("/home"); handleCheckboxChange()}}>Discrepancia</button>
-            <button className='botonLista' onClick={()=> {navigate("/lista"); handleCheckboxChange()}}>Lista</button>
-            <button className='botonUpdate' onClick={()=> {navigate("/upload"); handleCheckboxChange()}}>Subir DB</button>
-            <button className='botonValid' onClick={()=> {navigate("/InputDiscValPag"); handleCheckboxChange()}}>Validaciones</button>
-            <button className='botonTabValid' onClick={()=> {navigate("/tableDiscValPag"); handleCheckboxChange()}}>Lista Disc</button>
+            <div className='divBotonGranel'>
+                <button className='botonGranel' onClick={handleMenuDesplegableGranel}>
+                    Granel
+                </button>
+            </div>
+            <div className={noDisplayGranel ? 'noDisplay' : 'desplegableGranel'}>
+                <button className='botonHome' onClick={()=> {navigate("/home"); handleCheckboxChange(); setNoDisplayGranel(true)}}>→ Discrepancia</button>
+                <button className='botonLista' onClick={()=> {navigate("/lista"); handleCheckboxChange(); setNoDisplayGranel(true)}}>→ Lista</button>
+                <button className='botonUpdate' onClick={()=> {navigate("/upload"); handleCheckboxChange(); setNoDisplayGranel(true)}}>→ Subir DB</button>
+            </div>
+            <div className='divBotonValidaciones'>
+                <button className='botonValidaciones' onClick={handleMenuDesplegableValidaciones}>
+                    Validaciones
+                </button>
+            </div>
+            <div className={noDisplayValidaciones ? 'noDisplay' : 'desplegableValidaciones'}>
+                <button className='botonIngValid' onClick={()=> {navigate("/InputDiscValPag"); handleCheckboxChange(); setNoDisplayValidaciones(true)}}>→ Ingreso</button>
+                <button className='botonTabValid' onClick={()=> {navigate("/tableDiscValPag"); handleCheckboxChange(); setNoDisplayValidaciones(true)}}>→ Tabla</button>
+            </div>
             <button className='botonLogout' onClick={()=> SignOutUser()}>
                 {user ? 'SignOut' : 'Log In'}
             </button>
