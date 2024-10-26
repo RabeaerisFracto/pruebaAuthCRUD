@@ -1,8 +1,33 @@
+/* Sobre escribir estilo de boton x sobre layout.
+Importante considerar contenedor madre para no afectar layout.
+Notar que tambien afecta a componentes hermanos */
+form button {
+    border-radius: 8px;
+    border: 1px solid #2179acfd !important;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    width: 100%;
+    /* transition: all 0.5s; */
+}
+form button:hover {
+    /* background-color: #2179acfd; */
+    font-style: italic;
+    outline: 2px solid #2179acfd !important;
+    transition: all 0.1s !important;
+}
+@media (prefers-color-scheme: dark) {
+    form button {
+
+        background-color: aliceblue;
+        /* transition: all 0.5s; */
+    }
+}
 .componente-discrepancia {
     /* border: 2px solid #9b9b9b; */
     scale: 1;
     position: relative;
-
 }
 .componente-discrepancia form input{
     width: 100%;

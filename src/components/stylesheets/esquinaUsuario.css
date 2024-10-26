@@ -110,6 +110,7 @@ button {
     font-size: 1em;
 }
 button:hover {
+    /* Para mantener tema, debe estar sin border/outline en css principal */
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     outline: none;

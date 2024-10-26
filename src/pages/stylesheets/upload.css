@@ -14,7 +14,7 @@
 .dragZone {
     display: block;
     border: 2px dashed #ccc;
-    padding:10px;
+    padding:10px 0;
     font-size: 16px;
     color: #777;
     transition: all 0.5s ease-in-out;

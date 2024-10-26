@@ -129,7 +129,7 @@ const thumbs = files.map((file: { preview: string; }) => (
 ));
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form className="formularioDiscrepancia" onSubmit={handleSubmit}>
                 <label className="label">
                     <select className="especie"
                         onChange={e=> setEspecie(e.target.value)}>
@@ -171,7 +171,7 @@ const thumbs = files.map((file: { preview: string; }) => (
                     {
                         isDragActive ?
                         <div className='dragZoneActive'>Suelta aquí tu archivo ...</div> :
-                        <div className='dragZone'>{fileName !== '' ? fileName : 'Arrastra un archivo aca, o click para seleccionarlo'}</div>
+                        <div className='dragZoneVal'>{fileName !== '' ? fileName : 'Arrastra un archivo aca, o click para seleccionarlo'}</div>
                     }
                     </div>
                     <aside>

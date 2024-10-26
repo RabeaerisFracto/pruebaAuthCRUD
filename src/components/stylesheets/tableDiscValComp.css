@@ -11,12 +11,17 @@
     position: relative;/*Para que z-index haga efecto, debe ser position:relative*/
     z-index: 0;
 }
+/* Personalizacion de tabla */
 .lbJhKe {
     width: 100vw !important;
 }
-.zhQnV {
+.hlqmBs{
     /* HeadRow de tabla */
     position: relative !important;
+}
+.dZYcTC {
+    /* Para evitar overflow en movil, solo tener scroll hacia abajo */
+    overflow-x: hidden;
 }
 
 /* ----------Imagen-------------- */
@@ -73,7 +78,7 @@
 /* --------------Info----------------- */
 .infoDisc {
     grid-area: Info;
-    width: 90vw;
+    width: 40vw;
 }
 .infoDisc div {
     display: block;
@@ -117,7 +122,7 @@
     .infoDisc div {
         margin-right: 0px;
         text-align: left;
-        max-width: 100%; /* Para que no se salga de la pantalla (wrap) */
+        width: 90vw; /* Para que no se salga de la pantalla (wrap) */
     }
     .ibjJhK {
         width: 40vw !important;
