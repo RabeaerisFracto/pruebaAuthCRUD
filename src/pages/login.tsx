@@ -38,15 +38,34 @@ verificarToken();
                         password_label:'Contraseña',
                         email_input_placeholder:'Ingresa tu correo electrónico',
                         password_input_placeholder:'Ingresa tu contraseña',
-                        link_text:'¿No tienes cuenta? Inscribete!',
+                        link_text:'¿Ya estas registrado? Ingresa acá',
                         social_provider_text:'Tienes cuenta {{provider}}?',
+                        button_label:'Iniciar sesión',
                     },
-                    forgotten_password:{
-                        link_text:'¿Olvidaste tu contraseña?',
-                        confirmation_text:'No te preocupes, te enviaremos un correo para que puedas recuperarla',
-                        email_label:'Enviar correo',
-                        email_input_placeholder:'Ingresa tu correo electrónico',
+                    sign_up: {
+                        email_label: "Dirección de correo electrónico",
+                        password_label: "Crear contraseña",
+                        email_input_placeholder: "Tu dirección de correo electrónico",
+                        password_input_placeholder: "Tu contraseña",
+                        button_label: "Registrarse",
+                        loading_button_label: "Registrando...",
+                        social_provider_text: "Iniciar sesión con {{provider}}",
+                        link_text: "¿No tienes una cuenta? Regístrate"
                     },
+                    forgotten_password: {
+                        email_label: "Dirección de correo electrónico",
+                        password_label: "Tu contraseña",
+                        email_input_placeholder: "Tu dirección de correo electrónico",
+                        button_label: "Enviar instrucciones para restablecer la contraseña",
+                        loading_button_label: "Enviando instrucciones...",
+                        link_text: "¿Olvidaste tu contraseña?"
+                },
+                update_password: {
+                    password_label: "Nueva contraseña",
+                    password_input_placeholder: "Tu nueva contraseña",
+                    button_label: "Actualizar contraseña",
+                    loading_button_label: "Actualizando contraseña..."
+                },
                 }
                 }}
                 appearance={{theme: ThemeSupa}}/>
