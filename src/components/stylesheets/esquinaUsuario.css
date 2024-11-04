@@ -94,7 +94,7 @@
 /* Menu */
 
 .barra-menu {
-    border: 5px solid linear-gradient(to right, #2179acfd, transparent);
+    /* border: 5px solid linear-gradient(to right, #2179acfd, transparent); */
     background: linear-gradient(to right, #2179acfd, transparent);
     position: fixed;
     top: 118px;
