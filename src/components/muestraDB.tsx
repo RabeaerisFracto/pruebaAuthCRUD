@@ -35,16 +35,42 @@ useEffect(()=>{
     });
     console.log(dataDiscrepancias?.data?.map((item: Discrepancia) => item.RecepciónCarozo));//mapeo data en consola
 //-------Filtro de busqueda-------
+    const [fechaSeleccionada, setFechaSeleccionada] = useState<string | null>(null);
+    const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value)
+        setFechaSeleccionada(e.target.value);
+        console.log(fechaSeleccionada)
+        // const fechaSeleccionada = e.target.value;
+        // const filtroFecha = (dataDiscrepancias?.data || []).filter((record: any) => {
+        //     if (fechaSeleccionada === '') return;
+        //     else{
+        //     return record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada);
+        //     }
+        // })
+        // setFilteredRecords(filtroFecha);
+    }
+
     const [filteredRecords, setFilteredRecords] = useState<Discrepancia[]>(dataDiscrepancias?.data);
     useEffect(() => {
         setFilteredRecords(dataDiscrepancias?.data);
-    }, [dataDiscrepancias?.data]);//Cada vez que el [] se modifique, se actualizara en el VP.
+    }, [dataDiscrepancias?.data, fechaSeleccionada]);//Cada vez que el [] se modifique, se actualizara en el VP.
 
+
+    // useEffect(() => {
+    //     if (fechaSeleccionada) {
+    //         const filteredByDate = (dataDiscrepancias?.data || []).filter((record: any) => {
+    //             return record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada);
+    //         });
+    //         setFilteredRecords(filteredByDate);
+    //     } else {
+    //         setFilteredRecords(dataDiscrepancias?.data);
+    //     }
+    // }, [fechaSeleccionada, dataDiscrepancias?.data]);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {//Reacciona al input text.
         const value = e.target.value.toLowerCase();
         const filtered = (dataDiscrepancias?.data || []).filter((record: any) =>{
             if (filterField === 'folio'){
-                return record.folio.toLowerCase().includes(value);
+                return record.folio.toLowerCase().includes(value) && (fechaSeleccionada ? record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada) : true);
             }else if (filterField === 'RecepciónCarozo.SDP'){
                 return record.RecepciónCarozo.SDP?.toLowerCase().includes(value);
             }else if (filterField === 'RecepciónCarozo.CSG'){
@@ -54,6 +80,8 @@ useEffect(()=>{
 });
         setFilteredRecords(filtered);
     }
+
+
 //-------Manejo de Select-------
     const [filterField, setFilterField] = useState<string>('folio');
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -72,7 +100,7 @@ useEffect(()=>{
             <p><strong>Folio:</strong> {data.RecepciónCarozo.Folio}</p>
             <p><strong>Kilos Totales:</strong> {data.RecepciónCarozo.KilosFolio}</p>
             <p><strong>Kilos Promedio:</strong> {data.RecepciónCarozo.Kilos_prom}</p>
-            <p><strong>Fecha de Peso:</strong> {data.RecepciónCarozo.FecPeso}</p>
+            <p><strong>Fecha de Peso:</strong> {data.RecepciónCarozo.FecPeso.toString().replace("T", " ").slice(0,19)}</p>
         </div>
     );
     if (isLoading) return <div>Cargando data...</div>;
@@ -89,6 +117,7 @@ return(
             <option value="RecepciónCarozo.CSG">CSG</option>
             <option value="RecepciónCarozo.SDP">SDP</option>
         </select>
+        <input type="date" placeholder="fecha" onChange={handleDateChange} />
         <DataTable
             title="Discrepancias"
             theme="prueba"

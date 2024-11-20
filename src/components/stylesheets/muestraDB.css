@@ -31,6 +31,9 @@
     width: 300px;
     margin-right: 20px;
 }
+.tabla input[type="date"]{
+    margin-left: 20px;
+}
 
 @media screen and (max-width: 500px) {
     .tabla{
