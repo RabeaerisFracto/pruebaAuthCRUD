@@ -33,48 +33,29 @@ useEffect(()=>{
         queryFn: async () => await client.from('Discrepancia').select('*,RecepciónCarozo(*)'),//Union de 2 tablas
         queryKey: ['dataDiscrepancias'],
     });
-    console.log(dataDiscrepancias?.data?.map((item: Discrepancia) => item.RecepciónCarozo));//mapeo data en consola
-//-------Filtro de busqueda-------
+    // console.log(dataDiscrepancias?.data?.map((item: Discrepancia) => item.RecepciónCarozo));//mapeo data en consola
+//-------Guardar fecha en useState-------
     const [fechaSeleccionada, setFechaSeleccionada] = useState<string | null>(null);
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
-        setFechaSeleccionada(e.target.value);
-        console.log(fechaSeleccionada)
-        // const fechaSeleccionada = e.target.value;
-        // const filtroFecha = (dataDiscrepancias?.data || []).filter((record: any) => {
-        //     if (fechaSeleccionada === '') return;
-        //     else{
-        //     return record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada);
-        //     }
-        // })
-        // setFilteredRecords(filtroFecha);
+        setFechaSeleccionada(e.target.value); // Value es la fecha seleccionada.
     }
-
+//-------Filtro de busqueda-------
     const [filteredRecords, setFilteredRecords] = useState<Discrepancia[]>(dataDiscrepancias?.data);
     useEffect(() => {
-        setFilteredRecords(dataDiscrepancias?.data);
-    }, [dataDiscrepancias?.data, fechaSeleccionada]);//Cada vez que el [] se modifique, se actualizara en el VP.
+        setFilteredRecords(dataDiscrepancias?.data);//Cuando se actualice  el query, se actualiza el filtro.
+        handleDateChange; //Para que se actualice la fecha del state
+        console.log(fechaSeleccionada)
+    }, [dataDiscrepancias?.data, fechaSeleccionada, handleDateChange]);//Cada vez que el [] se modifique, se actualizara en el VP.
 
-
-    // useEffect(() => {
-    //     if (fechaSeleccionada) {
-    //         const filteredByDate = (dataDiscrepancias?.data || []).filter((record: any) => {
-    //             return record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada);
-    //         });
-    //         setFilteredRecords(filteredByDate);
-    //     } else {
-    //         setFilteredRecords(dataDiscrepancias?.data);
-    //     }
-    // }, [fechaSeleccionada, dataDiscrepancias?.data]);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {//Reacciona al input text.
         const value = e.target.value.toLowerCase();
         const filtered = (dataDiscrepancias?.data || []).filter((record: any) =>{
             if (filterField === 'folio'){
                 return record.folio.toLowerCase().includes(value) && (fechaSeleccionada ? record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada) : true);
             }else if (filterField === 'RecepciónCarozo.SDP'){
-                return record.RecepciónCarozo.SDP?.toLowerCase().includes(value);
+                return record.RecepciónCarozo.SDP?.toLowerCase().includes(value) && (fechaSeleccionada ? record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada) : true);
             }else if (filterField === 'RecepciónCarozo.CSG'){
-                return record.RecepciónCarozo.CSG?.toLowerCase().includes(value);
+                return record.RecepciónCarozo.CSG?.toLowerCase().includes(value) && (fechaSeleccionada ? record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada) : true);
             }
             return false
 });
@@ -87,8 +68,6 @@ useEffect(()=>{
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setFilterField(e.target.value)
     }
-    console.log(filterField)
-
 //-------Componente expandible-------
     const ExpandableComponent: React.FC<{ data: Discrepancia }> = ({ data }) => (
         <div className="expandable-component">
