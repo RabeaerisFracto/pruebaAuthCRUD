@@ -45,22 +45,24 @@ useEffect(()=>{
         setFilteredRecords(dataDiscrepancias?.data);//Cuando se actualice  el query, se actualiza el filtro.
         handleDateChange; //Para que se actualice la fecha del state
         console.log(fechaSeleccionada)
-    }, [dataDiscrepancias?.data, fechaSeleccionada, handleDateChange]);//Cada vez que el [] se modifique, se actualizara en el VP.
+    }, [dataDiscrepancias?.data, fechaSeleccionada]);//Cada vez que el [] se modifique, se actualizara en el VP.
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {//Reacciona al input text.
         const value = e.target.value.toLowerCase();
-        const filtered = (dataDiscrepancias?.data || []).filter((record: any) =>{
-            if (filterField === 'folio'){
-                return record.folio.toLowerCase().includes(value) && (fechaSeleccionada ? record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada) : true);
-            }else if (filterField === 'RecepciónCarozo.SDP'){
-                return record.RecepciónCarozo.SDP?.toLowerCase().includes(value) && (fechaSeleccionada ? record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada) : true);
-            }else if (filterField === 'RecepciónCarozo.CSG'){
-                return record.RecepciónCarozo.CSG?.toLowerCase().includes(value) && (fechaSeleccionada ? record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada) : true);
-            }
-            return false
-});
+        const filtered = (dataDiscrepancias?.data || []).filter((record: any) => {
+            const matchesFilterField = filterField === 'folio'
+                ? record.folio.toLowerCase().includes(value)
+                : filterField === 'RecepciónCarozo.SDP'
+                ? record.RecepciónCarozo.SDP?.toLowerCase().includes(value)
+                : filterField === 'RecepciónCarozo.CSG'
+                ? record.RecepciónCarozo.CSG?.toLowerCase().includes(value)
+                : false;
+            const matchesDate = fechaSeleccionada ? record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada) : true;
+            return matchesFilterField && matchesDate;
+        });
         setFilteredRecords(filtered);
     }
+
 
 
 //-------Manejo de Select-------
