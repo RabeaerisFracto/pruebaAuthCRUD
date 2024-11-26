@@ -39,16 +39,39 @@ useEffect(()=>{
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFechaSeleccionada(e.target.value); // Value es la fecha seleccionada.
     }
-//-------Filtro de busqueda-------
+
+    //-------Manejo de Select-------
+    const [filterField, setFilterField] = useState<string>('folio');
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setFilterField(e.target.value)
+    }
+////////////////-------Filtro de busqueda-------
     const [filteredRecords, setFilteredRecords] = useState<Discrepancia[]>(dataDiscrepancias?.data);
     useEffect(() => {
         setFilteredRecords(dataDiscrepancias?.data);//Cuando se actualice  el query, se actualiza el filtro.
         handleDateChange; //Para que se actualice la fecha del state
         console.log(fechaSeleccionada)
     }, [dataDiscrepancias?.data, fechaSeleccionada]);//Cada vez que el [] se modifique, se actualizara en el VP.
-
+//--------------------Actualizar tabla solo con fecha seleccionada--------------------
+    const [searchValue, setSearchValue] = useState(''); // Se almacena value de input en handleChange
+    useEffect(() => {//Mismo codigo de handleChange pero en useEffect
+        const filtered = (dataDiscrepancias?.data || []).filter((record: any) => {
+            const matchesFilterField = filterField === 'folio'
+                ? record.folio.toLowerCase().includes(searchValue)
+                : filterField === 'RecepciónCarozo.SDP'
+                ? record.RecepciónCarozo.SDP?.toLowerCase().includes(searchValue)
+                : filterField === 'RecepciónCarozo.CSG'
+                ? record.RecepciónCarozo.CSG?.toLowerCase().includes(searchValue)
+                : false;
+            const matchesDate = fechaSeleccionada ? record.RecepciónCarozo.FecRecepcion.includes(fechaSeleccionada) : true;
+            return matchesFilterField && matchesDate;
+        });
+        setFilteredRecords(filtered);
+    }, [fechaSeleccionada, dataDiscrepancias?.data, filterField, searchValue]); // Se actualiza cada vez que cambie la fecha y searchValue
+//---------------------handleChange--------------------
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {//Reacciona al input text.
         const value = e.target.value.toLowerCase();
+        setSearchValue(value);//Se almacena valor para usar en useEffect para updatear por fecha
         const filtered = (dataDiscrepancias?.data || []).filter((record: any) => {
             const matchesFilterField = filterField === 'folio'
                 ? record.folio.toLowerCase().includes(value)
@@ -64,12 +87,6 @@ useEffect(()=>{
     }
 
 
-
-//-------Manejo de Select-------
-    const [filterField, setFilterField] = useState<string>('folio');
-    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setFilterField(e.target.value)
-    }
 //-------Componente expandible-------
     const ExpandableComponent: React.FC<{ data: Discrepancia }> = ({ data }) => (
         <div className="expandable-component">
