@@ -6,6 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import Discrepancia from "../interfaces/Discrepancia";
 import { useState, useEffect } from "react";
 
+import { json2csv } from "json-2-csv";
+import { saveAs } from "file-saver";
+
 
 //-------Tema Tabla-------
 createTheme('prueba', {
@@ -54,6 +57,7 @@ useEffect(()=>{
     }, [dataDiscrepancias?.data, fechaSeleccionada]);//Cada vez que el [] se modifique, se actualizara en el VP.
 //--------------------Actualizar tabla solo con fecha seleccionada--------------------
     const [searchValue, setSearchValue] = useState(''); // Se almacena value de input en handleChange
+    const [jsonExport, setJsonExport] = useState<any>([]); // Se almacena value de input en handleChange
     useEffect(() => {//Mismo codigo de handleChange pero en useEffect
         const filtered = (dataDiscrepancias?.data || []).filter((record: any) => {
             const matchesFilterField = filterField === 'folio'
@@ -67,8 +71,23 @@ useEffect(()=>{
             return matchesFilterField && matchesDate;
         });
         setFilteredRecords(filtered);
+        const jsonData = JSON.stringify(filtered, null, 2);
+        setJsonExport(jsonData);
+        console.log(jsonData);
     }, [fechaSeleccionada, dataDiscrepancias?.data, filterField, searchValue]); // Se actualiza cada vez que cambie la fecha y searchValue
-//---------------------handleChange--------------------
+
+    //-------Descargar CSV-------
+
+    const export2CVS = () => {
+        const blobcsv = new Blob([json2csv(JSON.parse(jsonExport))], { type: 'text/csv' });
+        saveAs(blobcsv, 'discrepancias.txt');
+        // Se crea funcion que será utilizada en onClick, new blob (data, {type: 'text/csv'}), saveAs(blob, 'nombre.csv')
+        // Data usa libreria que convierte a cvs, parseando el jsonExport antes.
+        // Segundo parametro es tipo de blob, en este caso texto/csv.
+        // saveAs(nombre de const de blob, 'nombre-con-el-que-quedara-el-archivo.cvs') guarda el archivo con el nombre.
+    };
+
+    //---------------------handleChange--------------------
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {//Reacciona al input text.
         const value = e.target.value.toLowerCase();
         setSearchValue(value);//Se almacena valor para usar en useEffect para updatear por fecha
@@ -109,7 +128,8 @@ useEffect(()=>{
 
 return(
     <div className="tabla">
-        <input type="text" placeholder={`Busca por ${filterField === 'folio' ? 'Folio' : filterField === 'RecepciónCarozo.CSG' ? 'CSG' : 'SDP'}`} onChange={handleChange}></input>
+        <button className="botonDescarga" onClick={export2CVS}>Descargar Data</button>
+        <input type="text" placeholder={`   Busca por ${filterField === 'folio' ? 'Folio' : filterField === 'RecepciónCarozo.CSG' ? 'CSG' : 'SDP'}`} onChange={handleChange}></input>
         <select onChange={handleSelectChange}>
             <option value="folio">Folio</option>
             <option value="RecepciónCarozo.CSG">CSG</option>

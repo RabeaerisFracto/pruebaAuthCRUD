@@ -34,6 +34,15 @@
 .tabla input[type="date"]{
     margin-left: 20px;
 }
+.botonDescarga {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 20px;
+}
 
 @media screen and (max-width: 500px) {
     .tabla{
