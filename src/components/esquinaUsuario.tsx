@@ -13,7 +13,7 @@ export default function EsquinaUsuario() {
     
     const [email, setEmail] = useState('' as string | undefined);
     const [globalname, setGlobalname] = useState('' as string | undefined);
-    const [provider, setProvider] = useState('' as string | undefined);
+    // const [provider, setProvider] = useState('' as string | undefined);
     const [avatar, setAvatar] = useState('' as string | undefined);
 
     const user = useUserStore((state) => state.user);
@@ -31,7 +31,7 @@ export default function EsquinaUsuario() {
         else {
             setGlobalname(user.user_metadata.full_name)
             setEmail(user.email)
-            setProvider(user.app_metadata.provider)
+            // setProvider(user.app_metadata.provider)
             setAvatar(user.user_metadata.avatar_url)
         }
     }, [user, EsquinaUsuario, SignOutUser]);
@@ -45,7 +45,7 @@ export default function EsquinaUsuario() {
             navigate("/login");
             setGlobalname(undefined)
             setEmail(undefined)
-            setProvider(undefined)
+            // setProvider(undefined)
             setAvatar(undefined);
             window.location.reload();
             console.log('Desconectado')}
@@ -77,8 +77,9 @@ export default function EsquinaUsuario() {
                 {user ?
                 <>
                 <h1>{email}<br/>
-                    {globalname ? globalname?.charAt(0).toUpperCase() + globalname?.slice(1) : ''}<br/>
-                    {provider ? provider.charAt(0).toUpperCase() + provider.slice(1) : ''}<br/></h1>
+                    {globalname ? globalname?.charAt(0).toUpperCase() + globalname?.slice(1) : ''}
+                    {/* {provider ? provider.charAt(0).toUpperCase() + provider.slice(1) : ''} */}
+                    </h1>
                     <img src={avatar} alt='' />
                 </>
                 : <button className='login' onClick={() => navigate("/login")}>LogIn</button>}
