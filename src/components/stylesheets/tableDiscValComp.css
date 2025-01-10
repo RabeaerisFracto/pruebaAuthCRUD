@@ -93,6 +93,10 @@
     width: 300px;
     margin-right: 20px;
 }
+.botonCopiaFolios {
+    margin-top: 10px;
+    margin-left: 10px;
+}
 
 [aria-busy=true]:not(input,select,textarea,html)::before {
     display: none;

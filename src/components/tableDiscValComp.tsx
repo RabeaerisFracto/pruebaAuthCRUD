@@ -29,7 +29,7 @@ export default function TableDiscValComp() {
         queryKey: ['dataDiscrepancias'],
     });
     if (error) {console.log("error en la tabla "+ error);}
-    console.log(dataDiscrepancias?.data?.map((item: DiscValidacion) => item.Folio));//mapeo data en consola
+    // console.log(dataDiscrepancias?.data?.map((item: DiscValidacion) => item.Folio));//mapeo data en consola
 
 
 //-------Renderizado de columnas mobile-------
@@ -124,6 +124,11 @@ useEffect(() => {
     setElementosFiltrados(dataDiscrepancias?.data);
 }, [(dataDiscrepancias?.data)]);
 
+const [campoFiltrado, setCampoFiltrado] = useState<string>('folio');
+const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCampoFiltrado(e.target.value)
+}
+
 const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase();
     const filtrado = (dataDiscrepancias?.data || []).filter((record: DiscValidacion) => {
@@ -137,11 +142,25 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setElementosFiltrados(filtrado);
 }
 
-const [campoFiltrado, setCampoFiltrado] = useState<string>('folio');
-const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCampoFiltrado(e.target.value)
+
+// console.log(campoFiltrado)
+// console.log(elementosFiltrados)
+// console.log(elementosFiltrados?.map((item: DiscValidacion) => item.Folio));
+
+//------------------Copiar Folios------------------
+
+let elementosFiltradosX = elementosFiltrados?.map((item: DiscValidacion) => item.Folio);
+let aCopiar = elementosFiltradosX?.join(';');
+console.log(aCopiar);
+
+function copiarAPortapapeles() {
+    navigator.clipboard.writeText(aCopiar)
+    .then(() => {
+        alert('Texto copiado al portapapeles')
+    }).catch((err) => {
+        alert('No se pudo copiar el texto'+ err)
+    })
 }
-console.log(campoFiltrado)
     
 if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} width={"650px"} /></div>;
 //EARLY RETURN AL FINAL, asi se evita error de hooks despues de un render condicional.
@@ -149,10 +168,11 @@ if (isLoading) return <div><Skeleton  direction="ltr" duration={0.6} count={5} w
 //--------------Renderizado de Tabla-----------------
     return (
         <div className="tablaDiscrepancia">
-            <input type="text" placeholder={`Busca por ${campoFiltrado === 'folio' ? 'Folio' : 'Usuario'}`} onChange={handleChange}></input><select onChange={handleSelectChange}>
+            <input type="text" placeholder={`Busca por ${campoFiltrado === 'folio' ? 'Folio' : 'Usuario'}`} onChange={handleChange}></input><select title="seleccionar" onChange={handleSelectChange}>
                 <option value="folio">Folio</option>
                 <option value="Usuario">Usuario</option>
             </select>
+            <button className="botonCopiaFolios" onClick={copiarAPortapapeles}>Copiar Folios</button>
         <DataTable
             theme="prueba"
             title="Discrepancias"
