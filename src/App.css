@@ -8,4 +8,6 @@ body {
   background-image: url(/wp4377294pink.png);
   background-size: cover;
   background-position: left;
+  background-repeat: no-repeat;
+  background-position: right center;
 }
